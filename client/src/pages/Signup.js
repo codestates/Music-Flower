@@ -3,7 +3,7 @@ import "../css/Signup.css";
 
 export default function Signup() {
   return (
-    <body>
+    <div>
       <header>
         <div>
           <nav className="navbar">
@@ -45,6 +45,6 @@ export default function Signup() {
           </div>
         </div>
       </div>
-    </body>
+    </div>
   );
 }

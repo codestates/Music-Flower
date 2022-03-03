@@ -4,7 +4,7 @@ function handlePlay() {}
 
 export default function Landing() {
   return (
-    <body className="landing-body">
+    <div className="landing-body">
       <header>
         <div>
           <nav className="navbar">
@@ -30,6 +30,6 @@ export default function Landing() {
           </a>
         </div>
       </div>
-    </body>
+    </div>
   );
 }

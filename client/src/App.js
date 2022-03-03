@@ -5,21 +5,24 @@ import Landing from "./pages/Landing";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import react from "react";
+import SpotifyAPP from "./components/SpotifyApp";
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);
   const [userinfo, setUserinfo] = useState(null);
   const history = useHistory();
 
-  axios.get("https://localhost:4000/auth").then((res) => {
-    console.log(res.data.data.userInfo);
-    setUserinfo(res.data.data.userInfo);
-    setIsLogin(!isLogin);
-    history.push("/mypage");
-  });
+  // axios.get("https://localhost:4000/auth").then((res) => {
+  //   console.log(res.data.data.userInfo);
+  //   setUserinfo(res.data.data.userInfo);
+  //   setIsLogin(!isLogin);
+  //   history.push("/mypage");
+  // });
+
   return (
     <Switch>
       <Route exact path="/">
+        <SpotifyAPP />
         <Landing />
       </Route>
       <Route path="/login">
