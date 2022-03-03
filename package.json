@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start" : "node app.js",
+    "start": "node app.js",
     "test": "node test.js"
   },
   "repository": {
@@ -19,9 +19,11 @@
   },
   "homepage": "https://github.com/codestates/Music-Flower#readme",
   "dependencies": {
-    "react": "^17.0.2"
+    "react": "^17.0.2",
+    "sequelize": "^6.17.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.17.5"
+    "@babel/core": "^7.17.5",
+    "sequelize-cli": "^6.4.1"
   }
 }
