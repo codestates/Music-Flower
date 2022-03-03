@@ -50,6 +50,7 @@
     "depd": "^1.1.2",
     "destroy": "^1.0.4",
     "dot-prop": "^5.3.0",
+    "dotenv": "^16.0.0",
     "duplexer3": "^0.1.4",
     "ee-first": "^1.1.1",
     "electron-to-chromium": "^1.4.73",
@@ -120,6 +121,8 @@
     "minimatch": "^3.1.2",
     "minimist": "^1.2.5",
     "ms": "^2.1.2",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.3.3",
     "negotiator": "^0.6.3",
     "node-releases": "^2.0.2",
     "nopt": "^1.0.10",
@@ -154,6 +157,7 @@
     "semver": "^6.3.0",
     "semver-diff": "^3.1.1",
     "send": "^0.17.2",
+    "sequelize": "^6.17.0",
     "serve-static": "^1.14.2",
     "setprototypeof": "^1.2.0",
     "signal-exit": "^3.0.7",
@@ -198,6 +202,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "sequelize-cli": "^6.4.1"
   }
 }
