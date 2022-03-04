@@ -9,6 +9,7 @@ import Signup from "./pages/Signup";
 import Main from "./pages/Main";
 import Mypage from "./pages/Mypage";
 import Detail from "./pages/Detail";
+import Postthumnails from "./components/Postthumnails";
 import { initialitems } from "./components/dummy/dummyitems";
 import { dummyuser } from "./components/dummy/dummyUser";
 function App() {
@@ -28,6 +29,11 @@ function App() {
     history.push("/main");
   };
   const [items, setItems] = useState(initialitems);
+
+  // useEffect(() => {
+  //   console.log("이미지 useEffect");
+  //   const [items, setItems] = useState(initialitems);
+  // }, [items, playlist]);
 
   return (
     <Switch>
@@ -52,6 +58,7 @@ function App() {
         <Mypage users={userinfo}></Mypage>
       </Route>
     </Switch>
+    // <Main items={items} setItems={setItems}></Main>
   );
 }
 

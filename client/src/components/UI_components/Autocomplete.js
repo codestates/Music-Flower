@@ -1,56 +1,6 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
-
-const deselectedOptions = [
-  {
-    postTitle: "봄에 듣기 좋은 노래",
-    image: "http://spring",
-    nickname: "김코딩",
-    postExplain: "봄에 들으면 더 좋은 노래입니다",
-    musicList: [
-      {
-        musicTitle: "분홍신",
-        artist: "아이유",
-        musicImage: "http://IU",
-        musicUrl: "http://music",
-        genre: "k-pop",
-      },
-      {
-        musicTitle: "뱅뱅뱅",
-        artist: "빅뱅",
-        musicImage: "http://bigbang",
-        musicUrl: "http://music",
-        genre: "k-pop",
-      },
-    ],
-    likeCount: "1",
-    tags: ["봄", "좋은노래"],
-    totalComment: [],
-    createdAt: new Date(),
-  },
-
-  {
-    postTitle: "여름에 듣기 좋은 노래",
-    imageUrl: "http://summer",
-    user: "박해커",
-    likeCount: "1",
-    tags: "",
-  },
-  {
-    postTitle: "가을에 듣기 좋은 노래",
-    imageUrl: "http://fall",
-    user: "뮤지션",
-    likeCount: "1",
-    tags: "",
-  },
-  {
-    postTitle: "겨울에 듣기 좋은 노래",
-    imageUrl: "http://winter",
-    user: "하루",
-    likeCount: "1",
-    tags: "",
-  },
-];
+import { initialitems } from "../dummy/dummyitems";
 
 const boxShadow = "0 4px 6px rgb(32 33 36 / 28%)";
 const activeBorderRadius = "1rem 1rem 0 0";
@@ -119,11 +69,12 @@ export const DropDownContainer = styled.ul`
   }
 `;
 
-export const Autocomplete = () => {
+export const Autocomplete = ({ items, setItems }) => {
   const [hasText, setHasText] = useState(false);
   const [inputValue, setInputValue] = useState("");
-  const [options, setOptions] = useState(deselectedOptions);
+  const [options, setOptions] = [items, setItems];
   const [selected, setSelected] = useState(-1);
+  // console.log("valu", inputValue);
 
   useEffect(() => {
     if (inputValue === "") {
@@ -143,7 +94,7 @@ export const Autocomplete = () => {
 
     // dropdown을 위한 기능
     const filterRegex = new RegExp(value, "i");
-    const resultOptions = deselectedOptions.filter((option) =>
+    const resultOptions = initialitems.filter((option) =>
       option.postTitle.match(filterRegex)
     );
     setOptions(resultOptions);
@@ -152,7 +103,7 @@ export const Autocomplete = () => {
   // option은 객체
   const handleDropDownClick = (clickedOption) => {
     setInputValue(clickedOption.postTitle);
-    const resultOptions = deselectedOptions.filter(
+    const resultOptions = initialitems.filter(
       (option) => option.postTitle === clickedOption.postTitle
     );
     setOptions(resultOptions);

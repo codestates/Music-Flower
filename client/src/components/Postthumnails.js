@@ -69,7 +69,7 @@ const Tagitem = styled.button`
   color: #1e6b7b;
 `;
 export default function Postthumnails({ item }) {
-  console.log(item);
+  // console.log(item);
   return (
     <Post key={item.id}>
       <Card>
