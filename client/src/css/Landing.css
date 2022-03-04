@@ -1,0 +1,67 @@
+body {
+  /* background-image: url("../images/숲.jpeg"); */
+  background-size: cover;
+  line-height: 1.7;
+  background-attachment: fixed;
+}
+
+.Landing-main {
+  text-align: center;
+}
+.line:first-child {
+  margin-top: 10vw;
+}
+
+.line {
+  font-style: italic;
+  text-align: center;
+  font-size: 1.5vw;
+  font-weight: 150%;
+  line-height: 130%;
+}
+
+.btn {
+  margin-top: 10vh;
+}
+.play-btn {
+  background: #1aab8a;
+  color: rgb(255, 255, 255);
+  border: none;
+  position: relative;
+  height: 90px;
+  font-size: 3em;
+  padding: 0 2em;
+  cursor: pointer;
+  transition: 800ms ease all;
+  outline: none;
+}
+.play-btn:hover {
+  background: rgb(255, 255, 255);
+  color: #ffffff;
+}
+.play-btn:before,
+.play-btn:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 2px;
+  width: 0;
+  background: #1aab8a;
+  transition: 400ms ease all;
+}
+.play-btn:after {
+  right: inherit;
+  top: inherit;
+  left: 0;
+  bottom: 0;
+}
+.play-btn:hover:before,
+.play-btn:hover:after {
+  width: 100%;
+  transition: 800ms ease all;
+}
+
+.signup {
+  margin-left: 14.5rem;
+}
