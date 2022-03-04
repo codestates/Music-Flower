@@ -7,18 +7,14 @@ import Landing from "./pages/Landing";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Main from "./pages/Main";
-<<<<<<< HEAD
 import Mypage from "./pages/Mypage";
 import Detail from "./pages/Detail";
-=======
-import Postthumnails from "./components/Postthumnails";
 import { initialitems } from "./components/dummy/dummyitems";
->>>>>>> 3a2fba64a851a38e65fbf363397dc12c8d0ed0cb
-
+import { dummyuser } from "./components/dummy/dummyUser";
 function App() {
-  // const [isLogin, setIsLogin] = useState(false);
-  // const [userinfo, setUserinfo] = useState(null);
-  // const history = useHistory();
+  const [isLogin, setIsLogin] = useState(false);
+  const [userinfo, setUserinfo] = useState(null);
+  const history = useHistory();
 
   // axios.get("https://localhost:4000/auth").then((res) => {
   //   console.log(res.data.data.userInfo);
@@ -26,25 +22,36 @@ function App() {
   //   setIsLogin(!isLogin);
   //   history.push("/mypage");
   // });
+  const handleResponseSuccess = () => {
+    setIsLogin(!isLogin);
+    setUserinfo(dummyuser);
+    history.push("/main");
+  };
   const [items, setItems] = useState(initialitems);
 
   return (
-    // <Detail></Detail>
-    // <Mypage></Mypage>
-
-    <Main items={items}></Main>
-    // <Switch>
-    //   <Route exact path="/">
-    //     <SpotifyAPP />
-    //     <Landing />
-    //   </Route>
-    //   <Route path="/login">
-    //     <Login />
-    //   </Route>
-    //   <Route path="/signup">
-    //     <Signup />
-    //   </Route>
-    // </Switch>
+    <Switch>
+      <Route exact path="/">
+        <SpotifyAPP />
+        <Landing />
+      </Route>
+      <Route path="/login">
+        <Login
+          isLogin={isLogin}
+          userDatas={dummyuser}
+          handleResponseSuccess={handleResponseSuccess}
+        />
+      </Route>
+      <Route path="/signup">
+        <Signup />
+      </Route>
+      <Route path="/main">
+        <Main items={items} users={userinfo}></Main>
+      </Route>
+      <Route path="/mypage">
+        <Mypage users={userinfo}></Mypage>
+      </Route>
+    </Switch>
   );
 }
 

@@ -35,10 +35,10 @@ const Mypage = styled.div`
   }
 `;
 
-export default function MyPage() {
+export default function MyPage({ users }) {
   return (
     <Mypage>
-      <div id="up">유저정보</div>
+      <div id="up">{users.nickname}님의 마이페이지 입니다! </div>
       <div id="down">
         내가만든 포스트
         <div>
