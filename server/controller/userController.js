@@ -1,3 +1,5 @@
+const { User } = require("../models");
+
 module.exports = {
   logIn: (req, res) => {
     res.status(200).json('ok');
