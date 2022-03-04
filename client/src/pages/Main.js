@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Postthumnails from "../components/Postthumnails";
 import { Autocomplete } from "../components/UI_components/Autocomplete";
+import { Switch, Route, useHistory, Redirect } from "react-router-dom";
 
 const MainPage = styled.div`
   border: 1px solid red;
@@ -100,16 +101,21 @@ const MenuButtonInner = styled.button`
   height: 40px;
 `;
 
-export default function Main({ items }) {
-  console.log(items);
+export default function Main({ items, users }) {
+  const onClickHandle = () => {
+    history.push("/mypage");
+  };
+  const history = useHistory();
   return (
     <MainPage>
       <Header>
         <div className="logo">Flower(로고)</div>
         <Menu>
-          <Nick>OOO님 안녕하세요</Nick>
+          <Nick>{users.nickname}님 안녕하세요.</Nick>
           <MenuButton>
-            <MenuButtonInner>마이페이지</MenuButtonInner>
+            <MenuButtonInner onClick={onClickHandle}>
+              마이페이지
+            </MenuButtonInner>
             <MenuButtonInner>로그아웃</MenuButtonInner>
           </MenuButton>
         </Menu>
