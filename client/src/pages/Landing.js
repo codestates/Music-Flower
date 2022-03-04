@@ -2,7 +2,7 @@ import React from "react";
 import "../css/Landing.css";
 function handlePlay() {}
 
-export default function Landing() {
+export default function Landing({ item }) {
   return (
     <div className="landing-body">
       <header>
