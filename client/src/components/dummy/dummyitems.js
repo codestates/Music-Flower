@@ -61,4 +61,30 @@ export const initialitems = [
     totalLike: "1",
     tags: ["봄", "좋은노래"],
   },
+  {
+    id: 6,
+    postTitle: "이것은 테스트다",
+    imageUrl:
+      "https://image.bugsm.co.kr/album/images/original/2669/266970.jpg?version=undefined",
+    nickname: "손코딩",
+    postExplain: "이것은 테스트다",
+    musicList: [
+      {
+        songName: "분홍신",
+        artist: "아이유",
+        albumImageUrl:
+          "https://image.bugsm.co.kr/album/images/original/2669/266970.jpg?version=undefined",
+        youtubeLink: "유투브링크",
+      },
+      {
+        songName: "뱅뱅뱅",
+        artist: "빅뱅",
+        albumImageUrl:
+          "https://image.bugsm.co.kr/album/images/original/2669/266970.jpg?version=undefined",
+        youtubeLink: "유투브링크",
+      },
+    ],
+    totalLike: "1",
+    tags: ["봄", "좋은노래"],
+  },
 ];
