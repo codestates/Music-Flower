@@ -2,15 +2,18 @@ import React, { useEffect, useState } from "react";
 import { Switch, Route, useHistory, Redirect } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
-
 import SpotifyAPP from "./components/SpotifyApp";
-
 import Landing from "./pages/Landing";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
-
 import Main from "./pages/Main";
+import Mypage from "./pages/Mypage";
+import Detail from "./pages/Detail";
+import Editor from "./pages/Editor";
 
+import Postthumnails from "./components/Postthumnails";
+import { initialitems } from "./components/dummy/dummyitems";
+import { dummyuser } from "./components/dummy/dummyUser";
 function App() {
   const [isLogin, setIsLogin] = useState(false);
   const [userinfo, setUserinfo] = useState(null);
@@ -22,21 +25,45 @@ function App() {
   //   setIsLogin(!isLogin);
   //   history.push("/mypage");
   // });
+  const handleResponseSuccess = () => {
+    setIsLogin(!isLogin);
+    setUserinfo(dummyuser);
+    history.push("/main");
+  };
+  const [items, setItems] = useState(initialitems);
+
+  // useEffect(() => {
+  //   console.log("이미지 useEffect");
+  //   const [items, setItems] = useState(initialitems);
+  // }, [items, playlist]);
 
   return (
-    <Main></Main>
-    // <Switch>
-    //   <Route exact path="/">
-    //     <SpotifyAPP />
-    //     <Landing />
-    //   </Route>
-    //   <Route path="/login">
-    //     <Login />
-    //   </Route>
-    //   <Route path="/signup">
-    //     <Signup />
-    //   </Route>
-    // </Switch>
+    <Switch>
+      <Route exact path="/">
+        <SpotifyAPP />
+        <Landing />
+      </Route>
+      <Route path="/login">
+        <Login
+          isLogin={isLogin}
+          userDatas={dummyuser}
+          handleResponseSuccess={handleResponseSuccess}
+        />
+      </Route>
+      <Route path="/signup">
+        <Signup />
+      </Route>
+      <Route path="/main">
+        <Main items={items} users={userinfo}></Main>
+      </Route>
+      <Route path="/mypage">
+        <Mypage users={userinfo}></Mypage>
+      </Route>
+      <Route path="/editor">
+        <Editor users={userinfo}></Editor>
+      </Route>
+    </Switch>
+    // <Main items={items} setItems={setItems}></Main>
   );
 }
 

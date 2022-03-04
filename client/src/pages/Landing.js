@@ -2,15 +2,15 @@ import React from "react";
 import "../css/Landing.css";
 function handlePlay() {}
 
-export default function Landing() {
+export default function Landing({ item }) {
   return (
     <div className="landing-body">
       <header>
         <div>
           <nav className="navbar">
             <div className="nav-container">
-              <a href="/">
-                <h1 className="nav-logo">Music Flower</h1>
+              <a href="/" className="nav-logo">
+                <img src={require("../images/logos.png")} />
               </a>
             </div>
           </nav>

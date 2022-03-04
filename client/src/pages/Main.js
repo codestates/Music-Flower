@@ -1,10 +1,12 @@
 import React from "react";
 import styled from "styled-components";
+import Postthumnails from "../components/Postthumnails";
 import { Autocomplete } from "../components/UI_components/Autocomplete";
+import { Switch, Route, useHistory, Redirect } from "react-router-dom";
 
 const MainPage = styled.div`
-  /* border: 1px solid red;
-  padding: 10px; */
+  border: 1px solid red;
+  /* padding: 10px; */
 
   display: flex;
   text-align: center;
@@ -14,23 +16,23 @@ const MainPage = styled.div`
 `;
 
 const Header = styled.div`
-  /* border: 1px solid red;
-  padding: 10px; */
+  border: 1px solid red;
+  /* padding: 10px; */
 
   display: flex;
   flex: 1 0 auto;
 
   > div {
     border: 1px solid red;
-    padding: 10px;
+    /* padding: 10px; */
 
     flex: 1 0 auto;
   }
 `;
 
 const SerchArea = styled.div`
-  /* border: 1px solid red;
-  padding: 10px; */
+  border: 1px solid red;
+  /* padding: 10px; */
 
   display: flex;
   align-items: center;
@@ -38,14 +40,14 @@ const SerchArea = styled.div`
   flex-direction: row;
   justify-content: center;
   > #select_bar {
-    /* border: 1px solid red; */
+    border: 1px solid red;
     /* padding: 10px; */
 
     flex: 2 0 auto;
     margin-left: 40px;
   }
   > #create_post {
-    /* border: 1px solid red; */
+    border: 1px solid red;
     /* padding: 10px; */
 
     flex: 1 0 auto;
@@ -55,13 +57,14 @@ const SerchArea = styled.div`
 const Body = styled.div`
   /* border: 1px solid red;
   padding: 10px; */
-
+  display: flex;
+  flex-wrap: wrap;
   flex: 8 0 auto;
 `;
 
 const Footer = styled.div`
-  /* border: 1px solid red;
-  padding: 10px; */
+  border: 1px solid red;
+  /* padding: 10px; */
 
   flex: 0 0 auto;
 `;
@@ -69,28 +72,28 @@ const Footer = styled.div`
 //----------------------------------------------------------------
 
 const Menu = styled.div`
-  /* border: 1px solid red;
-  padding: 10px; */
+  border: 1px solid red;
+  /* padding: 10px; */
 
   display: flex;
   flex: 4 0 auto;
 `;
 const Nick = styled.div`
-  /* border: 1px solid red;
-  padding: 10px; */
+  border: 1px solid red;
+  /* padding: 10px; */
 
   flex: 3 0 auto;
 `;
 const MenuButton = styled.div`
-  /* border: 1px solid red;
-  padding: 10px; */
+  border: 1px solid red;
+  /* padding: 10px; */
 
   display: flex;
   flex: 1 0 auto;
 `;
 const MenuButtonInner = styled.button`
-  /* border: 1px solid red;
-  padding: 10px; */
+  border: 1px solid red;
+  /* padding: 10px; */
 
   margin: 10px;
   margin-top: 0px;
@@ -99,15 +102,27 @@ const MenuButtonInner = styled.button`
   height: 40px;
 `;
 
-export default function Signup() {
+export default function Main({ items, setItems, users }) {
+  console.log(items);
+  const onClickMyPageHandle = () => {
+    history.push("/mypage");
+  };
+  const onClickEditorHandle = () => {
+    history.push("/editor");
+  };
+  const history = useHistory();
   return (
     <MainPage>
       <Header>
-        <div className="logo">Flower(로고)</div>
+        <a href="/" className="nav-logo">
+          <img src={require("../images/logos.png")} />
+        </a>
         <Menu>
-          <Nick>OOO님 안녕하세요</Nick>
+          <Nick>{users.nickname}님 안녕하세요.</Nick>
           <MenuButton>
-            <MenuButtonInner>마이페이지</MenuButtonInner>
+            <MenuButtonInner onClick={onClickMyPageHandle}>
+              마이페이지
+            </MenuButtonInner>
             <MenuButtonInner>로그아웃</MenuButtonInner>
           </MenuButton>
         </Menu>
@@ -115,15 +130,18 @@ export default function Signup() {
 
       <SerchArea>
         <div id="select_bar">
-          <Autocomplete></Autocomplete>
+          <Autocomplete items={items} setItems={setItems}></Autocomplete>
         </div>
         <div id="create_post">
-          <button>글쓰기</button>
+          <button onClick={onClickEditorHandle}>글쓰기</button>
         </div>
       </SerchArea>
-
-      <Body>바디</Body>
-      <Footer>바닥</Footer>
+      <Body>
+        {items.map((item, idx) => (
+          <Postthumnails item={item} key={idx} />
+        ))}
+      </Body>
+      <Footer></Footer>
     </MainPage>
   );
 }

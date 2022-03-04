@@ -69,7 +69,7 @@ export const DropDownContainer = styled.ul`
   }
 `;
 
-export const Autocomplete = ({ items, setItems }) => {
+export const MusicSelector = ({ items, setItems }) => {
   const [hasText, setHasText] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const [options, setOptions] = [items, setItems];
