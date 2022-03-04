@@ -43,8 +43,8 @@ export default function Login({ userDatas, handleResponseSuccess }) {
         <div>
           <nav className="navbar">
             <div className="nav-container">
-              <a href="/">
-                <h1 className="nav-logo">Music Flower</h1>
+              <a href="/" className="nav-logo">
+                <img src={require("../images/logos.png")} />
               </a>
             </div>
           </nav>
@@ -54,7 +54,7 @@ export default function Login({ userDatas, handleResponseSuccess }) {
         <div className="LoginWrapper">
           <img
             className="Login-logo"
-            src={require("../images/face.png")}
+            src={require("../images/logo.png")}
             alt="logo"
             width="300px"
           />
