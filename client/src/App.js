@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Switch, Route, useHistory, Redirect } from "react-router-dom";
+import styled from "styled-components";
 import axios from "axios";
+
+import SpotifyAPP from "./components/SpotifyApp";
+
 import Landing from "./pages/Landing";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
-import react from "react";
-import SpotifyAPP from "./components/SpotifyApp";
+
+import Main from "./pages/Main";
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);
@@ -20,18 +24,19 @@ function App() {
   // });
 
   return (
-    <Switch>
-      <Route exact path="/">
-        <SpotifyAPP />
-        <Landing />
-      </Route>
-      <Route path="/login">
-        <Login />
-      </Route>
-      <Route path="/signup">
-        <Signup />
-      </Route>
-    </Switch>
+    <Main></Main>
+    // <Switch>
+    //   <Route exact path="/">
+    //     <SpotifyAPP />
+    //     <Landing />
+    //   </Route>
+    //   <Route path="/login">
+    //     <Login />
+    //   </Route>
+    //   <Route path="/signup">
+    //     <Signup />
+    //   </Route>
+    // </Switch>
   );
 }
 
