@@ -1,10 +1,13 @@
 const express = require("express");
 const cors = require("cors");
 const app = express();
+const test = require('./test');
 
 const userRouter = require('./router/userRouter');
 const postRouter = require('./router/postRouter');
 const spotifyRouter = require('./router/spotifyRouter');
+
+app.use(test);
 
 app.use(cors());
 app.use(express.json());
