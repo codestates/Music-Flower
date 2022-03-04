@@ -57,6 +57,7 @@ const Body = styled.div`
   /* border: 1px solid red;
   padding: 10px; */
   display: flex;
+  flex-wrap: wrap;
   flex: 8 0 auto;
 `;
 
@@ -100,7 +101,7 @@ const MenuButtonInner = styled.button`
   height: 40px;
 `;
 
-export default function Main({ items }) {
+export default function Main({ items, setItems }) {
   console.log(items);
   return (
     <MainPage>
@@ -117,7 +118,7 @@ export default function Main({ items }) {
 
       <SerchArea>
         <div id="select_bar">
-          <Autocomplete></Autocomplete>
+          <Autocomplete items={items} setItems={setItems}></Autocomplete>
         </div>
         <div id="create_post">
           <button>글쓰기</button>

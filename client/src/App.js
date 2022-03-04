@@ -7,13 +7,10 @@ import Landing from "./pages/Landing";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Main from "./pages/Main";
-<<<<<<< HEAD
 import Mypage from "./pages/Mypage";
 import Detail from "./pages/Detail";
-=======
 import Postthumnails from "./components/Postthumnails";
 import { initialitems } from "./components/dummy/dummyitems";
->>>>>>> 3a2fba64a851a38e65fbf363397dc12c8d0ed0cb
 
 function App() {
   // const [isLogin, setIsLogin] = useState(false);
@@ -28,11 +25,16 @@ function App() {
   // });
   const [items, setItems] = useState(initialitems);
 
+  // useEffect(() => {
+  //   console.log("이미지 useEffect");
+  //   const [items, setItems] = useState(initialitems);
+  // }, [items, playlist]);
+
   return (
     // <Detail></Detail>
     // <Mypage></Mypage>
 
-    <Main items={items}></Main>
+    <Main items={items} setItems={setItems}></Main>
     // <Switch>
     //   <Route exact path="/">
     //     <SpotifyAPP />
