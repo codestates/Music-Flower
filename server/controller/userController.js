@@ -1,10 +1,10 @@
 //userController.js
-const { User } = require("../../models");
+const { User } = require("../models");
 //jwt 라이브러리 불러오기
 const jwt = require("jsonwebtoken");
 
 //AccessToken, GenerateToken
-require("dotenv").config();
+//require("dotenv").config();
 
 /**
 const YOUR_SECRET_KEY = process.env.SECRET_KEY
@@ -43,7 +43,7 @@ export.createToken = async function (req, res, next) {
         });
       } catch (err) {
       console.error(err);
-      next(err);
+      next(err);g
       }
   };
  */
@@ -82,7 +82,7 @@ module.exports = {
   },
   //500케이스는 잘 모르겟습니다
 
-  signUp: (req, res) => {
+  signUp: async (req, res) => {
     //find or Create 쓰기.
     //토큰보내주기
     const { nickname, email, password } = req.body;
@@ -111,7 +111,7 @@ module.exports = {
     res.status(200).json("ok");
   },
   //put
-  //accessToken 이 있을 경우에만 수정이 가능하다.
+  //accessToken 이 있을 경우에만 수정이 가능하다
   updateUser: (req, res) => {
     res.status(200).json("ok");
   },
