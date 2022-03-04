@@ -8,8 +8,8 @@ export default function Signup() {
         <div>
           <nav className="navbar">
             <div className="nav-container">
-              <a href="/">
-                <h1 className="nav-logo">Music Flower</h1>
+              <a href="/" className="nav-logo">
+                <img src={require("../images/logos.png")} />
               </a>
             </div>
           </nav>
@@ -19,7 +19,7 @@ export default function Signup() {
         <div className="SignupWrapper">
           <img
             className="Signup-logo"
-            src={require("../images/face.png")}
+            src={require("../images/logo.png")}
             alt="logo"
             width="300px"
           />
