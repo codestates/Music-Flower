@@ -10,6 +10,8 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 
 import Main from "./pages/Main";
+import Mypage from "./pages/Mypage";
+import Detail from "./pages/Detail";
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);
@@ -24,7 +26,10 @@ function App() {
   // });
 
   return (
+    // <Detail></Detail>
+    // <Mypage></Mypage>
     <Main></Main>
+
     // <Switch>
     //   <Route exact path="/">
     //     <SpotifyAPP />
