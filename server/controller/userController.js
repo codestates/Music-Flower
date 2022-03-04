@@ -1,10 +1,7 @@
 //userController.js
-const { User } = require("../../models");
+const { User } = require("../models");
 //jwt 라이브러리 불러오기
 const jwt = require("jsonwebtoken");
-
-//AccessToken, GenerateToken
-require("dotenv").config();
 
 /**
 const YOUR_SECRET_KEY = process.env.SECRET_KEY
@@ -82,7 +79,7 @@ module.exports = {
   },
   //500케이스는 잘 모르겟습니다
 
-  signUp: (req, res) => {
+  signUp: async(req, res) => {
     //find or Create 쓰기.
     //토큰보내주기
     const { nickname, email, password } = req.body;
