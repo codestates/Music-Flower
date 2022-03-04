@@ -104,8 +104,11 @@ const MenuButtonInner = styled.button`
 
 export default function Main({ items, setItems, users }) {
   console.log(items);
-  const onClickHandle = () => {
+  const onClickMyPageHandle = () => {
     history.push("/mypage");
+  };
+  const onClickEditorHandle = () => {
+    history.push("/editor");
   };
   const history = useHistory();
   return (
@@ -117,7 +120,7 @@ export default function Main({ items, setItems, users }) {
         <Menu>
           <Nick>{users.nickname}님 안녕하세요.</Nick>
           <MenuButton>
-            <MenuButtonInner onClick={onClickHandle}>
+            <MenuButtonInner onClick={onClickMyPageHandle}>
               마이페이지
             </MenuButtonInner>
             <MenuButtonInner>로그아웃</MenuButtonInner>
@@ -130,7 +133,7 @@ export default function Main({ items, setItems, users }) {
           <Autocomplete items={items} setItems={setItems}></Autocomplete>
         </div>
         <div id="create_post">
-          <button>글쓰기</button>
+          <button onClick={onClickEditorHandle}>글쓰기</button>
         </div>
       </SerchArea>
       <Body>

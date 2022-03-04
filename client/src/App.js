@@ -9,6 +9,8 @@ import Signup from "./pages/Signup";
 import Main from "./pages/Main";
 import Mypage from "./pages/Mypage";
 import Detail from "./pages/Detail";
+import Editor from "./pages/Editor";
+
 import Postthumnails from "./components/Postthumnails";
 import { initialitems } from "./components/dummy/dummyitems";
 import { dummyuser } from "./components/dummy/dummyUser";
@@ -56,6 +58,9 @@ function App() {
       </Route>
       <Route path="/mypage">
         <Mypage users={userinfo}></Mypage>
+      </Route>
+      <Route path="/editor">
+        <Editor users={userinfo}></Editor>
       </Route>
     </Switch>
     // <Main items={items} setItems={setItems}></Main>
