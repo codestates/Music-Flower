@@ -72,8 +72,7 @@ export const DropDownContainer = styled.ul`
 export const Autocomplete = ({ items, setItems }) => {
   const [hasText, setHasText] = useState(false);
   const [inputValue, setInputValue] = useState("");
-  const [options, setOptions] = useState(items);
-  // const [options, setOptions] = [items, setItems];
+  const [options, setOptions] = [items, setItems];
   const [selected, setSelected] = useState(-1);
   // console.log("valu", inputValue);
 
@@ -81,10 +80,6 @@ export const Autocomplete = ({ items, setItems }) => {
     if (inputValue === "") {
       setHasText(false);
     }
-  }, [inputValue]);
-
-  useEffect(() => {
-    setItems(options);
   }, [inputValue]);
 
   const handleInputChange = (event) => {

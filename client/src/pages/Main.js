@@ -102,16 +102,12 @@ const MenuButtonInner = styled.button`
   height: 40px;
 `;
 
-<<<<<<< HEAD
-export default function Main({ items, setItems }) {
+export default function Main({ items, setItems, users }) {
   console.log(items);
-=======
-export default function Main({ items, users }) {
   const onClickHandle = () => {
     history.push("/mypage");
   };
   const history = useHistory();
->>>>>>> fc4e8fc34e5bb805f55c9ea618b63a57b2b7cd5c
   return (
     <MainPage>
       <Header>
