@@ -9,8 +9,8 @@ export default function Landing({ item }) {
         <div>
           <nav className="navbar">
             <div className="nav-container">
-              <a href="/">
-                <h1 className="nav-logo">Music Flower</h1>
+              <a href="/" className="nav-logo">
+                <img src={require("../images/logos.png")} />
               </a>
             </div>
           </nav>

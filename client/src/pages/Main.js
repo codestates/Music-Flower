@@ -111,7 +111,9 @@ export default function Main({ items, setItems, users }) {
   return (
     <MainPage>
       <Header>
-        <div className="logo">Flower(로고)</div>
+        <a href="/" className="nav-logo">
+          <img src={require("../images/logos.png")} />
+        </a>
         <Menu>
           <Nick>{users.nickname}님 안녕하세요.</Nick>
           <MenuButton>
