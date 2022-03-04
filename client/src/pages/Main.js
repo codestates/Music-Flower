@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import Postthumnails from "../components/Postthumnails";
 import { Autocomplete } from "../components/UI_components/Autocomplete";
 
 const MainPage = styled.div`
@@ -55,7 +56,7 @@ const SerchArea = styled.div`
 const Body = styled.div`
   /* border: 1px solid red;
   padding: 10px; */
-
+  display: flex;
   flex: 8 0 auto;
 `;
 
@@ -99,7 +100,8 @@ const MenuButtonInner = styled.button`
   height: 40px;
 `;
 
-export default function Signup() {
+export default function Main({ items }) {
+  console.log(items);
   return (
     <MainPage>
       <Header>
@@ -121,9 +123,12 @@ export default function Signup() {
           <button>글쓰기</button>
         </div>
       </SerchArea>
-
-      <Body>바디</Body>
-      <Footer>바닥</Footer>
+      <Body>
+        {items.map((item, idx) => (
+          <Postthumnails item={item} key={idx} />
+        ))}
+      </Body>
+      <Footer></Footer>
     </MainPage>
   );
 }
