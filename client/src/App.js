@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Switch, Route, useHistory, Redirect } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
-import SpotifyAPP from "./components/SpotifyApp";
 import Landing from "./pages/Landing";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
@@ -12,7 +11,7 @@ import Detail from "./pages/Detail";
 import Editor from "./pages/Editor";
 
 import Postthumnails from "./components/Postthumnails";
-import { initialitems } from "./components/dummy/dummyitems";
+import { allPosts } from "./components/dummy/dummyitems";
 import { dummyuser } from "./components/dummy/dummyUser";
 function App() {
   const [isLogin, setIsLogin] = useState(false);
@@ -30,17 +29,12 @@ function App() {
     setUserinfo(dummyuser);
     history.push("/main");
   };
-  const [items, setItems] = useState(initialitems);
-
-  // useEffect(() => {
-  //   console.log("이미지 useEffect");
-  //   const [items, setItems] = useState(initialitems);
-  // }, [items, playlist]);
+  const [items, setItems] = useState(allPosts);
+  const [detailData, setDetailData] = useState({});
 
   return (
     <Switch>
       <Route exact path="/">
-        <SpotifyAPP />
         <Landing />
       </Route>
       <Route path="/login">
@@ -54,10 +48,17 @@ function App() {
         <Signup />
       </Route>
       <Route path="/main">
-        <Main items={items} users={userinfo}></Main>
+        <Main
+          items={items}
+          users={userinfo}
+          setDetailData={setDetailData}
+        ></Main>
       </Route>
       <Route path="/mypage">
         <Mypage users={userinfo}></Mypage>
+      </Route>
+      <Route path="/detail">
+        <Detail users={userinfo} detailData={detailData}></Detail>
       </Route>
       <Route path="/editor">
         <Editor users={userinfo}></Editor>

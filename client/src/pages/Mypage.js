@@ -26,6 +26,7 @@ const Mypage = styled.div`
       border: 1px solid red;
       padding: 10px;
       display: flex;
+      flex-wrap: wrap;
 
       > .myPost {
         border: 1px solid red;

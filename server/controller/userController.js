@@ -82,8 +82,6 @@ module.exports = {
   },
   //500케이스는 잘 모르겟습니다
 
-  //post
-  //회원가입이다
   signUp: async (req, res) => {
     //find or Create 쓰기.
     //토큰보내주기
