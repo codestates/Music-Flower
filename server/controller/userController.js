@@ -82,10 +82,16 @@ module.exports = {
   },
   //500케이스는 잘 모르겟습니다
 
+  //post
+  //회원가입이다
   signUp: async (req, res) => {
     //find or Create 쓰기.
     //토큰보내주기
     const { nickname, email, password } = req.body;
+    if (!nickname || !email || !password) {
+      res.status(422).send("모든 항목을 입력해 주세요");
+    }
+
     const [result, created] = await User.findOrCreate({
       where: { email },
       defaults: {
@@ -96,28 +102,46 @@ module.exports = {
     if (!created) {
       res.status(400).send("user is already exists");
     } else {
-      const token = payload;
-      res, token;
+      const payload = {
+        email,
+        nickname,
+        password,
+      };
 
+      const token = generateAccessToken(payload);
+      sendAccessToken(res, token);
       res.status(200).json({ message: "successfully signed up" });
     }
-
-    res.status(200).json("ok");
   },
 
   //get
   //mypage 로 이동 accessToken이 있을 경우에만 data를 보내준다
+  //data를 cookie에 넣어야 하는지 accesstoken에 넣어야할까요?
+  //data 에 userinfo 를 넣고 거기에 accessTokenData 넣어서 진행함.
   findUser: (req, res) => {
-    res.status(200).json("ok");
+    const cookie = req.cookies.jwt; //event: req cookies 찾아보기
+    if (!cookie) {
+      res.json({ data: null, message: "not authorized" });
+    }
+
+    const accessTokenData = isAuthorized(cookie);
+
+    if (!accessTokenData || !cookie) {
+      res.json({ data: null, message: "not authorized" });
+    }
+
+    return res.status(200).json({ data: { userInfo: accessTokenData } });
   },
+
   //put
-  //accessToken 이 있을 경우에만 수정이 가능하다
+  //accessToken 이 있을 경우에만  my page 수정이 가능하다
+  //현재 진행중
   updateUser: (req, res) => {
     res.status(200).json("ok");
   },
   //delete
   //accessToken이 있을 경우에만 delete 한다.
   deleteUser: (req, res) => {
-    res.status(200).json("ok");
+    res.status(200).send("Good bye ");
   },
 };
