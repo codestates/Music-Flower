@@ -3,12 +3,14 @@ import spotifyAuth from "../auth/useSpotifyAuth";
 import SpotifyWebApi from "spotify-web-api-node";
 import TrackSearchResult from "./TrackSerchResult";
 import SavePlayList from "./SavePlayList";
+import { spotifyC } from "./SpotifyC";
 
 const spotifyApi = new SpotifyWebApi({
-  clientId: "91b9b462242b430aa59363c6adeda3fc",
+  clientId: spotifyC,
 });
 
 export default function SpDashboard({ code }) {
+  console.log("spotify대쉬보드 입니다:");
   const accessToken = spotifyAuth(code);
   // console.log("accesstoken", accessToken);
   const [search, setSearch] = useState("");

@@ -1,16 +1,20 @@
 const SpotifyWebApi = require("spotify-web-api-node");
 
+const cId = "26044bd61ea049d4a54e2798864d988b";
+const cSecret = "b0143d3ebc5949b5b353a78dfaf4ba97";
+
 module.exports = {
   getAuth: (req, res) => {
     const code = req.body.code;
     const spotifyApi = new SpotifyWebApi({
-      clientId: "91b9b462242b430aa59363c6adeda3fc",
-      clientSecret: "5e09bcd040bf4a46afac0eb381056fb3",
+      clientId: cId,
+      clientSecret: cSecret,
       redirectUri: "http://localhost:3000/editor",
     });
     spotifyApi
       .authorizationCodeGrant(code)
       .then((data) => {
+        console.log("data", data);
         res.json({
           accessToken: data.body.access_token,
           refreshToken: data.body.refresh_token,
@@ -24,8 +28,8 @@ module.exports = {
   getRefreshToken: (req, res) => {
     const refreshToken = req.body.refreshToken;
     const spotifyApi = new SpotifyWebApi({
-      clientId: "91b9b462242b430aa59363c6adeda3fc",
-      clientSecret: "5e09bcd040bf4a46afac0eb381056fb3",
+      clientId: cId,
+      clientSecret: cSecret,
       redirectUri: "http://localhost:3000/editor",
       refreshToken,
     });

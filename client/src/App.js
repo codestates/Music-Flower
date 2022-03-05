@@ -8,6 +8,9 @@ import Main from "./pages/Main";
 import Mypage from "./pages/Mypage";
 import Detail from "./pages/Detail";
 import Editor from "./pages/Editor";
+
+import SpotifyAPP from "./components/SpotifyApp";
+
 import { allPosts } from "./components/dummy/dummyitems";
 import { dummyuser } from "./components/dummy/dummyUser";
 function App() {
@@ -40,6 +43,8 @@ function App() {
   return (
     <Switch>
       <Route exact path="/">
+        {/* <SpotifyAPP /> */}
+
         <Landing />
       </Route>
       <Route path="/login">
@@ -72,7 +77,6 @@ function App() {
         {isLogin ? <Redirect to="/main" /> : <Redirect to="/login" />}
       </Route>
     </Switch>
-    // <Main items={items} setItems={setItems}></Main>
   );
 }
 

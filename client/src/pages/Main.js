@@ -3,6 +3,9 @@ import styled from "styled-components";
 import Postthumnails from "../components/Postthumnails";
 import { Autocomplete } from "../components/UI_components/Autocomplete";
 import { Switch, Route, useHistory, Redirect } from "react-router-dom";
+import { spotifyC } from "../components/SpotifyC";
+const cId = spotifyC;
+const AUTH_URL = `https://accounts.spotify.com/authorize?client_id=${cId}&response_type=code&redirect_uri=http://localhost:3000/editor&scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20user-read-playback-state%20user-modify-playback-state`;
 
 const MainPage = styled.div`
   border: 1px solid red;
@@ -125,6 +128,7 @@ export default function Main({
   };
 
   const history = useHistory();
+  // console.log("history:", history);
   return (
     <div id="mainPage">
       <MainPage>
@@ -148,7 +152,11 @@ export default function Main({
             <Autocomplete items={items} setItems={setItems}></Autocomplete>
           </div>
           <div id="create_post">
-            <button onClick={onClickEditorHandle}>글쓰기</button>
+            {/* <button onClick={onClickEditorHandle}> */}
+            <a className="12134" href={AUTH_URL} onClick={onClickEditorHandle}>
+              글쓰기
+            </a>
+            {/* </button> */}
           </div>
         </SerchArea>
         <Body>

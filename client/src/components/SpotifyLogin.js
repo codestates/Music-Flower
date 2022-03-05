@@ -1,9 +1,10 @@
 // import React from "react";
-
-const AUTH_URL =
-  "https://accounts.spotify.com/authorize?client_id=91b9b462242b430aa59363c6adeda3fc&response_type=code&redirect_uri=http://localhost:3000&scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20user-read-playback-state%20user-modify-playback-state";
+import { spotifyC } from "./SpotifyC";
+const cId = spotifyC;
+const AUTH_URL = `https://accounts.spotify.com/authorize?client_id=${cId}&response_type=code&redirect_uri=http://localhost:3000/editor&scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20user-read-playback-state%20user-modify-playback-state`;
 
 export default function SpotifyLogin() {
+  console.log("spotify로그인 페이지");
   return (
     <div className="12">
       <a className="12134" href={AUTH_URL}>
