@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Switch, Route, useHistory, Redirect } from "react-router-dom";
-import styled from "styled-components";
 import axios from "axios";
 import Landing from "./pages/Landing";
 import Login from "./pages/Login";
@@ -9,8 +8,6 @@ import Main from "./pages/Main";
 import Mypage from "./pages/Mypage";
 import Detail from "./pages/Detail";
 import Editor from "./pages/Editor";
-
-import Postthumnails from "./components/Postthumnails";
 import { allPosts } from "./components/dummy/dummyitems";
 import { dummyuser } from "./components/dummy/dummyUser";
 function App() {
@@ -24,13 +21,21 @@ function App() {
   //   setIsLogin(!isLogin);
   //   history.push("/mypage");
   // });
+
   const handleResponseSuccess = () => {
     setIsLogin(!isLogin);
     setUserinfo(dummyuser);
     history.push("/main");
+    console.log("??????");
   };
   const [items, setItems] = useState(allPosts);
   const [detailData, setDetailData] = useState({});
+
+  const handleLogout = () => {
+    setUserinfo(null);
+    setIsLogin(false);
+    history.push("/");
+  };
 
   return (
     <Switch>
@@ -40,7 +45,6 @@ function App() {
       <Route path="/login">
         <Login
           isLogin={isLogin}
-          userDatas={dummyuser}
           handleResponseSuccess={handleResponseSuccess}
         />
       </Route>
@@ -52,6 +56,7 @@ function App() {
           items={items}
           users={userinfo}
           setDetailData={setDetailData}
+          handleLogout={handleLogout}
         ></Main>
       </Route>
       <Route path="/mypage">
@@ -62,6 +67,9 @@ function App() {
       </Route>
       <Route path="/editor">
         <Editor users={userinfo}></Editor>
+      </Route>
+      <Route path="/">
+        {isLogin ? <Redirect to="/main" /> : <Redirect to="/login" />}
       </Route>
     </Switch>
     // <Main items={items} setItems={setItems}></Main>

@@ -52,14 +52,14 @@ module.exports = {
   logIn: async (req, res) => {
     const { email, password } = req.body;
     //일치하는 값   email, password
-
+    console.log(req.body);
     const user = await User.findOne({ where: { email, password } });
     // 해당하는 값
     if (!user) {
       //없다
-      res.status(401).json({ message: "Unauthorized" });
+      res.status(404).json({ message: "Unauthorized" });
     } else {
-      //아닌경우
+      //아닌경우;
       if (err) {
         res.status(500).send({ message: "Internal Server Error" });
       } else {
