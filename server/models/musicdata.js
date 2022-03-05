@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      models.MusicData.belongsToMany(models.Post, {through:'Post_MusicData'})
     }
   }
   MusicData.init({
