@@ -1,13 +1,18 @@
 const express = require("express");
 const cors = require("cors");
 const app = express();
-const test = require('./test');
+const { sequelize } = require('./models');
 
 const userRouter = require('./router/userRouter');
 const postRouter = require('./router/postRouter');
 const spotifyRouter = require('./router/spotifyRouter');
 
-app.use(test);
+sequelize.sync({ force: false })
+.then(()=> {
+  console.log('데이터베이스 연결');
+}).catch((err)=> {
+  console.error(err);
+})
 
 app.use(cors());
 app.use(express.json());
