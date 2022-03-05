@@ -1,0 +1,86 @@
+header {
+  position: sticky;
+  top: 0;
+}
+
+.labelTitle {
+  line-height: 2;
+  text-align: left;
+  display: block;
+  margin-top: 10px;
+  color: gray;
+  font-size: 14px;
+  font-weight: 500;
+  background: white;
+}
+.passwordField {
+  position: relative;
+}
+
+.SignupForm {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  width: 100%;
+}
+.SignupWrapper {
+  background: white;
+  max-width: 390px;
+  margin: 0 auto;
+  border: 1px;
+  border-radius: 2rem;
+  height: 55rem;
+  box-shadow: 0px 10px 20px 0px rgba(50, 50, 50, 0.52);
+}
+.Signup-logo {
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+  color: gray;
+  text-align: center;
+  padding-bottom: 10px;
+  margin-left: 3rem;
+}
+.SignUpfrm {
+  background: white;
+  width: 90%;
+  margin: 0 auto;
+}
+
+input {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  border-radius: 4px;
+  border: 1px;
+  padding: 10px 15px;
+  font-size: 14px;
+  background: rgb(228, 224, 224);
+}
+.Signup-btn {
+  margin-top: 1.5rem;
+  margin-left: 1.2rem;
+  font-size: larger;
+  width: inherit;
+  margin-bottom: 20px;
+  padding: 20px 20px;
+  border-radius: 5px;
+  border: none;
+  color: rgba(30, 22, 54, 0.6);
+  box-shadow: rgba(119, 108, 153, 0.4) 0 0px 0px 2px inset;
+}
+
+.Signup-btn:hover {
+  color: rgba(255, 255, 255, 0.85);
+  box-shadow: rgba(30, 22, 54, 0.7) 0 80px 0px 2px inset;
+}
+.option p > a {
+  text-decoration: none;
+  color: #00a0f7;
+}
+.option {
+  width: 400px;
+  height: 70px;
+  margin-top: 20px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
