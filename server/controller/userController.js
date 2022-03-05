@@ -79,7 +79,7 @@ module.exports = {
   },
   //500케이스는 잘 모르겟습니다
 
-  signUp: async(req, res) => {
+  signUp: async (req, res) => {
     //find or Create 쓰기.
     //토큰보내주기
     const { nickname, email, password } = req.body;

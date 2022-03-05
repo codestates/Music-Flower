@@ -1,26 +1,27 @@
 import React from "react";
 import styled from "styled-components";
 
-const Post = styled.ul`
-  border: 1px solid red;
-  padding: 10px;
+// const Post = styled.div`
+//   border: 1px solid red;
+//   padding: 10px;
 
-  display: flex;
-  text-align: center;
-  height: 30vw;
-  width: auto;
-  flex-direction: row;
-`;
+//   display: flex;
+//   text-align: center;
+//   height: 30vw;
+//   width: auto;
+//   flex-direction: row;
+// `;
 const Card = styled.li`
   border: 1px solid red;
   padding: 10px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
   border-radius: 5px;
+  height: 400px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: auto;
+  margin: 10px;
   > #Card:hover & {
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
   }
@@ -68,27 +69,27 @@ const Tagitem = styled.button`
   background-color: aliceblue;
   color: #1e6b7b;
 `;
-export default function Postthumnails({ item }) {
+export default function Postthumnails({ item, onClickDetailHandle }) {
   // console.log(item);
   return (
-    <Post key={item.id}>
-      <Card>
-        <img src={item.imageUrl} width="200vw" />
-        <Container>
-          <h4>
-            <b>{item.postTitle}</b>
-          </h4>
-          <Nickname>{item.nickname}</Nickname>
-          <Meta>
-            <Likes>좋아요</Likes>
-            <Bar>\</Bar>
-            100곡
-          </Meta>
-          <Meta>
-            <Tagitem>{item.tags}</Tagitem>
-          </Meta>
-        </Container>
-      </Card>
-    </Post>
+    // <Post>
+    <Card key={item.id} onClick={() => onClickDetailHandle(item)}>
+      <img src={item.imageUrl} width="200vw" />
+      <Container>
+        <h4>
+          <b>{item.postTitle}</b>
+        </h4>
+        <Nickname>{item.nickname}</Nickname>
+        <Meta>
+          <Likes>좋아요</Likes>
+          <Bar>\</Bar>
+          100곡
+        </Meta>
+        <Meta>
+          <Tagitem>{item.tags}</Tagitem>
+        </Meta>
+      </Container>
+    </Card>
+    /* </Post> */
   );
 }
