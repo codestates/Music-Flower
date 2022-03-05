@@ -1,8 +1,16 @@
 import React from "react";
 import "../css/Landing.css";
-function handlePlay() {}
-
-export default function Landing({ item }) {
+import { useHistory } from "react-router-dom";
+export default function Landing({ isLogin }) {
+  console.log("랜딩", isLogin);
+  const history = useHistory();
+  const handleRecord = () => {
+    if (isLogin) {
+      history.push("/main");
+    } else {
+      history.push("/login");
+    }
+  };
   return (
     <div className="landing-body">
       <header>
@@ -20,7 +28,7 @@ export default function Landing({ item }) {
         <div className="line">좋아하는 음악을 다른 사람들과 서로 공유하며</div>
         <div className="line">새로운 추억을 쌓아 보세요!</div>
         <div className="btn">
-          <a className="play-btn" href="/login">
+          <a className="play-btn" onClick={handleRecord}>
             Start
           </a>
         </div>

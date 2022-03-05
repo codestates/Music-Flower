@@ -49,20 +49,19 @@ module.exports = {
   logIn: async (req, res) => {
     const { email, password } = req.body;
     //일치하는 값   email, password
-
+    console.log(req.body);
     const user = await User.findOne({ where: { email, password } });
     // 해당하는 값
     if (!user) {
       //없다
-      res.status(401).json({ message: "Unauthorized" });
+      res.status(404).json({ message: "Unauthorized" });
     } else {
       //아닌경우
-      if (err) {
-        res.status(500).send({ message: "Internal Server Error" });
-      } else {
-        res.status(200).json({ message: "successfully loged in!" }); //"successfully loged in!"\ // result
-        //cookie와 토큰을!!! 인증을 담아서 보내준다.
-      }
+      // if (err) {
+      //   res.status(500).send({ message: "Internal Server Error" });
+      // } else {
+      res.status(200).json({ message: "successfully loged in!" }); //"successfully loged in!"\ // result
+      //cookie와 토큰을!!! 인증을 담아서 보내준다.
     }
   },
 
@@ -79,11 +78,7 @@ module.exports = {
   },
   //500케이스는 잘 모르겟습니다
 
-<<<<<<< HEAD
   signUp: async (req, res) => {
-=======
-  signUp: async(req, res) => {
->>>>>>> 79f36ebfa5b597f77f05c2791fe57bd55e815d29
     //find or Create 쓰기.
     //토큰보내주기
     const { nickname, email, password } = req.body;

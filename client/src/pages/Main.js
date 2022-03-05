@@ -102,7 +102,7 @@ const MenuButtonInner = styled.button`
   height: 40px;
 `;
 
-export default function Main({ items, setItems, users }) {
+export default function Main({ items, setItems, users, handleLogout }) {
   console.log(items);
   const onClickMyPageHandle = () => {
     history.push("/mypage");
@@ -123,7 +123,7 @@ export default function Main({ items, setItems, users }) {
             <MenuButtonInner onClick={onClickMyPageHandle}>
               마이페이지
             </MenuButtonInner>
-            <MenuButtonInner>로그아웃</MenuButtonInner>
+            <MenuButtonInner onClick={handleLogout}>로그아웃</MenuButtonInner>
           </MenuButton>
         </Menu>
       </Header>

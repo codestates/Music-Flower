@@ -3,9 +3,7 @@ import React from "react";
 import "../css/Login.css";
 import { useState } from "react";
 
-axios.defaults.withCredentials = true;
-
-export default function Login({ userDatas, handleResponseSuccess }) {
+export default function Login({ handleResponseSuccess }) {
   const [loginInfo, setLoginInfo] = useState({
     email: "",
     password: "",
@@ -14,27 +12,37 @@ export default function Login({ userDatas, handleResponseSuccess }) {
     setLoginInfo({ ...loginInfo, [key]: e.target.value });
   };
 
-  const guestlogin = () => {
-    setLoginInfo({
-      email: "test.naver.com",
-      password: "test",
-    });
-    handleResponseSuccess();
-  };
-
   console.log(loginInfo);
   const [errorMessage, setErrorMessage] = useState("");
+
   const handleLogin = () => {
     if (!loginInfo.email && !loginInfo.password) {
       setErrorMessage("이메일과 비밀번호를 입력하세요");
-      return alert(errorMessage);
-    } else if (
-      loginInfo.email !== userDatas.email &&
-      loginInfo.password !== userDatas.password
-    ) {
-      setErrorMessage("아이디 또는 비밀번호 가 다릅니다");
-      return alert(errorMessage);
+      return;
     }
+    // } else if (
+    //   loginInfo.email !== userDatas.email &&
+    //   loginInfo.password !== userDatas.password
+    // ) {
+    //   setErrorMessage("아이디 또는 비밀번호 가 다릅니다");
+    //   return alert(errorMessage);
+    // }
+    const url = "http://localhost:8080/user/login";
+    axios
+      .post(
+        url,
+        { email: loginInfo.email, password: loginInfo.password }
+        // {
+        //   headers: { "Content-Type": "application/json" },
+        //   // withCredentials: true,
+        // }
+      )
+      .then((res) => {
+        if (res.payload.message === "successfully loged in!") {
+          handleResponseSuccess();
+        }
+      })
+      .catch((err) => err);
   };
 
   return (
@@ -75,9 +83,6 @@ export default function Login({ userDatas, handleResponseSuccess }) {
             </div>
             <button className="Login-btn" onClick={handleLogin}>
               Login !
-            </button>
-            <button className="Login-btn" onClick={guestlogin}>
-              Guest
             </button>
           </form>
           <div className="option">
