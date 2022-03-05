@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Switch, Route, useHistory, Redirect } from "react-router-dom";
 import axios from "axios";
-import SpotifyAPP from "./components/SpotifyApp";
 import Landing from "./pages/Landing";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
@@ -9,7 +8,7 @@ import Main from "./pages/Main";
 import Mypage from "./pages/Mypage";
 import Detail from "./pages/Detail";
 import Editor from "./pages/Editor";
-import { initialitems } from "./components/dummy/dummyitems";
+import { allPosts } from "./components/dummy/dummyitems";
 import { dummyuser } from "./components/dummy/dummyUser";
 function App() {
   const [isLogin, setIsLogin] = useState(false);
@@ -29,13 +28,8 @@ function App() {
     history.push("/main");
     console.log("??????");
   };
-  console.log("로그인후", isLogin);
-  const [items, setItems] = useState(initialitems);
-
-  // useEffect(() => {
-  //   console.log("이미지 useEffect");
-  //   const [items, setItems] = useState(initialitems);
-  // }, [items, playlist]);
+  const [items, setItems] = useState(allPosts);
+  const [detailData, setDetailData] = useState({});
 
   const handleLogout = () => {
     setUserinfo(null);
@@ -46,8 +40,7 @@ function App() {
   return (
     <Switch>
       <Route exact path="/">
-        <SpotifyAPP />
-        <Landing isLogin={isLogin} />
+        <Landing />
       </Route>
       <Route path="/login">
         <Login
@@ -59,10 +52,18 @@ function App() {
         <Signup />
       </Route>
       <Route path="/main">
-        <Main items={items} users={userinfo} handleLogout={handleLogout}></Main>
+        <Main
+          items={items}
+          users={userinfo}
+          setDetailData={setDetailData}
+          handleLogout={handleLogout}
+        ></Main>
       </Route>
       <Route path="/mypage">
         <Mypage users={userinfo}></Mypage>
+      </Route>
+      <Route path="/detail">
+        <Detail users={userinfo} detailData={detailData}></Detail>
       </Route>
       <Route path="/editor">
         <Editor users={userinfo}></Editor>

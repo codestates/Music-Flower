@@ -102,7 +102,13 @@ const MenuButtonInner = styled.button`
   height: 40px;
 `;
 
-export default function Main({ items, setItems, users, handleLogout }) {
+export default function Main({
+  items,
+  setItems,
+  users,
+  setDetailData,
+  handleLogout,
+}) {
   console.log(items);
   const onClickMyPageHandle = () => {
     history.push("/mypage");
@@ -110,38 +116,52 @@ export default function Main({ items, setItems, users, handleLogout }) {
   const onClickEditorHandle = () => {
     history.push("/editor");
   };
+  const onClickDetailHandle = (postData) => {
+    // 클릭하면 디테일데이터가 들어가야지 ㅇㅇ
+    console.log("postData:", postData);
+    setDetailData(postData);
+
+    history.push("/detail");
+  };
+
   const history = useHistory();
   return (
-    <MainPage>
-      <Header>
-        <a href="/" className="nav-logo">
-          <img src={require("../images/logos.png")} />
-        </a>
-        <Menu>
-          <Nick>{users.nickname}님 안녕하세요.</Nick>
-          <MenuButton>
-            <MenuButtonInner onClick={onClickMyPageHandle}>
-              마이페이지
-            </MenuButtonInner>
-            <MenuButtonInner onClick={handleLogout}>로그아웃</MenuButtonInner>
-          </MenuButton>
-        </Menu>
-      </Header>
+    <div id="mainPage">
+      <MainPage>
+        <Header>
+          <a href="/" className="nav-logo">
+            <img src={require("../images/logos.png")} />
+          </a>
+          <Menu>
+            <Nick>{users.nickname}님 안녕하세요.</Nick>
+            <MenuButton>
+              <MenuButtonInner onClick={onClickMyPageHandle}>
+                마이페이지
+              </MenuButtonInner>
+              <MenuButtonInner onClick={handleLogout}>로그아웃</MenuButtonInner>
+            </MenuButton>
+          </Menu>
+        </Header>
 
-      <SerchArea>
-        <div id="select_bar">
-          <Autocomplete items={items} setItems={setItems}></Autocomplete>
-        </div>
-        <div id="create_post">
-          <button onClick={onClickEditorHandle}>글쓰기</button>
-        </div>
-      </SerchArea>
-      <Body>
-        {items.map((item, idx) => (
-          <Postthumnails item={item} key={idx} />
-        ))}
-      </Body>
-      <Footer></Footer>
-    </MainPage>
+        <SerchArea>
+          <div id="select_bar">
+            <Autocomplete items={items} setItems={setItems}></Autocomplete>
+          </div>
+          <div id="create_post">
+            <button onClick={onClickEditorHandle}>글쓰기</button>
+          </div>
+        </SerchArea>
+        <Body>
+          {items.map((item, idx) => (
+            <Postthumnails
+              onClickDetailHandle={onClickDetailHandle}
+              item={item}
+              key={idx}
+            />
+          ))}
+        </Body>
+        <Footer></Footer>
+      </MainPage>
+    </div>
   );
 }

@@ -15,6 +15,16 @@ export default function Login({ handleResponseSuccess }) {
   console.log(loginInfo);
   const [errorMessage, setErrorMessage] = useState("");
 
+  const handleGuest = () => {
+    setLoginInfo(
+      {
+        email: "test@naver.com",
+        password: "password",
+      },
+      handleResponseSuccess()
+    );
+  };
+
   const handleLogin = () => {
     if (!loginInfo.email && !loginInfo.password) {
       setErrorMessage("이메일과 비밀번호를 입력하세요");
@@ -83,6 +93,9 @@ export default function Login({ handleResponseSuccess }) {
             </div>
             <button className="Login-btn" onClick={handleLogin}>
               Login !
+            </button>
+            <button className="Login-btn" onClick={handleGuest}>
+              Guest !
             </button>
           </form>
           <div className="option">

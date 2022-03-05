@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { MusicSelector } from "../components/UI_components/MusicSelector";
+import SpotifyAPP from "../components/SpotifyApp";
 
 const EditorBody = styled.div`
   border: 1px solid red;
@@ -54,17 +55,29 @@ export default function Editor() {
     <div id="editorPage">
       <EditorBody>
         <div id="up">
-          <div id="postImg">이미지</div>
-          <div id="postInfo">post 정보</div>
+          <div id="postImg">
+            이미지
+            <br />
+            (어케올리지???) 있는 이미지 중에서 선택?
+          </div>
+          <div id="postInfo">
+            post 정보
+            <div>
+              post 제목
+              <input type="textarea"></input>
+            </div>
+          </div>
         </div>
         <div id="down">
+          <div>post 소개</div>
           <div id="postIntro">
-            <input></input>
+            <input type="text" id=""></input>
           </div>
 
           <div id="musicList">
             음악 리스트
-            {/* <MusicSelector></MusicSelector> */}
+            {/* <SpotifyAPP /> */}
+            <MusicSelector></MusicSelector>
             <div id="music">music</div>
             <div id="music">music</div>
             <div id="music">music</div>
