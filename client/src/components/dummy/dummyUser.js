@@ -1,5 +1,5 @@
 export const dummyuser = {
-  email: "test.naver.com",
+  email: "test@naver.com",
   password: "test",
   nickname: "손코딩",
   myposts: [
