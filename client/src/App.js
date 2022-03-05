@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Switch, Route, useHistory, Redirect } from "react-router-dom";
-import axios from "axios";
+import { Switch, Route, useHistory } from "react-router-dom";
+
 import Landing from "./pages/Landing";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
@@ -26,7 +26,6 @@ function App() {
     setIsLogin(!isLogin);
     setUserinfo(dummyuser);
     history.push("/main");
-    console.log("??????");
   };
   const [items, setItems] = useState(allPosts);
   const [detailData, setDetailData] = useState({});
@@ -40,13 +39,10 @@ function App() {
   return (
     <Switch>
       <Route exact path="/">
-        <Landing />
+        <Landing isLogin={isLogin} />
       </Route>
       <Route path="/login">
-        <Login
-          isLogin={isLogin}
-          handleResponseSuccess={handleResponseSuccess}
-        />
+        <Login handleResponseSuccess={handleResponseSuccess} />
       </Route>
       <Route path="/signup">
         <Signup />
@@ -67,9 +63,6 @@ function App() {
       </Route>
       <Route path="/editor">
         <Editor users={userinfo}></Editor>
-      </Route>
-      <Route path="/">
-        {isLogin ? <Redirect to="/main" /> : <Redirect to="/login" />}
       </Route>
     </Switch>
     // <Main items={items} setItems={setItems}></Main>

@@ -60,12 +60,11 @@ module.exports = {
       res.status(404).json({ message: "Unauthorized" });
     } else {
       //아닌경우;
-      if (err) {
-        res.status(500).send({ message: "Internal Server Error" });
-      } else {
-        res.status(200).json({ message: "successfully loged in!" }); //"successfully loged in!"\ // result
-        //cookie와 토큰을!!! 인증을 담아서 보내준다.
-      }
+      // if (err) {
+      //   res.status(500).send({ message: "Internal Server Error" });
+      // } else {
+      res.status(200).json({ message: "successfully loged in!" }); //"successfully loged in!"\ // result
+      //cookie와 토큰을!!! 인증을 담아서 보내준다.
     }
   },
 
