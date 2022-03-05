@@ -8,8 +8,6 @@ module.exports = {
         email: "test@naver.com",
         password: "test",
         createdAt: new Date(),
-        updatedAt: new Date(),
-      },
     ]);
   },
 
