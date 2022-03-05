@@ -11,12 +11,16 @@ module.exports = {
       userId: {
         type: Sequelize.INTEGER,
         references: {
-          model: User,
+          model: 'Users',
           key: 'id'
         }
       },
       postId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Posts',
+          key: 'id'
+        }
       },
       comment: {
         type: Sequelize.STRING
