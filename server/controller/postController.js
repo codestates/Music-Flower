@@ -1,5 +1,5 @@
 //postController.js
-const { User } = require("../../models");
+const { User } = require("../models");
 //jwt 라이브러리 불러오기
 const jwt = require("jsonwebtoken");
 

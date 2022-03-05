@@ -3,9 +3,6 @@ const { User } = require("../models");
 //jwt 라이브러리 불러오기
 const jwt = require("jsonwebtoken");
 
-//AccessToken, GenerateToken
-require("dotenv").config();
-
 /**
 const YOUR_SECRET_KEY = process.env.SECRET_KEY
 

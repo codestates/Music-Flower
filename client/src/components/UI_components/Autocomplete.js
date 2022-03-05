@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
-import { initialitems } from "../dummy/dummyitems";
+import { allPosts } from "../dummy/dummyitems";
 
 const boxShadow = "0 4px 6px rgb(32 33 36 / 28%)";
 const activeBorderRadius = "1rem 1rem 0 0";
@@ -94,7 +94,7 @@ export const Autocomplete = ({ items, setItems }) => {
 
     // dropdown을 위한 기능
     const filterRegex = new RegExp(value, "i");
-    const resultOptions = initialitems.filter((option) =>
+    const resultOptions = allPosts.filter((option) =>
       option.postTitle.match(filterRegex)
     );
     setOptions(resultOptions);
@@ -103,7 +103,7 @@ export const Autocomplete = ({ items, setItems }) => {
   // option은 객체
   const handleDropDownClick = (clickedOption) => {
     setInputValue(clickedOption.postTitle);
-    const resultOptions = initialitems.filter(
+    const resultOptions = allPosts.filter(
       (option) => option.postTitle === clickedOption.postTitle
     );
     setOptions(resultOptions);
