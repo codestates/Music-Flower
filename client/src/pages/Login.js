@@ -2,8 +2,9 @@ import axios from "axios";
 import React from "react";
 import "../css/Login.css";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
-export default function Login({ handleResponseSuccess }) {
+export default function Login({ handleResponseSuccess, isLogin }) {
   const [loginInfo, setLoginInfo] = useState({
     email: "",
     password: "",
@@ -12,7 +13,7 @@ export default function Login({ handleResponseSuccess }) {
     setLoginInfo({ ...loginInfo, [key]: e.target.value });
   };
 
-  console.log(loginInfo);
+  console.log("this", isLogin);
   const [errorMessage, setErrorMessage] = useState("");
 
   const handleGuest = () => {
@@ -28,7 +29,7 @@ export default function Login({ handleResponseSuccess }) {
   const handleLogin = () => {
     if (!loginInfo.email && !loginInfo.password) {
       setErrorMessage("이메일과 비밀번호를 입력하세요");
-      return;
+      return alert(errorMessage);
     }
     // } else if (
     //   loginInfo.email !== userDatas.email &&
@@ -39,20 +40,12 @@ export default function Login({ handleResponseSuccess }) {
     // }
     const url = "http://localhost:8080/user/login";
     axios
-      .post(
-        url,
-        { email: loginInfo.email, password: loginInfo.password }
-        // {
-        //   headers: { "Content-Type": "application/json" },
-        //   // withCredentials: true,
-        // }
-      )
-      .then((res) => {
-        if (res.payload.message === "successfully loged in!") {
-          handleResponseSuccess();
-        }
+      .post(url, {
+        email: loginInfo.email,
+        password: loginInfo.password,
       })
-      .catch((err) => err);
+      .then((res) => handleResponseSuccess())
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -61,9 +54,13 @@ export default function Login({ handleResponseSuccess }) {
         <div>
           <nav className="navbar">
             <div className="nav-container">
-              <a href="/" className="nav-logo">
-                <img src={require("../images/logos.png")} />
-              </a>
+              <Link to="/" className="nav-logo">
+                <img
+                  src={require("../images/logo.png")}
+                  width="220px"
+                  alt="logo"
+                />
+              </Link>
             </div>
           </nav>
         </div>
@@ -76,7 +73,7 @@ export default function Login({ handleResponseSuccess }) {
             alt="logo"
             width="300px"
           />
-          <form className="Loginfrm">
+          <form className="Loginfrm" onSubmit={(e) => e.preventDefault()}>
             <label className="labelTitle">이메일</label>
             <input
               className="email"
@@ -100,7 +97,7 @@ export default function Login({ handleResponseSuccess }) {
           </form>
           <div className="option">
             <p>
-              계정이 없으신가요? <a href="/signup"> 회원가입</a>
+              계정이 없으신가요? <Link to="/signup">회원가입</Link>
             </p>
           </div>
         </div>
