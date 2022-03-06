@@ -9,18 +9,22 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       userId: {
-        type: Sequelize.INTEGER,
+        type: 'foreign key',
         references: {
           model: "Users",
           key: "id",
         },
+        onDelete: 'cascade',
+        onUpdate: 'cascade'
       },
       postId: {
-        type: Sequelize.INTEGER,
+        type: 'foreign key',
         references: {
           model: "Posts",
           key: "id",
         },
+        onDelete: 'cascade',
+        onUpdate: 'cascade'
       },
     });
   },

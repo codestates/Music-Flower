@@ -15,10 +15,10 @@ module.exports = {
         type: Sequelize.STRING,
       },
       musicImage: {
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT,
       },
       musicUrl: {
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT,
       },
       genre: {
         type: Sequelize.STRING,

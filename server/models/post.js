@@ -12,10 +12,10 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
 
-      models.Post.hasMany(models.Like, {foreignKey: "postId", sourceKey:'id'});
-      models.Post.hasMany(models.Comment, {foreignKey: "postId", sourceKey:'id'});
+      models.Post.hasMany(models.Like, { foreignKey: 'postId', sourceKey: 'id'});
+      models.Post.hasMany(models.Comment, { foreignKey: 'postId', sourceKey: 'id'});
 
-      models.Post.belongsTo(models.User, {foreignKey: 'userId', targetKey: 'id'});
+      models.Post.belongsTo(models.User, { foreignKey: 'userId', targetKey: 'id'});
 
       const Post_MusicData = sequelize.define('Post_MusicData', {}, {timestamps: false});
       models.Post.belongsToMany(models.MusicData, {through:Post_MusicData});
@@ -27,13 +27,19 @@ module.exports = (sequelize, DataTypes) => {
   Post.init({
     userId: DataTypes.INTEGER,
     postTitle: DataTypes.STRING,
-    image: DataTypes.STRING,
-    postExplain: DataTypes.STRING,
-    totalLike: DataTypes.INTEGER,
-    totalComment: DataTypes.INTEGER
+    image: DataTypes.TEXT,
+    postExplain: DataTypes.TEXT,
+    totalLike: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0
+    },
+    totalComment: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0
+    }
   }, {
     sequelize,
-        timestamps: true,
+    timestamps: true,
     createdAt: true,
     updatedAt: false,
     modelName: 'Post',
