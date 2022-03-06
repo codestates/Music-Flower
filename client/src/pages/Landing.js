@@ -1,17 +1,29 @@
 import React from "react";
 import "../css/Landing.css";
-function handlePlay() {}
-
-export default function Landing({ item }) {
+import { useHistory, Link } from "react-router-dom";
+export default function Landing({ isLogin }) {
+  console.log("랜딩", isLogin);
+  const history = useHistory();
+  const handleRecord = () => {
+    if (isLogin) {
+      history.push("/main");
+    } else {
+      history.push("/login");
+    }
+  };
   return (
     <div className="landing-body">
       <header>
         <div>
           <nav className="navbar">
             <div className="nav-container">
-              <a href="/" className="nav-logo">
-                <img src={require("../images/logos.png")} />
-              </a>
+              <Link to="/" className="nav-logo">
+                <img
+                  src={require("../images/logo.png")}
+                  width="220px"
+                  alt="logo"
+                />
+              </Link>
             </div>
           </nav>
         </div>
@@ -20,14 +32,14 @@ export default function Landing({ item }) {
         <div className="line">좋아하는 음악을 다른 사람들과 서로 공유하며</div>
         <div className="line">새로운 추억을 쌓아 보세요!</div>
         <div className="btn">
-          <a className="play-btn" href="/login">
+          <button className="play-btn" onClick={handleRecord}>
             Start
-          </a>
+          </button>
         </div>
         <div>
-          <a href="/signup" className="signup">
+          <Link to="/signup" className="signup">
             회원가입
-          </a>
+          </Link>
         </div>
       </div>
     </div>

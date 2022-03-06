@@ -2,10 +2,9 @@ import axios from "axios";
 import React from "react";
 import "../css/Login.css";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
-axios.defaults.withCredentials = true;
-
-export default function Login({ userDatas, handleResponseSuccess }) {
+export default function Login({ handleResponseSuccess, isLogin }) {
   const [loginInfo, setLoginInfo] = useState({
     email: "",
     password: "",
@@ -14,27 +13,39 @@ export default function Login({ userDatas, handleResponseSuccess }) {
     setLoginInfo({ ...loginInfo, [key]: e.target.value });
   };
 
-  const guestlogin = () => {
-    setLoginInfo({
-      email: "test.naver.com",
-      password: "test",
-    });
-    handleResponseSuccess();
+  console.log("this", isLogin);
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const handleGuest = () => {
+    setLoginInfo(
+      {
+        email: "test@naver.com",
+        password: "password",
+      },
+      handleResponseSuccess()
+    );
   };
 
-  console.log(loginInfo);
-  const [errorMessage, setErrorMessage] = useState("");
   const handleLogin = () => {
     if (!loginInfo.email && !loginInfo.password) {
       setErrorMessage("이메일과 비밀번호를 입력하세요");
       return alert(errorMessage);
-    } else if (
-      loginInfo.email !== userDatas.email &&
-      loginInfo.password !== userDatas.password
-    ) {
-      setErrorMessage("아이디 또는 비밀번호 가 다릅니다");
-      return alert(errorMessage);
     }
+    // } else if (
+    //   loginInfo.email !== userDatas.email &&
+    //   loginInfo.password !== userDatas.password
+    // ) {
+    //   setErrorMessage("아이디 또는 비밀번호 가 다릅니다");
+    //   return alert(errorMessage);
+    // }
+    const url = "http://localhost:8080/user/login";
+    axios
+      .post(url, {
+        email: loginInfo.email,
+        password: loginInfo.password,
+      })
+      .then((res) => handleResponseSuccess())
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -43,9 +54,13 @@ export default function Login({ userDatas, handleResponseSuccess }) {
         <div>
           <nav className="navbar">
             <div className="nav-container">
-              <a href="/" className="nav-logo">
-                <img src={require("../images/logos.png")} />
-              </a>
+              <Link to="/" className="nav-logo">
+                <img
+                  src={require("../images/logo.png")}
+                  width="220px"
+                  alt="logo"
+                />
+              </Link>
             </div>
           </nav>
         </div>
@@ -58,7 +73,7 @@ export default function Login({ userDatas, handleResponseSuccess }) {
             alt="logo"
             width="300px"
           />
-          <form className="Loginfrm">
+          <form className="Loginfrm" onSubmit={(e) => e.preventDefault()}>
             <label className="labelTitle">이메일</label>
             <input
               className="email"
@@ -76,13 +91,13 @@ export default function Login({ userDatas, handleResponseSuccess }) {
             <button className="Login-btn" onClick={handleLogin}>
               Login !
             </button>
-            <button className="Login-btn" onClick={guestlogin}>
-              Guest
+            <button className="Login-btn" onClick={handleGuest}>
+              Guest !
             </button>
           </form>
           <div className="option">
             <p>
-              계정이 없으신가요? <a href="/signup"> 회원가입</a>
+              계정이 없으신가요? <Link to="/signup">회원가입</Link>
             </p>
           </div>
         </div>

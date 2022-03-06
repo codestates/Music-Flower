@@ -1,10 +1,10 @@
 //userController.js
-const { User } = require("../../models");
+const { User } = require("../models");
 //jwt 라이브러리 불러오기
 const jwt = require("jsonwebtoken");
 
 //AccessToken, GenerateToken
-require("dotenv").config();
+//require("dotenv").config();
 
 /**
 const YOUR_SECRET_KEY = process.env.SECRET_KEY
@@ -43,29 +43,32 @@ export.createToken = async function (req, res, next) {
         });
       } catch (err) {
       console.error(err);
-      next(err);
+      next(err);g
       }
   };
  */
 
 module.exports = {
   logIn: async (req, res) => {
+    console.log("a");
     const { email, password } = req.body;
+    console.log("확인");
+    console.log("rq :", req.body);
+
     //일치하는 값   email, password
 
-    const user = await User.findOne({ where: { email, password } });
+    const loginInfo = await User.findOne({ where: { email, password } });
     // 해당하는 값
-    if (!user) {
+    if (!loginInfo) {
       //없다
-      res.status(401).json({ message: "Unauthorized" });
+      res.status(404).json({ message: "Unauthorized" });
     } else {
-      //아닌경우
-      if (err) {
-        res.status(500).send({ message: "Internal Server Error" });
-      } else {
-        res.status(200).json({ message: "successfully loged in!" }); //"successfully loged in!"\ // result
-        //cookie와 토큰을!!! 인증을 담아서 보내준다.
-      }
+      //아닌경우;
+      // if (err) {
+      //   res.status(500).send({ message: "Internal Server Error" });
+      // } else {
+      res.status(200).json({ message: "successfully loged in!" }); //"successfully loged in!"\ // result
+      //cookie와 토큰을!!! 인증을 담아서 보내준다.
     }
   },
 
@@ -82,10 +85,14 @@ module.exports = {
   },
   //500케이스는 잘 모르겟습니다
 
-  signUp: (req, res) => {
+  signUp: async (req, res) => {
     //find or Create 쓰기.
     //토큰보내주기
     const { nickname, email, password } = req.body;
+    if (!nickname || !email || !password) {
+      res.status(422).send("모든 항목을 입력해 주세요");
+    }
+
     const [result, created] = await User.findOrCreate({
       where: { email },
       defaults: {
@@ -96,28 +103,45 @@ module.exports = {
     if (!created) {
       res.status(400).send("user is already exists");
     } else {
-      const token = payload;
-      res, token;
+      const payload = {
+        email,
+        nickname,
+        password,
+      };
 
+      const token = generateAccessToken(payload);
+      sendAccessToken(res, token);
       res.status(200).json({ message: "successfully signed up" });
     }
-
-    res.status(200).json("ok");
   },
 
   //get
   //mypage 로 이동 accessToken이 있을 경우에만 data를 보내준다
+  //data 에 userinfo 를 넣고 거기에 accessTokenData 넣어서 진행함.
   findUser: (req, res) => {
-    res.status(200).json("ok");
+    const cookie = req.cookies.jwt; //event: req cookies 찾아보기
+    if (!cookie) {
+      res.json({ data: null, message: "not authorized" });
+    }
+
+    const accessTokenData = isAuthorized(cookie);
+
+    if (!accessTokenData || !cookie) {
+      res.json({ data: null, message: "not authorized" });
+    }
+
+    return res.status(200).json({ data: { userInfo: accessTokenData } });
   },
+
   //put
-  //accessToken 이 있을 경우에만 수정이 가능하다.
+  //accessToken 이 있을 경우에만  my page 수정이 가능하다
+  //현재 진행중
   updateUser: (req, res) => {
     res.status(200).json("ok");
   },
   //delete
   //accessToken이 있을 경우에만 delete 한다.
   deleteUser: (req, res) => {
-    res.status(200).json("ok");
+    res.status(200).send("Good bye ");
   },
 };

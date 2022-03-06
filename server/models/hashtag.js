@@ -11,12 +11,17 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      models.Hashtag.belongsToMany(models.Post, {through:'Post_Hashtag'})
     }
   }
   Hashtag.init({
-    tagname: DataTypes.STRING
+    tagname: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    }
   }, {
     sequelize,
+    timestamps: false,
     modelName: 'Hashtag',
   });
   return Hashtag;

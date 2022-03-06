@@ -1,22 +1,34 @@
-'use strict';
+"use strict";
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Likes', {
+    await queryInterface.createTable("Likes", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       userId: {
-        type: Sequelize.INTEGER
+        type: 'foreign key',
+        references: {
+          model: "Users",
+          key: "id",
+        },
+        onDelete: 'cascade',
+        onUpdate: 'cascade'
       },
       postId: {
-        type: Sequelize.INTEGER
+        type: 'foreign key',
+        references: {
+          model: "Posts",
+          key: "id",
+        },
+        onDelete: 'cascade',
+        onUpdate: 'cascade'
       },
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Likes');
-  }
+    await queryInterface.dropTable("Likes");
+  },
 };

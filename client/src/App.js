@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Switch, Route, useHistory, Redirect } from "react-router-dom";
-import styled from "styled-components";
-import axios from "axios";
-import SpotifyAPP from "./components/SpotifyApp";
+import { Switch, Route, useHistory } from "react-router-dom";
+
 import Landing from "./pages/Landing";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
@@ -10,9 +8,7 @@ import Main from "./pages/Main";
 import Mypage from "./pages/Mypage";
 import Detail from "./pages/Detail";
 import Editor from "./pages/Editor";
-
-import Postthumnails from "./components/Postthumnails";
-import { initialitems } from "./components/dummy/dummyitems";
+import { allPosts } from "./components/dummy/dummyitems";
 import { dummyuser } from "./components/dummy/dummyUser";
 function App() {
   const [isLogin, setIsLogin] = useState(false);
@@ -25,39 +21,45 @@ function App() {
   //   setIsLogin(!isLogin);
   //   history.push("/mypage");
   // });
+
   const handleResponseSuccess = () => {
     setIsLogin(!isLogin);
     setUserinfo(dummyuser);
     history.push("/main");
   };
-  const [items, setItems] = useState(initialitems);
+  const [items, setItems] = useState(allPosts);
+  const [detailData, setDetailData] = useState({});
 
-  // useEffect(() => {
-  //   console.log("이미지 useEffect");
-  //   const [items, setItems] = useState(initialitems);
-  // }, [items, playlist]);
+  const handleLogout = () => {
+    setUserinfo(null);
+    setIsLogin(false);
+    history.push("/");
+  };
 
   return (
     <Switch>
       <Route exact path="/">
-        <SpotifyAPP />
-        <Landing />
+        <Landing isLogin={isLogin} />
       </Route>
       <Route path="/login">
-        <Login
-          isLogin={isLogin}
-          userDatas={dummyuser}
-          handleResponseSuccess={handleResponseSuccess}
-        />
+        <Login handleResponseSuccess={handleResponseSuccess} />
       </Route>
       <Route path="/signup">
         <Signup />
       </Route>
       <Route path="/main">
-        <Main items={items} users={userinfo}></Main>
+        <Main
+          items={items}
+          users={userinfo}
+          setDetailData={setDetailData}
+          handleLogout={handleLogout}
+        ></Main>
       </Route>
       <Route path="/mypage">
         <Mypage users={userinfo}></Mypage>
+      </Route>
+      <Route path="/detail">
+        <Detail users={userinfo} detailData={detailData}></Detail>
       </Route>
       <Route path="/editor">
         <Editor users={userinfo}></Editor>
