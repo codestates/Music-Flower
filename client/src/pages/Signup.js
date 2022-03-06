@@ -3,6 +3,14 @@ import "../css/Signup.css";
 import { Link } from "react-router-dom";
 
 export default function Signup() {
+  axios
+    .post(url, {
+      email: loginInfo.email,
+      password: loginInfo.password,
+    })
+    .then((res) => handleResponseSuccess())
+    .catch((err) => console.log(err));
+
   return (
     <div>
       <header>
