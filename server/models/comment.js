@@ -21,6 +21,9 @@ module.exports = (sequelize, DataTypes) => {
     comment: DataTypes.STRING
   }, {
     sequelize,
+    timestamps: true,
+    createdAt: true,
+    updatedAt: false,
     modelName: 'Comment',
   });
   return Comment;

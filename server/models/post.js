@@ -11,8 +11,10 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+
       models.Post.hasMany(models.Like, {foreignKey: "postId", sourceKey:'id'});
       models.Post.hasMany(models.Comment, {foreignKey: "postId", sourceKey:'id'});
+
       models.Post.belongsTo(models.User, {foreignKey: 'userId', targetKey: 'id'});
 
       const Post_MusicData = sequelize.define('Post_MusicData', {}, {timestamps: false});
@@ -31,6 +33,9 @@ module.exports = (sequelize, DataTypes) => {
     totalComment: DataTypes.INTEGER
   }, {
     sequelize,
+        timestamps: true,
+    createdAt: true,
+    updatedAt: false,
     modelName: 'Post',
   });
   return Post;
