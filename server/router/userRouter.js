@@ -8,14 +8,13 @@ const {
 } = require("../controller/userController");
 const express = require("express");
 const router = express.Router();
-const authJwt = require("../auth");
 
-router.post("/login", authJwt, logIn);
-router.post("/logout", authJwt, logOut);
-router.post("/signup", authJwt, signUp);
+router.post("/login", logIn);
+router.post("/logout", logOut);
+router.post("/signup", signUp);
 
-router.get("/:id", authJwt, findUser);
-router.put("/:id", authJwt, updateUser);
-router.delete("/:id", authJwt, deleteUser);
+router.get("/:id", findUser);
+router.put("/:id", updateUser);
+router.delete("/:id", deleteUser);
 
 module.exports = router;

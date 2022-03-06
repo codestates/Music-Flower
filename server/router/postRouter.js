@@ -1,4 +1,3 @@
-const authJwt = require("../auth");
 const {
   findPost,
   createPost,
@@ -8,9 +7,9 @@ const {
 const express = require("express");
 const router = express.Router();
 
-router.get("/", authJwt, findPost);
-router.post("/:id", authJwt, createPost);
-router.put("/:id", authJwt, updatePost);
-router.delete("/:id", authJwt, deletePost);
+router.get("/", findPost);
+router.post("/:id", createPost);
+router.put("/:id", updatePost);
+router.delete("/:id", deletePost);
 
 module.exports = router;
