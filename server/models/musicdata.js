@@ -17,11 +17,12 @@ module.exports = (sequelize, DataTypes) => {
   MusicData.init({
     musicTitle: DataTypes.STRING,
     artist: DataTypes.STRING,
-    musicImage: DataTypes.STRING,
-    musicUrl: DataTypes.STRING,
+    musicImage: DataTypes.TEXT,
+    musicUrl: DataTypes.TEXT,
     genre: DataTypes.STRING
   }, {
     sequelize,
+    timestamps: false,
     modelName: 'MusicData',
   });
   return MusicData;

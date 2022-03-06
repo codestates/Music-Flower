@@ -50,22 +50,25 @@ export.createToken = async function (req, res, next) {
 
 module.exports = {
   logIn: async (req, res) => {
+    console.log("a");
     const { email, password } = req.body;
+    console.log("확인");
+    console.log("rq :", req.body);
+
     //일치하는 값   email, password
-    console.log(req.body);
-    const user = await User.findOne({ where: { email, password } });
+
+    const loginInfo = await User.findOne({ where: { email, password } });
     // 해당하는 값
-    if (!user) {
+    if (!loginInfo) {
       //없다
       res.status(404).json({ message: "Unauthorized" });
     } else {
       //아닌경우;
-      if (err) {
-        res.status(500).send({ message: "Internal Server Error" });
-      } else {
-        res.status(200).json({ message: "successfully loged in!" }); //"successfully loged in!"\ // result
-        //cookie와 토큰을!!! 인증을 담아서 보내준다.
-      }
+      // if (err) {
+      //   res.status(500).send({ message: "Internal Server Error" });
+      // } else {
+      res.status(200).json({ message: "successfully loged in!" }); //"successfully loged in!"\ // result
+      //cookie와 토큰을!!! 인증을 담아서 보내준다.
     }
   },
 
@@ -114,7 +117,6 @@ module.exports = {
 
   //get
   //mypage 로 이동 accessToken이 있을 경우에만 data를 보내준다
-  //data를 cookie에 넣어야 하는지 accesstoken에 넣어야할까요?
   //data 에 userinfo 를 넣고 거기에 accessTokenData 넣어서 진행함.
   findUser: (req, res) => {
     const cookie = req.cookies.jwt; //event: req cookies 찾아보기

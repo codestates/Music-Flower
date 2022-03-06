@@ -11,9 +11,9 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      models.User.hasMany(models.Like, {foreignKey: "postId", sourceKey:'id'});
-      models.User.hasMany(models.Comment, {foreignKey: "postId", sourceKey:'id'});
-      models.User.hasMany(models.Post, {foreignKey: "postId", sourceKey:'id'});
+      models.User.hasMany(models.Like, { foreignKey: 'userId', sourceKey: 'id'});
+      models.User.hasMany(models.Comment, { foreignKey: 'userId', sourceKey: 'id'});
+      models.User.hasMany(models.Post, { foreignKey: 'userId', sourceKey: 'id'});
     }
   }
   User.init({
@@ -22,6 +22,9 @@ module.exports = (sequelize, DataTypes) => {
     password: DataTypes.STRING
   }, {
     sequelize,
+    timestamps: true,
+    createdAt: true,
+    updatedAt: false,
     modelName: 'User',
   });
   return User;
