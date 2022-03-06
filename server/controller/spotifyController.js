@@ -9,7 +9,7 @@ module.exports = {
     const spotifyApi = new SpotifyWebApi({
       clientId: cId,
       clientSecret: cSecret,
-      redirectUri: "http://localhost:3000/editor",
+      redirectUri: "http://localhost:3000/login",
     });
     spotifyApi
       .authorizationCodeGrant(code)
@@ -30,7 +30,7 @@ module.exports = {
     const spotifyApi = new SpotifyWebApi({
       clientId: cId,
       clientSecret: cSecret,
-      redirectUri: "http://localhost:3000/editor",
+      redirectUri: "http://localhost:3000/login",
       refreshToken,
     });
 

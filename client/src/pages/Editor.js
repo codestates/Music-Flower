@@ -51,7 +51,7 @@ const EditorBody = styled.div`
   }
 `;
 
-export default function Editor() {
+export default function Editor({ meetCode }) {
   const history = useHistory();
   const onClickMainPageHandle = () => {
     history.push("/main");
@@ -83,7 +83,7 @@ export default function Editor() {
 
           <div id="musicList">
             음악 리스트
-            <SpotifyAPP />
+            <SpotifyAPP meetCode={meetCode} />
             <MusicSelector></MusicSelector>
             <div id="music">music</div>
             <div id="music">music</div>

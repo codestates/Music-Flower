@@ -1,5 +1,6 @@
 import React from "react";
 import "../css/Signup.css";
+import { Link } from "react-router-dom";
 
 export default function Signup() {
   return (
@@ -8,9 +9,13 @@ export default function Signup() {
         <div>
           <nav className="navbar">
             <div className="nav-container">
-              <a href="/" className="nav-logo">
-                <img src={require("../images/logos.png")} />
-              </a>
+              <Link to="/land" className="nav-logo">
+                <img
+                  src={require("../images/logo.png")}
+                  width="220px"
+                  alt="logo"
+                />
+              </Link>
             </div>
           </nav>
         </div>
@@ -23,7 +28,7 @@ export default function Signup() {
             alt="logo"
             width="300px"
           />
-          <form className="SignUpfrm">
+          <form className="SignUpfrm" onSubmit={(e) => e.preventDefault()}>
             <label className="labelTitle">이메일</label>
             <input className="email" type="email" />
             <label className="labelTitle">닉네임</label>
@@ -40,7 +45,7 @@ export default function Signup() {
           </form>
           <div className="option">
             <p>
-              이미 계정이 있으신가요? <a href="/login"> 로그인</a>
+              이미 계정이 있으신가요?<Link to="/login">로그인</Link>
             </p>
           </div>
         </div>

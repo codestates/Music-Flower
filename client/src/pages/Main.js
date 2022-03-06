@@ -2,10 +2,10 @@ import React from "react";
 import styled from "styled-components";
 import Postthumnails from "../components/Postthumnails";
 import { Autocomplete } from "../components/UI_components/Autocomplete";
-import { Switch, Route, useHistory, Redirect } from "react-router-dom";
-import { spotifyC } from "../components/SpotifyC";
-const cId = spotifyC;
-const AUTH_URL = `https://accounts.spotify.com/authorize?client_id=${cId}&response_type=code&redirect_uri=http://localhost:3000/editor&scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20user-read-playback-state%20user-modify-playback-state`;
+import { Switch, Route, useHistory, Link, Redirect } from "react-router-dom";
+// import { AUTH_URL } from "../components/SpotifyC";
+// const cId = spotifyC;
+// const AUTH_URL = `https://accounts.spotify.com/authorize?client_id=${cId}&response_type=code&redirect_uri=http://localhost:3000/editor&scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20user-read-playback-state%20user-modify-playback-state`;
 
 const MainPage = styled.div`
   border: 1px solid red;
@@ -111,14 +111,14 @@ export default function Main({
   users,
   setDetailData,
   handleLogout,
+  meetCode,
 }) {
-  console.log(items);
   const onClickMyPageHandle = () => {
     history.push("/mypage");
   };
-  const onClickEditorHandle = () => {
-    history.push("/editor");
-  };
+  // const onClickEditorHandle = () => {
+  //   history.push("/editor");
+  // };
   const onClickDetailHandle = (postData) => {
     // 클릭하면 디테일데이터가 들어가야지 ㅇㅇ
     console.log("postData:", postData);
@@ -133,9 +133,9 @@ export default function Main({
     <div id="mainPage">
       <MainPage>
         <Header>
-          <a href="/" className="nav-logo">
-            <img src={require("../images/logos.png")} />
-          </a>
+          <Link to="/" className="nav-logo">
+            <img src={require("../images/logo.png")} width="220px" alt="logo" />
+          </Link>
           <Menu>
             <Nick>{users.nickname}님 안녕하세요.</Nick>
             <MenuButton>
@@ -153,9 +153,9 @@ export default function Main({
           </div>
           <div id="create_post">
             {/* <button onClick={onClickEditorHandle}> */}
-            <a className="12134" href={AUTH_URL} onClick={onClickEditorHandle}>
+            <Link className="12134" to="/editor">
               글쓰기
-            </a>
+            </Link>
             {/* </button> */}
           </div>
         </SerchArea>

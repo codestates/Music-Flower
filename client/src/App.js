@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Switch, Route, useHistory, Redirect } from "react-router-dom";
-import axios from "axios";
+import { Switch, Route, useHistory } from "react-router-dom";
+
 import Landing from "./pages/Landing";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
@@ -29,9 +29,9 @@ function App() {
     setIsLogin(!isLogin);
     setUserinfo(dummyuser);
     history.push("/main");
-    console.log("??????");
   };
   const [items, setItems] = useState(allPosts);
+  const [meetCode, setMeetCode] = useState(null);
   const [detailData, setDetailData] = useState({});
 
   const handleLogout = () => {
@@ -43,14 +43,16 @@ function App() {
   return (
     <Switch>
       <Route exact path="/">
-        {/* <SpotifyAPP /> */}
-
-        <Landing />
+        <Landing
+          isLogin={isLogin}
+          meetCode={meetCode}
+          setMeetCode={setMeetCode}
+        />
       </Route>
       <Route path="/login">
         <Login
-          isLogin={isLogin}
           handleResponseSuccess={handleResponseSuccess}
+          setMeetCode={setMeetCode}
         />
       </Route>
       <Route path="/signup">
@@ -62,6 +64,7 @@ function App() {
           users={userinfo}
           setDetailData={setDetailData}
           handleLogout={handleLogout}
+          meetCode={meetCode}
         ></Main>
       </Route>
       <Route path="/mypage">
@@ -71,10 +74,7 @@ function App() {
         <Detail users={userinfo} detailData={detailData}></Detail>
       </Route>
       <Route path="/editor">
-        <Editor users={userinfo}></Editor>
-      </Route>
-      <Route path="/">
-        {isLogin ? <Redirect to="/main" /> : <Redirect to="/login" />}
+        <Editor users={userinfo} meetCode={meetCode}></Editor>
       </Route>
     </Switch>
   );
