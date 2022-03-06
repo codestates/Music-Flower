@@ -22,6 +22,7 @@ module.exports = (sequelize, DataTypes) => {
     genre: DataTypes.STRING
   }, {
     sequelize,
+    timestamps: false,
     modelName: 'MusicData',
   });
   return MusicData;

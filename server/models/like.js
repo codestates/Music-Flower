@@ -20,6 +20,7 @@ module.exports = (sequelize, DataTypes) => {
     postId: DataTypes.INTEGER
   }, {
     sequelize,
+    timestamps: false,
     modelName: 'Like',
   });
   return Like;
