@@ -9,26 +9,30 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       userId: {
-        type: Sequelize.INTEGER,
+        type: 'foreign key',
         references: {
           model: "Users",
           key: "id",
         },
+        onDelete: 'cascade',
+        onUpdate: 'cascade'
       },
       postTitle: {
         type: Sequelize.STRING,
       },
       image: {
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT,
       },
       postExplain: {
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT,
       },
       totalLike: {
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
+        defaultValue: 0
       },
       totalComment: {
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
+        defaultValue: 0
       },
       createdAt: {
         allowNull: false,
