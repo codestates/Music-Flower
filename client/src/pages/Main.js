@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Postthumnails from "../components/Postthumnails";
 import { Autocomplete } from "../components/UI_components/Autocomplete";
-import { Switch, Route, useHistory, Redirect } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 
 const MainPage = styled.div`
   border: 1px solid red;
@@ -109,7 +109,6 @@ export default function Main({
   setDetailData,
   handleLogout,
 }) {
-  console.log(items);
   const onClickMyPageHandle = () => {
     history.push("/mypage");
   };
@@ -129,9 +128,9 @@ export default function Main({
     <div id="mainPage">
       <MainPage>
         <Header>
-          <a href="/" className="nav-logo">
-            <img src={require("../images/logos.png")} />
-          </a>
+          <Link to="/" className="nav-logo">
+            <img src={require("../images/logo.png")} width="220px" alt="logo" />
+          </Link>
           <Menu>
             <Nick>{users.nickname}님 안녕하세요.</Nick>
             <MenuButton>
