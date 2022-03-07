@@ -10,8 +10,8 @@ import Editor from "./pages/Editor";
 
 // import SpotifyAPP from "./components/SpotifyApp";
 
-import { allPosts } from "./components/dummy/dummyitems";
-import { dummyuser } from "./components/dummy/dummyUser";
+import { allPosts } from "./pages/dummy/dummyitems";
+import { dummyuser } from "./pages/dummy/dummyUser";
 function App() {
   const [meetCode, setMeetCode] = useState(null);
   const [isLogin, setIsLogin] = useState(false);

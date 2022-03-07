@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Postthumnails from "../components/Postthumnails";
-import { Autocomplete } from "../components/UI_components/Autocomplete";
+import { Autocomplete } from "../pages/UI_components/Autocomplete";
 import { Switch, Route, useHistory, Link, Redirect } from "react-router-dom";
 // import { AUTH_URL } from "../components/SpotifyC";
 // const cId = spotifyC;
