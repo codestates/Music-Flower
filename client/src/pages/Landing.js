@@ -1,8 +1,13 @@
 import React from "react";
 import "../css/Landing.css";
 import { useHistory, Link } from "react-router-dom";
-export default function Landing({ isLogin }) {
+import { AUTH_URL } from "../components/SpotifyC";
+
+const code = new URLSearchParams(window.location.search).get("code");
+export default function Landing({ isLogin, meetCode, setMeetCode }) {
   console.log("랜딩", isLogin);
+  setMeetCode(code);
+  console.log("code:", meetCode);
   const history = useHistory();
   const handleRecord = () => {
     if (isLogin) {
@@ -11,7 +16,14 @@ export default function Landing({ isLogin }) {
       history.push("/login");
     }
   };
-  return (
+
+  // function getCode() {
+  //   if (meetCode) return;
+  //   location.href = AUTH_URL;
+  // }
+
+  //dololak.tistory.com/765 [코끼리를 냉장고에 넣는 방법]
+  출처: https: return (
     <div className="landing-body">
       <header>
         <div>
@@ -32,9 +44,15 @@ export default function Landing({ isLogin }) {
         <div className="line">좋아하는 음악을 다른 사람들과 서로 공유하며</div>
         <div className="line">새로운 추억을 쌓아 보세요!</div>
         <div className="btn">
-          <button className="play-btn" onClick={handleRecord}>
-            Start
-          </button>
+          {meetCode ? (
+            <button className="play-btn" onClick={handleRecord}>
+              Start
+            </button>
+          ) : (
+            <a className="play-btn" href={AUTH_URL} onClick={handleRecord}>
+              Start
+            </a>
+          )}
         </div>
         <div>
           <Link to="/signup" className="signup">

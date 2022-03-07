@@ -2,7 +2,10 @@ import React from "react";
 import styled from "styled-components";
 import Postthumnails from "../components/Postthumnails";
 import { Autocomplete } from "../components/UI_components/Autocomplete";
-import { useHistory, Link } from "react-router-dom";
+import { Switch, Route, useHistory, Link, Redirect } from "react-router-dom";
+// import { AUTH_URL } from "../components/SpotifyC";
+// const cId = spotifyC;
+// const AUTH_URL = `https://accounts.spotify.com/authorize?client_id=${cId}&response_type=code&redirect_uri=http://localhost:3000/editor&scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20user-read-playback-state%20user-modify-playback-state`;
 
 const MainPage = styled.div`
   border: 1px solid red;
@@ -108,13 +111,14 @@ export default function Main({
   users,
   setDetailData,
   handleLogout,
+  meetCode,
 }) {
   const onClickMyPageHandle = () => {
     history.push("/mypage");
   };
-  const onClickEditorHandle = () => {
-    history.push("/editor");
-  };
+  // const onClickEditorHandle = () => {
+  //   history.push("/editor");
+  // };
   const onClickDetailHandle = (postData) => {
     // 클릭하면 디테일데이터가 들어가야지 ㅇㅇ
     console.log("postData:", postData);
@@ -124,6 +128,7 @@ export default function Main({
   };
 
   const history = useHistory();
+  // console.log("history:", history);
   return (
     <div id="mainPage">
       <MainPage>
@@ -147,7 +152,11 @@ export default function Main({
             <Autocomplete items={items} setItems={setItems}></Autocomplete>
           </div>
           <div id="create_post">
-            <button onClick={onClickEditorHandle}>글쓰기</button>
+            {/* <button onClick={onClickEditorHandle}> */}
+            <Link className="12134" to="/editor">
+              글쓰기
+            </Link>
+            {/* </button> */}
           </div>
         </SerchArea>
         <Body>

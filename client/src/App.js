@@ -8,6 +8,9 @@ import Main from "./pages/Main";
 import Mypage from "./pages/Mypage";
 import Detail from "./pages/Detail";
 import Editor from "./pages/Editor";
+
+import SpotifyAPP from "./components/SpotifyApp";
+
 import { allPosts } from "./components/dummy/dummyitems";
 import { dummyuser } from "./components/dummy/dummyUser";
 function App() {
@@ -28,6 +31,7 @@ function App() {
     history.push("/main");
   };
   const [items, setItems] = useState(allPosts);
+  const [meetCode, setMeetCode] = useState(null);
   const [detailData, setDetailData] = useState({});
 
   const handleLogout = () => {
@@ -39,10 +43,17 @@ function App() {
   return (
     <Switch>
       <Route exact path="/">
-        <Landing isLogin={isLogin} />
+        <Landing
+          isLogin={isLogin}
+          meetCode={meetCode}
+          setMeetCode={setMeetCode}
+        />
       </Route>
       <Route path="/login">
-        <Login handleResponseSuccess={handleResponseSuccess} />
+        <Login
+          handleResponseSuccess={handleResponseSuccess}
+          setMeetCode={setMeetCode}
+        />
       </Route>
       <Route path="/signup">
         <Signup />
@@ -53,6 +64,7 @@ function App() {
           users={userinfo}
           setDetailData={setDetailData}
           handleLogout={handleLogout}
+          meetCode={meetCode}
         ></Main>
       </Route>
       <Route path="/mypage">
@@ -62,10 +74,9 @@ function App() {
         <Detail users={userinfo} detailData={detailData}></Detail>
       </Route>
       <Route path="/editor">
-        <Editor users={userinfo}></Editor>
+        <Editor users={userinfo} meetCode={meetCode}></Editor>
       </Route>
     </Switch>
-    // <Main items={items} setItems={setItems}></Main>
   );
 }
 

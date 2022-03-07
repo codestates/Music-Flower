@@ -3,8 +3,15 @@ import React from "react";
 import "../css/Login.css";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import spotifyAuth from "../auth/useSpotifyAuth";
 
-export default function Login({ handleResponseSuccess, isLogin }) {
+const code = new URLSearchParams(window.location.search).get("code");
+
+export default function Login({ handleResponseSuccess, isLogin, setMeetCode }) {
+  const accessToken = spotifyAuth(code);
+  setMeetCode(accessToken);
+  console.log("code", code);
+  console.log("accessToken", accessToken);
   const [loginInfo, setLoginInfo] = useState({
     email: "",
     password: "",

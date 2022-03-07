@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { MusicSelector } from "../components/UI_components/MusicSelector";
 import SpotifyAPP from "../components/SpotifyApp";
+import { Switch, Route, useHistory, Redirect } from "react-router-dom";
 
 const EditorBody = styled.div`
   border: 1px solid red;
@@ -50,10 +51,16 @@ const EditorBody = styled.div`
   }
 `;
 
-export default function Editor() {
+export default function Editor({ meetCode }) {
+  const history = useHistory();
+  const onClickMainPageHandle = () => {
+    history.push("/main");
+  };
+
   return (
     <div id="editorPage">
       <EditorBody>
+        <button onClick={onClickMainPageHandle}>메인으로 돌아가기</button>
         <div id="up">
           <div id="postImg">
             이미지
@@ -76,7 +83,7 @@ export default function Editor() {
 
           <div id="musicList">
             음악 리스트
-            {/* <SpotifyAPP /> */}
+            <SpotifyAPP meetCode={meetCode} />
             <MusicSelector></MusicSelector>
             <div id="music">music</div>
             <div id="music">music</div>

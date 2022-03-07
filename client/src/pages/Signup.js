@@ -1,15 +1,16 @@
 import React from "react";
 import "../css/Signup.css";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 export default function Signup() {
-  axios
-    .post(url, {
-      email: loginInfo.email,
-      password: loginInfo.password,
-    })
-    .then((res) => handleResponseSuccess())
-    .catch((err) => console.log(err));
+  // axios
+  //   .post(url, {
+  //     email: loginInfo.email,
+  //     password: loginInfo.password,
+  //   })
+  //   .then((res) => handleResponseSuccess())
+  //   .catch((err) => console.log(err));
 
   return (
     <div>
