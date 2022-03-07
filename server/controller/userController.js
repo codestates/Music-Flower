@@ -6,6 +6,8 @@ const {
 } = require("./tokenFunction");
 
 module.exports = {
+  //[post]/login
+  //User DB에서 사용자 정보 찾아서 accessToken을 쿠키(jwt)에 담아서 보내줌
   logIn: async (req, res) => {
     const { email, password } = req.body;
     const loginInfo = await User.findOne({ where: { email, password } });
@@ -18,7 +20,8 @@ module.exports = {
       return res.status(200).json({ message: "successfully loged in!" });
     }
   },
-
+  //[post]/logout
+  //쿠키를 clear(AccessToken지움)한 후 로그아웃
   logOut: (req, res) => {
     if (!res.cookies) {
       res.status(400).json({ message: "Bad request" });
@@ -26,7 +29,8 @@ module.exports = {
     res.clearCookie("jwt");
     res.status(200).json({ message: "successfully signed out!" });
   },
-
+  //[post]/signup
+  //User DB에서 사용자 정보 찾고 없으면 생성해서 accessToken을 쿠키(jwt)에 담아서 보내줌
   signUp: async (req, res) => {
     const { nickname, email, password } = req.body;
     
@@ -55,7 +59,8 @@ module.exports = {
       res.status(201).json({ message: "successfully signed up" });
     }
   },
-
+  //[get]/userinfo
+  //쿠키에 토큰을 가지고 있을 경우(jwt) 사용자 정보를 해독한 값 보내줌
   findUser: (req, res) => {
     const accessTokenData = isAuthorized(req);
     if (!accessTokenData) {
