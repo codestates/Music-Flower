@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Switch, Route, useHistory } from "react-router-dom";
-
 import Landing from "./pages/Landing";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
@@ -25,7 +24,9 @@ function App() {
   //   setIsLogin(!isLogin);
   //   history.push("/mypage");
   // });
-
+  const handleMainPage = () => {
+    history.push("/main");
+  };
   const handleResponseSuccess = () => {
     setIsLogin(!isLogin);
     setUserinfo(dummyuser);
@@ -72,13 +73,24 @@ function App() {
         <Mypage
           users={userinfo}
           onClickDetailHandle={onClickDetailHandle}
+          handleLogout={handleLogout}
+          handleMainPage={handleMainPage}
         ></Mypage>
       </Route>
       <Route path="/detail">
-        <Detail users={userinfo} detailData={detailData}></Detail>
+        <Detail
+          users={userinfo}
+          detailData={detailData}
+          handleMainPage={handleMainPage}
+          handleLogout={handleLogout}
+        ></Detail>
       </Route>
       <Route path="/editor">
-        <Editor users={userinfo}></Editor>
+        <Editor
+          users={userinfo}
+          handleMainPage={handleMainPage}
+          handleLogout={handleLogout}
+        ></Editor>
       </Route>
     </Switch>
   );
