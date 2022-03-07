@@ -2,16 +2,17 @@ import React from "react";
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { MusicSelector } from "../components/UI_components/MusicSelector";
-import SpotifyAPP from "../components/SpotifyApp";
-import { Switch, Route, useHistory, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const EditorBody = styled.div`
   border: 1px solid red;
   padding: 10px;
   display: flex;
   flex-direction: column;
-  height: 96vh;
-  width: auto;
+  margin: 0 auto;
+  padding: 0 20px;
+  max-width: 1080px;
+  max-height: 1980px;
   > div {
     border: 1px solid red;
     padding: 10px;
@@ -29,6 +30,9 @@ const EditorBody = styled.div`
     }
     > #postInfo {
       flex: 2 0 auto;
+      > #textInput {
+        background-color: #e3ecfe;
+      }
     }
   }
   > #down {
@@ -38,8 +42,8 @@ const EditorBody = styled.div`
     > #postIntro {
       display: flex;
       flex: 1 0 auto;
-      > textarea {
-        width: 100vw;
+      > #textInput {
+        background-color: #e3ecfe;
       }
     }
     > #musicList {
@@ -51,19 +55,81 @@ const EditorBody = styled.div`
     }
   }
 `;
+const Header = styled.div`
+  /* border: 1px solid red; */
+  /* padding: 10px; */
 
-export default function Editor({ meetCode }) {
+  display: flex;
+  margin-bottom: 2rem;
+  left: 0px;
+  top: 0;
+  border-bottom: 1px solid #d1d4d9;
+  position: sticky;
+  background-color: rgba(255, 255, 255, 0.96);
+  > div {
+    /* border: 1px solid red; */
+    /* padding: 10px; */
+    flex: 1 0 auto;
+  }
+`;
+const Menu = styled.div`
+  /* border: 1px solid red; */
+  /* padding: 10px; */
+
+  display: flex;
+  flex: 4 0 auto;
+`;
+const Nick = styled.div`
+  /* //border: 1px solid red; */
+  /* padding: 10px; */
+  text-align: center;
+  margin-top: 20px;
+  flex: 3 0 auto;
+  > span {
+    color: #a14efc;
+  }
+`;
+const MenuButton = styled.div`
+  // border: 1px solid red;
+  /* padding: 10px; */
+  margin-top: 10px;
+  display: flex;
+  width: 220px;
+  > button {
+    //border: 1px solid red;
+    /* padding: 10px; */
+    border: 0;
+    background-color: white;
+    cursor: pointer;
+    margin: 10px;
+    margin-top: 0px;
+    height: 40px;
+    font-size: 16px;
+  }
+  > button:hover {
+    color: #a14efc;
+  }
+`;
+export default function Editor({ handleLogout, handleMainPage }) {
   const [musicList, setMusicList] = useState([]);
-
-  const history = useHistory();
-  const onClickMainPageHandle = () => {
-    history.push("/main");
-  };
 
   return (
     <div id="editorPage">
+      <Header>
+        <Link to="/" className="nav-logo">
+          <img src={require("../images/logo.png")} width="220px" alt="logo" />
+        </Link>
+        <Menu>
+          <Nick>
+            <span>글 작성 페이지</span>
+          </Nick>
+          <MenuButton>
+            <button onClick={handleMainPage}>메인페이지</button>
+            <button onClick={handleLogout}>로그아웃</button>
+          </MenuButton>
+        </Menu>
+      </Header>
       <EditorBody>
-        <button onClick={onClickMainPageHandle}>메인으로 돌아가기</button>
         <div id="up">
           <div id="postImg">
             이미지
@@ -71,17 +137,14 @@ export default function Editor({ meetCode }) {
             (어케올리지???) 있는 이미지 중에서 선택?
           </div>
           <div id="postInfo">
-            post 정보
-            <div>
-              post 제목
-              <input type="textarea"></input>
-            </div>
+            post 제목
+            <input type="text" id="textInput"></input>
           </div>
         </div>
         <div id="down">
           <div>post 소개</div>
           <div id="postIntro">
-            <input type="text" id=""></input>
+            <input type="text" id="textInput"></input>
           </div>
 
           <div id="musicList">
