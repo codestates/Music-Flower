@@ -12,6 +12,7 @@ const {
 
 const postRouter = require("./router/postRouter");
 const spotifyRouter = require("./router/spotifyRouter");
+//const musicListRouter = require("./test/musicListRouter");
 
 sequelize
   .sync({ force: false })
@@ -30,6 +31,7 @@ app.use(
   })
 );
 app.use(express.json());
+app.use(express.urlencoded({extended: false}));
 
 app.post("/login", logIn);
 app.post("/logout", logOut);
@@ -38,6 +40,7 @@ app.get("/userinfo", findUser);
 
 app.use("/post", postRouter);
 app.use("/spotify", spotifyRouter);
+//app.use("/musiclist", musicListRouter);
 
 app.get("/", (req, res) => {
   res.status(200).send("Beautiful Music Flower");
