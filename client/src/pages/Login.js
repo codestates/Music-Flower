@@ -46,10 +46,16 @@ export default function Login({ handleResponseSuccess, isLogin, setMeetCode }) {
     // }
     const url = "http://localhost:8080/login";
     axios
-      .post(url, {
-        email: loginInfo.email,
-        password: loginInfo.password,
-      })
+      .post(
+        url,
+        {
+          email: loginInfo.email,
+          password: loginInfo.password,
+        },
+        {
+          withCredentials: true,
+        }
+      )
       .then((res) => handleResponseSuccess())
       .catch((err) => console.log(err));
   };

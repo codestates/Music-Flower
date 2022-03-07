@@ -59,7 +59,7 @@ function App() {
         />
       </Route>
       <Route path="/signup">
-        <Signup />
+        <Signup loginInfo={userinfo} />
       </Route>
       <Route path="/main">
         <Main

@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Postthumnails from "../components/Postthumnails";
 import { Autocomplete } from "../pages/UI_components/Autocomplete";
 import { Switch, Route, useHistory, Link, Redirect } from "react-router-dom";
+import axios from "axios";
 // import { AUTH_URL } from "../components/SpotifyC";
 // const cId = spotifyC;
 // const AUTH_URL = `https://accounts.spotify.com/authorize?client_id=${cId}&response_type=code&redirect_uri=http://localhost:3000/editor&scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20user-read-playback-state%20user-modify-playback-state`;
@@ -166,6 +167,8 @@ export default function Main({
   };
 
   const history = useHistory();
+
+  axios.get("http://localhost:8080/post").then((res) => console.log(res));
 
   return (
     <div id="mainPage">
