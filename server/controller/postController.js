@@ -10,22 +10,19 @@ module.exports = {
   //포스트와 연결된(Post-Post_MusicData-MusicData) MusicData의 정보도 가지고 옴
   findPost: async (req, res) => {
     console.log(req);
-    const postList = await Post.findAll({
-      attributes: ["userId", "postTitle", "image", "postExplain", "createdAt"],
-      // {
-      // exclude: ['tatalLike', 'totalComment'],
-      // include: [
-      //   {
-      //     model: User,
-      //     attributes: ['nickname']
-      //   },
-      //   {
-      //     model: MusicData,
-      //     attributes: ['musicTitle', 'artist','musicImage','musicUrl','genre']
-      //   }
-      //   ]
-      // }
-    });
+    // const postList = await Post.findAll({
+    //   attributes: ["userId", "postTitle", "image", "postExplain", "createdAt"],
+    // });
+      const postList = await Post.findAll({
+      include: [
+        {
+          model: User,
+          attributes: ['nickname']
+        },
+        {
+          model: MusicData,
+        }]
+      });
     res.status(200).json({ data: postList, message: "ok" });
   },
 

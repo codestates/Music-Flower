@@ -16,7 +16,7 @@ module.exports = {
     } else {
       delete loginInfo.dataValues.password;
       const token = generateAccessToken(loginInfo.dataValues);
-      sendAccessToken(res, token, loginInfo);
+      sendAccessToken(res, token);
       return res.status(200).json({ message: "successfully loged in!" });
     }
   },
@@ -33,7 +33,7 @@ module.exports = {
   //User DB에서 사용자 정보 찾고 없으면 생성해서 accessToken을 쿠키(jwt)에 담아서 보내줌
   signUp: async (req, res) => {
     const { nickname, email, password } = req.body;
-
+    
     if (!nickname || !email || !password) {
       res.status(422).send("모든 항목을 입력해 주세요");
     }
@@ -45,7 +45,7 @@ module.exports = {
         password,
       },
     });
-
+    
     if (!created) {
       res.status(400).send("user is already exists");
     } else {
