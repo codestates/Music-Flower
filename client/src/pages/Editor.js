@@ -1,10 +1,10 @@
+// import SpotifyAPP from "../components/SpotifyApp";
 import React, { useState, useEffect } from "react";
+import { Link, Switch, Route, useHistory, Redirect } from "react-router-dom";
 import styled from "styled-components";
 import { MusicSelector } from "./UI_components/MusicSelector";
-// import SpotifyAPP from "../components/SpotifyApp";
-import { Switch, Route, useHistory, Redirect } from "react-router-dom";
 import PostThumnailSelecter from "./UI_components/PostThumnailSelector";
-import { Link } from "react-router-dom";
+import SelectMusicList from "./UI_components/SelectMusicList";
 
 const EditorBody = styled.div`
   border: 1px solid red;
@@ -53,8 +53,26 @@ const EditorBody = styled.div`
       > #music {
         border: 1px solid red;
         padding: 10px;
+        display: flex;
+        justify-content: space-between;
+
+        > div {
+        }
+        > #musicserch {
+          width: 40vh;
+        }
+        > #musicselectList {
+          /* border: 1px solid red; */
+          margin-left: 60px;
+          width: 40vh;
+
+          /* flex: 2 0 auto; */
+        }
       }
     }
+  }
+  > button {
+    height: 5vh;
   }
 `;
 const Header = styled.div`
@@ -114,6 +132,27 @@ const MenuButton = styled.div`
 `;
 export default function Editor({ handleLogout, handleMainPage }) {
   const [musicList, setMusicList] = useState([]);
+  const [postPoto, setPostPoto] = useState("");
+  const [postTitle, setPostTitle] = useState("");
+  const [postIntro, setPostintro] = useState("");
+
+  const submitHandle = () => {
+    let postData = {
+      postPoto,
+      postTitle,
+      postIntro,
+      musicList,
+    };
+    console.log("전송정보", postData);
+  };
+  const postTitleChageHandle = (e) => {
+    console.log("title", e.target.value);
+    setPostTitle(e.target.value);
+  };
+  const postInroChageHandle = (e) => {
+    console.log("Inro", e.target.value);
+    setPostintro(e.target.value);
+  };
 
   return (
     <div id="editorPage">
@@ -136,44 +175,59 @@ export default function Editor({ handleLogout, handleMainPage }) {
           <div id="postImg">
             이미지
             <br />
-            <PostThumnailSelecter></PostThumnailSelecter>
+            <PostThumnailSelecter
+              setPostPoto={setPostPoto}
+            ></PostThumnailSelecter>
           </div>
           <div id="postInfo">
             post 제목
-            <input type="text" id="textInput"></input>
+            <input
+              type="text"
+              id="textInput"
+              onChange={postTitleChageHandle}
+            ></input>
           </div>
         </div>
         <div id="down">
           <div>post 소개</div>
           <div id="postIntro">
-            <input type="text" id="textInput"></input>
+            <input
+              type="textarea"
+              id="textInput"
+              onChange={postInroChageHandle}
+            ></input>
           </div>
 
           <div id="musicList">
             음악 리스트
             {/* <SpotifyAPP meetCode={meetCode} /> */}
-            <MusicSelector
-              musicList={musicList}
-              setMusicList={setMusicList}
-            ></MusicSelector>
-            {musicList.map((e) => {
-              return (
-                <div id="musicList" key={e.albumImageUrl}>
-                  <img
-                    src={e.albumImageUrl}
-                    style={{ height: "64px", width: "64px" }}
-                  />
-                  <span> // </span>
-                  <div>{e.songName}</div>
-                  <div className="serchArtist">{e.artist}</div>
-                </div>
-              );
-            })}
-            {/* <div id="music">music</div>
-            <div id="music">music</div>
-            <div id="music">music</div> */}
+            <div id="music">
+              <div id="musicserch">
+                <MusicSelector
+                  musicList={musicList}
+                  setMusicList={setMusicList}
+                ></MusicSelector>
+              </div>
+              <div id="musicselectList">
+                {musicList.map((music, idx) => {
+                  // console.log("music", music);
+                  return (
+                    <div key={music.albumImageUrl}>
+                      {/* SavePlayList */}
+                      <SelectMusicList
+                        music={music}
+                        idx={idx}
+                        musicList={musicList}
+                        setMusicList={setMusicList}
+                      ></SelectMusicList>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
           </div>
         </div>
+        <button onClick={submitHandle}>작성완료</button>
       </EditorBody>
     </div>
   );

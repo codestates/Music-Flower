@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const PostThumnailSelecter = () => {
+const PostThumnailSelecter = ({ setPostPoto }) => {
   // console.log("label : ", label);
   const [aaa, setAaa] = useState("sellect");
   const [photoIdx, setPotoIdx] = useState(0);
@@ -47,6 +47,7 @@ const PostThumnailSelecter = () => {
     // changed(e.target.value);
     setAaa(e.target.value);
     setPotoIdx();
+    setPostPoto(images[aaa]);
   };
 
   return (
