@@ -39,15 +39,16 @@ function App() {
     setIsLogin(false);
     history.push("/");
   };
-
+  const onClickDetailHandle = (postData) => {
+    // 클릭하면 디테일데이터가 들어가야지 ㅇㅇ
+    console.log("postData:", postData);
+    setDetailData(postData);
+    history.push("/detail");
+  };
   return (
     <Switch>
       <Route exact path="/">
-        <Landing
-          isLogin={isLogin}
-          meetCode={meetCode}
-          setMeetCode={setMeetCode}
-        />
+        <Landing isLogin={isLogin} setMeetCode={setMeetCode} />
       </Route>
       <Route path="/login">
         <Login
@@ -64,17 +65,20 @@ function App() {
           users={userinfo}
           setDetailData={setDetailData}
           handleLogout={handleLogout}
-          meetCode={meetCode}
+          onClickDetailHandle={onClickDetailHandle}
         ></Main>
       </Route>
       <Route path="/mypage">
-        <Mypage users={userinfo}></Mypage>
+        <Mypage
+          users={userinfo}
+          onClickDetailHandle={onClickDetailHandle}
+        ></Mypage>
       </Route>
       <Route path="/detail">
         <Detail users={userinfo} detailData={detailData}></Detail>
       </Route>
       <Route path="/editor">
-        <Editor users={userinfo} meetCode={meetCode}></Editor>
+        <Editor users={userinfo}></Editor>
       </Route>
     </Switch>
   );

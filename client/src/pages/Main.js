@@ -13,8 +13,8 @@ const MainPage = styled.div`
 
   display: flex;
   text-align: center;
-  height: 96vh;
-  width: auto;
+  height: 900px;
+  width: 1200px;
   flex-direction: column;
 `;
 
@@ -36,7 +36,9 @@ const Header = styled.div`
 const SerchArea = styled.div`
   /* border: 1px solid red; */
   /* padding: 10px; */
-
+  margin-bottom: 1rem;
+  margin-left: 10rem;
+  margin-right: 10rem;
   display: flex;
   align-items: center;
   flex: 0 0 auto;
@@ -53,18 +55,44 @@ const SerchArea = styled.div`
     /* border: 1px solid red; */
     /* padding: 10px; */
 
-    flex: 1 0 auto;
+    > button {
+      margin-left: 10rem;
+      width: 150px;
+      height: 38px;
+      border: 1px solid grey;
+      cursor: pointer;
+      color: rgba(30, 22, 54, 0.6);
+      box-shadow: rgba(119, 108, 153, 0.4) 0 0px 0px 2px inset;
+      font-size: 14px;
+      border-radius: 30px;
+    }
+    > button:hover {
+      color: rgba(255, 255, 255, 0.85);
+      box-shadow: rgba(30, 22, 54, 0.7) 0 80px 0px 2px inset;
+    }
   }
 `;
 
 const Body = styled.div`
-  border: 10px solid gray;
+  border: 1px solid gray;
   /* padding: 10px; */
-  border-radius: 20px;
+  border-radius: 10px;
   /* background-color: rgb(84, 140, 255); */
   display: flex;
   flex-wrap: wrap;
+  flex-direction: column;
   flex: 8 0 auto;
+  > #Posts {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  > #BoardName {
+    /* border: 1px solid red; */
+    font-size: 30px;
+  }
+  > #thumnail {
+    cursor: pointer;
+  }
 `;
 
 const Footer = styled.div`
@@ -84,27 +112,34 @@ const Menu = styled.div`
   flex: 4 0 auto;
 `;
 const Nick = styled.div`
-  /* border: 1px solid red; */
+  /* //border: 1px solid red; */
   /* padding: 10px; */
-
+  margin-top: 40px;
   flex: 3 0 auto;
+  > span {
+    color: #a14efc;
+  }
 `;
 const MenuButton = styled.div`
-  /* border: 1px solid red; */
+  //border: 1px solid red;
   /* padding: 10px; */
 
   display: flex;
   flex: 1 0 auto;
-`;
-const MenuButtonInner = styled.button`
-  /* border: 1px solid red; */
-  /* padding: 10px; */
-
-  margin: 10px;
-  margin-top: 0px;
-
-  flex: 1 0 auto;
-  height: 40px;
+  > button {
+    //border: 1px solid red;
+    /* padding: 10px; */
+    border: 0;
+    background-color: white;
+    cursor: pointer;
+    margin: 10px;
+    margin-top: 0px;
+    flex: 1 0 auto;
+    height: 40px;
+  }
+  > button:hover {
+    color: #a14efc;
+  }
 `;
 
 export default function Main({
@@ -113,24 +148,17 @@ export default function Main({
   users,
   setDetailData,
   handleLogout,
-  meetCode,
+  onClickDetailHandle,
 }) {
   const onClickMyPageHandle = () => {
     history.push("/mypage");
   };
-  // const onClickEditorHandle = () => {
-  //   history.push("/editor");
-  // };
-  const onClickDetailHandle = (postData) => {
-    // 클릭하면 디테일데이터가 들어가야지 ㅇㅇ
-    console.log("postData:", postData);
-    setDetailData(postData);
-
-    history.push("/detail");
+  const onClickEditorHandle = () => {
+    history.push("/editor");
   };
 
   const history = useHistory();
-  // console.log("history:", history);
+
   return (
     <div id="mainPage">
       <MainPage>
@@ -139,12 +167,12 @@ export default function Main({
             <img src={require("../images/logo.png")} width="220px" alt="logo" />
           </Link>
           <Menu>
-            <Nick>{users.nickname}님 안녕하세요.</Nick>
+            <Nick>
+              <span>{users.nickname}</span>님 안녕하세요.
+            </Nick>
             <MenuButton>
-              <MenuButtonInner onClick={onClickMyPageHandle}>
-                마이페이지
-              </MenuButtonInner>
-              <MenuButtonInner onClick={handleLogout}>로그아웃</MenuButtonInner>
+              <button onClick={onClickMyPageHandle}>마이페이지</button>
+              <button onClick={handleLogout}>로그아웃</button>
             </MenuButton>
           </Menu>
         </Header>
@@ -154,21 +182,22 @@ export default function Main({
             <Autocomplete items={items} setItems={setItems}></Autocomplete>
           </div>
           <div id="create_post">
-            {/* <button onClick={onClickEditorHandle}> */}
-            <Link className="12134" to="/editor">
+            <button className="12134" onClick={onClickEditorHandle}>
               글쓰기
-            </Link>
-            {/* </button> */}
+            </button>
           </div>
         </SerchArea>
         <Body>
-          {items.map((item, idx) => (
-            <Postthumnails
-              onClickDetailHandle={onClickDetailHandle}
-              item={item}
-              key={idx}
-            />
-          ))}
+          <div id="BoardName">이것은 예시입니다</div>
+          <div id="Posts">
+            {items.map((item, idx) => (
+              <Postthumnails
+                onClickDetailHandle={onClickDetailHandle}
+                item={item}
+                key={idx}
+              />
+            ))}
+          </div>
         </Body>
         <Footer></Footer>
       </MainPage>
