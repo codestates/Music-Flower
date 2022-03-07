@@ -7,21 +7,20 @@ import PostThumnailSelecter from "./UI_components/PostThumnailSelector";
 import SelectMusicList from "./UI_components/SelectMusicList";
 
 const EditorBody = styled.div`
-  border: 1px solid red;
+  border: 3px solid grey;
   padding: 10px;
   display: flex;
   flex-direction: column;
   margin: 0 auto;
-  padding: 0 20px;
   max-width: 1080px;
   max-height: 1980px;
   > div {
-    border: 1px solid red;
+    border: 1px solid grey;
     padding: 10px;
     display: flex;
 
     > div {
-      border: 1px solid red;
+      /* border: 1px solid grey; */
       padding: 10px;
     }
   }
@@ -51,7 +50,7 @@ const EditorBody = styled.div`
     > #musicList {
       flex: 4 0 auto;
       > #music {
-        border: 1px solid red;
+        /* border: 1px solid grey; */
         padding: 10px;
         display: flex;
         justify-content: space-between;
@@ -72,7 +71,19 @@ const EditorBody = styled.div`
     }
   }
   > button {
-    height: 5vh;
+    /* width: 150px; */
+    margin-top: 10px;
+    height: 50px;
+    border: 1px solid grey;
+    cursor: pointer;
+    color: rgba(30, 22, 54, 0.6);
+    box-shadow: rgba(119, 108, 153, 0.4) 0 0px 0px 2px inset;
+    font-size: 16px;
+    border-radius: 30px;
+  }
+  > button:hover {
+    color: rgba(255, 255, 255, 0.85);
+    box-shadow: rgba(30, 22, 54, 0.7) 0 80px 0px 2px inset;
   }
 `;
 const Header = styled.div`
@@ -173,7 +184,7 @@ export default function Editor({ handleLogout, handleMainPage }) {
       <EditorBody>
         <div id="up">
           <div id="postImg">
-            이미지
+            post 이미지 선택
             <br />
             <PostThumnailSelecter
               setPostPoto={setPostPoto}

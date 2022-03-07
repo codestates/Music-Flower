@@ -2,10 +2,10 @@ import React, { useState } from "react";
 
 const PostThumnailSelecter = ({ setPostPoto }) => {
   // console.log("label : ", label);
-  const [aaa, setAaa] = useState("sellect");
-  const [photoIdx, setPotoIdx] = useState(0);
+  const [photo, setphoto] = useState("sellect");
+  // const [photoIdx, setPotoIdx] = useState(0);
   let label = "";
-  console.log("aaa", aaa);
+  console.log("photo", photo);
   let options = [
     {
       id: 1,
@@ -43,24 +43,21 @@ const PostThumnailSelecter = ({ setPostPoto }) => {
   // console.log("changed : ", changed);
 
   const dropdownChanged = (e) => {
-    console.log("e :", e.target.value);
-    // changed(e.target.value);
-    setAaa(e.target.value);
-    setPotoIdx();
-    setPostPoto(images[aaa]);
+    setphoto(e.target.value);
   };
-
+  // dropdownChanged 안에 넣으면 박자 느림 이유를 몰루 아 바뀌기 전에거가 들어가서 그란가?
+  setPostPoto(images[photo]);
   return (
     <div id="thumnailSelecter">
       <div>
         <label className="form-label col-sm-2">{label}</label>
         <select
-          value={aaa}
+          value={photo}
           // idx={photoIdx}
           onChange={dropdownChanged}
           className="form-control form-control-sm col-sm-10"
         >
-          <option key={0}>Select...</option>
+          <option key={0}>이미지를 선택하세요</option>
           {options.map((item, idx) => (
             <option key={idx + 1} value={item.idx}>
               {item.name}
@@ -68,7 +65,7 @@ const PostThumnailSelecter = ({ setPostPoto }) => {
           ))}
         </select>
       </div>
-      <img src={images[aaa]} style={{ height: "400px", width: "400px" }} />
+      <img src={images[photo]} style={{ height: "400px", width: "400px" }} />
     </div>
   );
 };

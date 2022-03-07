@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const SelectMusic = styled.div`
-  border: 1px solid red;
+  border: 1px solid grey;
   padding: 10px 10px;
   display: flex;
   /* width: 40vh; */
