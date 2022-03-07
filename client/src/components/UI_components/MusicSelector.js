@@ -67,7 +67,7 @@ export const DropDownContainer = styled.ul`
   }
 `;
 
-export const MusicSelector = () => {
+export const MusicSelector = ({ musicList, setMusicList }) => {
   const [hasText, setHasText] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const [options, setOptions] = useState(dummyMusics);
@@ -99,7 +99,9 @@ export const MusicSelector = () => {
   };
 
   const handleDropDownClick = (clickedOption) => {
-    setInputValue(clickedOption);
+    console.log("clickedOption:", clickedOption);
+    setMusicList([...musicList, clickedOption]);
+    setInputValue("");
     const resultOptions = dummyMusics.filter(
       (option) => option.songName === clickedOption.songName
     );
@@ -181,9 +183,8 @@ export const DropDown = ({ options, handleDropDownClick, selected }) => {
               style={{ height: "64px", width: "64px" }}
             />
             <span> // </span>
-            <span>{option.songName}</span>
-            <span> // </span>
-            <span className="serchArtist">{option.artist}</span>
+            <div>{option.songName}</div>
+            <div className="serchArtist">{option.artist}</div>
             <div>
               <br></br>
             </div>

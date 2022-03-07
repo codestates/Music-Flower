@@ -1,4 +1,5 @@
 import React from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { MusicSelector } from "../components/UI_components/MusicSelector";
 import SpotifyAPP from "../components/SpotifyApp";
@@ -52,6 +53,8 @@ const EditorBody = styled.div`
 `;
 
 export default function Editor({ meetCode }) {
+  const [musicList, setMusicList] = useState([]);
+
   const history = useHistory();
   const onClickMainPageHandle = () => {
     history.push("/main");
@@ -83,11 +86,27 @@ export default function Editor({ meetCode }) {
 
           <div id="musicList">
             음악 리스트
-            <SpotifyAPP meetCode={meetCode} />
-            <MusicSelector></MusicSelector>
+            {/* <SpotifyAPP meetCode={meetCode} /> */}
+            <MusicSelector
+              musicList={musicList}
+              setMusicList={setMusicList}
+            ></MusicSelector>
+            {musicList.map((e) => {
+              return (
+                <div id="musicList" key={e.albumImageUrl}>
+                  <img
+                    src={e.albumImageUrl}
+                    style={{ height: "64px", width: "64px" }}
+                  />
+                  <span> // </span>
+                  <div>{e.songName}</div>
+                  <div className="serchArtist">{e.artist}</div>
+                </div>
+              );
+            })}
+            {/* <div id="music">music</div>
             <div id="music">music</div>
-            <div id="music">music</div>
-            <div id="music">music</div>
+            <div id="music">music</div> */}
           </div>
         </div>
       </EditorBody>
