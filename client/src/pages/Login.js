@@ -5,7 +5,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 // import spotifyAuth from "../auth/useSpotifyAuth";
 
-const code = new URLSearchParams(window.location.search).get("code");
+//const code = new URLSearchParams(window.location.search).get("code");
 
 export default function Login({ handleResponseSuccess, isLogin, setMeetCode }) {
   // const accessToken = spotifyAuth(code);
