@@ -22,7 +22,13 @@ sequelize
     console.error(err);
   });
 
-app.use(cors());
+app.use(
+  cors({
+    origin: ["http://localhost:3000"],
+    credentials: true,
+    methods: ["GET", "POST", "OPTIONS"],
+  })
+);
 app.use(express.json());
 
 app.post("/login", logIn);

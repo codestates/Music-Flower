@@ -8,12 +8,15 @@ module.exports = {
   },
 
   sendAccessToken: (res, accessToken) => {
+    // console.log(loginInfo);
     // TODO: JWT 토큰을 쿠키로 전달합니다.
     res.cookie("jwt", accessToken, {
+      domain: "localhost",
+      path: "/",
       httpOnly: true,
       secure: true,
       maxAge: 24 * 6 * 60 * 10000,
-      sameSite: "None",
+      sameSite: "none",
     });
   },
 
