@@ -23,6 +23,7 @@ module.exports = {
   },
   getRefreshToken: (req, res) => {
     const refreshToken = req.body.refreshToken;
+    console.log(refreshToken);
     const spotifyApi = new SpotifyWebApi({
       clientId: "91b9b462242b430aa59363c6adeda3fc",
       clientSecret: "5e09bcd040bf4a46afac0eb381056fb3",
