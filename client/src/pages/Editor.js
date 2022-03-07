@@ -1,7 +1,9 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { MusicSelector } from "../components/UI_components/MusicSelector";
+import { MusicSelector } from "./UI_components/MusicSelector";
+// import SpotifyAPP from "../components/SpotifyApp";
+import { Switch, Route, useHistory, Redirect } from "react-router-dom";
+import PostThumnailSelecter from "./UI_components/PostThumnailSelector";
 import { Link } from "react-router-dom";
 
 const EditorBody = styled.div`
@@ -134,7 +136,7 @@ export default function Editor({ handleLogout, handleMainPage }) {
           <div id="postImg">
             이미지
             <br />
-            (어케올리지???) 있는 이미지 중에서 선택?
+            <PostThumnailSelecter></PostThumnailSelecter>
           </div>
           <div id="postInfo">
             post 제목
