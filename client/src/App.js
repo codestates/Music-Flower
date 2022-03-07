@@ -9,11 +9,12 @@ import Mypage from "./pages/Mypage";
 import Detail from "./pages/Detail";
 import Editor from "./pages/Editor";
 
-import SpotifyAPP from "./components/SpotifyApp";
+// import SpotifyAPP from "./components/SpotifyApp";
 
 import { allPosts } from "./components/dummy/dummyitems";
 import { dummyuser } from "./components/dummy/dummyUser";
 function App() {
+  const [meetCode, setMeetCode] = useState(null);
   const [isLogin, setIsLogin] = useState(false);
   const [userinfo, setUserinfo] = useState(null);
   const history = useHistory();
@@ -31,7 +32,6 @@ function App() {
     history.push("/main");
   };
   const [items, setItems] = useState(allPosts);
-  const [meetCode, setMeetCode] = useState(null);
   const [detailData, setDetailData] = useState({});
 
   const handleLogout = () => {

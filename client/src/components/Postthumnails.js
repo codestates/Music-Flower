@@ -12,11 +12,12 @@ import styled from "styled-components";
 //   flex-direction: row;
 // `;
 const Card = styled.li`
-  border: 1px solid red;
+  /* border: 1px solid red; */
+  background-color: rgb(207, 255, 220);
   padding: 10px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
-  border-radius: 5px;
+  border-radius: 20px;
   height: 400px;
   display: flex;
   flex-direction: column;

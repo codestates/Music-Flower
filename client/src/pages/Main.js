@@ -8,7 +8,7 @@ import { Switch, Route, useHistory, Link, Redirect } from "react-router-dom";
 // const AUTH_URL = `https://accounts.spotify.com/authorize?client_id=${cId}&response_type=code&redirect_uri=http://localhost:3000/editor&scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20user-read-playback-state%20user-modify-playback-state`;
 
 const MainPage = styled.div`
-  border: 1px solid red;
+  /* border: 1px solid red; */
   /* padding: 10px; */
 
   display: flex;
@@ -19,14 +19,14 @@ const MainPage = styled.div`
 `;
 
 const Header = styled.div`
-  border: 1px solid red;
+  /* border: 1px solid red; */
   /* padding: 10px; */
 
   display: flex;
   flex: 1 0 auto;
 
   > div {
-    border: 1px solid red;
+    /* border: 1px solid red; */
     /* padding: 10px; */
 
     flex: 1 0 auto;
@@ -34,7 +34,7 @@ const Header = styled.div`
 `;
 
 const SerchArea = styled.div`
-  border: 1px solid red;
+  /* border: 1px solid red; */
   /* padding: 10px; */
 
   display: flex;
@@ -43,14 +43,14 @@ const SerchArea = styled.div`
   flex-direction: row;
   justify-content: center;
   > #select_bar {
-    border: 1px solid red;
+    /* border: 1px solid red; */
     /* padding: 10px; */
 
     flex: 2 0 auto;
     margin-left: 40px;
   }
   > #create_post {
-    border: 1px solid red;
+    /* border: 1px solid red; */
     /* padding: 10px; */
 
     flex: 1 0 auto;
@@ -58,15 +58,17 @@ const SerchArea = styled.div`
 `;
 
 const Body = styled.div`
-  /* border: 1px solid red;
-  padding: 10px; */
+  border: 10px solid gray;
+  /* padding: 10px; */
+  border-radius: 20px;
+  /* background-color: rgb(84, 140, 255); */
   display: flex;
   flex-wrap: wrap;
   flex: 8 0 auto;
 `;
 
 const Footer = styled.div`
-  border: 1px solid red;
+  /* border: 1px solid red; */
   /* padding: 10px; */
 
   flex: 0 0 auto;
@@ -75,27 +77,27 @@ const Footer = styled.div`
 //----------------------------------------------------------------
 
 const Menu = styled.div`
-  border: 1px solid red;
+  /* border: 1px solid red; */
   /* padding: 10px; */
 
   display: flex;
   flex: 4 0 auto;
 `;
 const Nick = styled.div`
-  border: 1px solid red;
+  /* border: 1px solid red; */
   /* padding: 10px; */
 
   flex: 3 0 auto;
 `;
 const MenuButton = styled.div`
-  border: 1px solid red;
+  /* border: 1px solid red; */
   /* padding: 10px; */
 
   display: flex;
   flex: 1 0 auto;
 `;
 const MenuButtonInner = styled.button`
-  border: 1px solid red;
+  /* border: 1px solid red; */
   /* padding: 10px; */
 
   margin: 10px;
