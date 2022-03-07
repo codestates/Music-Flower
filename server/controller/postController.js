@@ -2,7 +2,6 @@
 const { User } = require("../models");
 const { Post } = require("../models");
 const { MusicData } = require("../models");
-const { Post_MusicData } = require("../models");
 
 module.exports = {
   //[get] 포스트 불러오기
