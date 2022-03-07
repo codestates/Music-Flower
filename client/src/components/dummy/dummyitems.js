@@ -24,7 +24,7 @@ export const allPosts = [
         youtubeLink: "유투브링크",
       },
     ],
-    totalLike: "1",
+    totalLike: "30",
     tags: ["봄", "좋은노래"],
   },
   {
@@ -50,7 +50,7 @@ export const allPosts = [
         youtubeLink: "유투브링크",
       },
     ],
-    totalLike: "1",
+    totalLike: "30",
     tags: ["봄", "좋은노래"],
   },
   {
@@ -76,7 +76,7 @@ export const allPosts = [
         youtubeLink: "유투브링크",
       },
     ],
-    totalLike: "1",
+    totalLike: "30",
     tags: ["봄", "좋은노래"],
   },
   {
@@ -102,7 +102,7 @@ export const allPosts = [
         youtubeLink: "유투브링크",
       },
     ],
-    totalLike: "1",
+    totalLike: "30",
     tags: ["봄", "좋은노래"],
   },
   {
@@ -128,7 +128,7 @@ export const allPosts = [
         youtubeLink: "유투브링크",
       },
     ],
-    totalLike: "1",
+    totalLike: "30",
     tags: ["봄", "좋은노래"],
   },
   {
@@ -154,7 +154,7 @@ export const allPosts = [
         youtubeLink: "유투브링크",
       },
     ],
-    totalLike: "1",
+    totalLike: "30",
     tags: ["봄", "좋은노래"],
   },
 ];

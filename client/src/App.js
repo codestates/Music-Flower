@@ -46,6 +46,7 @@ function App() {
     setDetailData(postData);
     history.push("/detail");
   };
+
   return (
     <Switch>
       <Route exact path="/">
