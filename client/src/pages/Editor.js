@@ -1,8 +1,8 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import styled from "styled-components";
-import { MusicSelector } from "../components/UI_components/MusicSelector";
-import SpotifyAPP from "../components/SpotifyApp";
+import { MusicSelector } from "./UI_components/MusicSelector";
+// import SpotifyAPP from "../components/SpotifyApp";
 import { Switch, Route, useHistory, Redirect } from "react-router-dom";
 
 const EditorBody = styled.div`

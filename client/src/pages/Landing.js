@@ -1,13 +1,13 @@
 import React from "react";
 import "../css/Landing.css";
 import { useHistory, Link } from "react-router-dom";
-import { AUTH_URL } from "../components/SpotifyC";
+// import { AUTH_URL } from "../components/SpotifyC";
 
 const code = new URLSearchParams(window.location.search).get("code");
 export default function Landing({ isLogin, meetCode, setMeetCode }) {
-  console.log("랜딩", isLogin);
-  setMeetCode(code);
-  console.log("code:", meetCode);
+  // console.log("랜딩", isLogin);
+  // setMeetCode(code);
+  // console.log("code:", meetCode);
   const history = useHistory();
   const handleRecord = () => {
     if (isLogin) {
@@ -49,9 +49,9 @@ export default function Landing({ isLogin, meetCode, setMeetCode }) {
               Start
             </button>
           ) : (
-            <a className="play-btn" href={AUTH_URL} onClick={handleRecord}>
+            <button className="play-btn" onClick={handleRecord}>
               Start
-            </a>
+            </button>
           )}
         </div>
         <div>
