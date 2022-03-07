@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { MusicSelector } from "./UI_components/MusicSelector";
 // import SpotifyAPP from "../components/SpotifyApp";
 import { Switch, Route, useHistory, Redirect } from "react-router-dom";
+import PostThumnailSelecter from "../pages/UI_components/PostThumnailSelector";
 
 const EditorBody = styled.div`
   border: 1px solid red;
@@ -68,7 +69,7 @@ export default function Editor({ meetCode }) {
           <div id="postImg">
             이미지
             <br />
-            (어케올리지???) 있는 이미지 중에서 선택?
+            <PostThumnailSelecter></PostThumnailSelecter>
           </div>
           <div id="postInfo">
             post 정보
