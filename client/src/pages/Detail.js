@@ -122,7 +122,7 @@ export default function Detail({
   users,
   handleLogout,
 }) {
-  console.log("디테일 컴포넌트 정보: ", detailData);
+  // console.log("디테일 컴포넌트 정보: ", detailData);
   return (
     <div id="detailPage">
       <Header>
@@ -131,7 +131,7 @@ export default function Detail({
         </Link>
         <Menu>
           <Nick>
-            <span>{detailData.postTitle}</span>
+            <span>{users.nickname}</span>님 안녕하세요.
           </Nick>
           <MenuButton>
             <button onClick={handleMainPage}>메인페이지</button>

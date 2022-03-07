@@ -1,6 +1,5 @@
-import React from "react";
 import styled from "styled-components";
-
+import React, { useEffect, useState } from "react";
 // const Post = styled.div`
 //   border: 1px solid red;
 //   padding: 10px;
@@ -24,7 +23,9 @@ const Card = styled.li`
   flex-direction: column;
   align-items: center;
   margin: 10px;
-  cursor: pointer;
+  > img {
+    cursor: pointer;
+  }
   > #Card:hover & {
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
   }
@@ -35,6 +36,11 @@ const Container = styled.div`
   padding: 0;
   border: 0;
   vertical-align: baseline;
+  > h4 {
+    > b {
+      cursor: pointer;
+    }
+  }
 `;
 const Nickname = styled.p`
   color: #333;
@@ -53,6 +59,7 @@ const Meta = styled.div`
   margin-bottom: 1rem;
 `;
 const Likes = styled.button`
+  cursor: pointer;
   display: inline-block;
   position: relative;
   top: 1px;
@@ -88,24 +95,38 @@ const Tagitem = styled.button`
   background-color: aliceblue;
   color: #1e6b7b;
 `;
+
 export default function Postthumnails({ item, onClickDetailHandle }) {
-  // console.log(item);
+  console.log(item.totalLike);
+
+  const [like, setLike] = useState(item.totalLike);
+
+  const handleLike = (item) => {
+    setLike(Number(like) + 1);
+  };
+
   return (
     // <Post>
-    <Card key={item.id} onClick={() => onClickDetailHandle(item)}>
-      <img src={item.imageUrl} width="200px" alt="logo" />
+
+    <Card key={item.id}>
+      <img
+        onClick={() => onClickDetailHandle(item)}
+        src={item.imageUrl}
+        width="200px"
+        alt="logo"
+      />
       <Container>
         <h4>
-          <b>{item.postTitle}</b>
+          <b onClick={() => onClickDetailHandle(item)}>{item.postTitle}</b>
         </h4>
         <Nickname>
           <span>{item.nickname}</span>
         </Nickname>
         <Meta>
-          <Likes />
-          total likes
+          <Likes onClick={() => handleLike(item)} />
+          {like}
           <Bar>\</Bar>
-          total song
+          {item.musicList.length}곡
         </Meta>
         <Meta>
           <Tagitem>{item.tags}</Tagitem>
