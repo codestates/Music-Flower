@@ -1,15 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../css/Signup.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
 export default function Signup() {
+  const [signup, setSignup] = useState({
+    nickname: "",
+    email: "",
+    password: "",
+  });
+  const handleInputValue = (key) => (e) => {
+    setSignup({ ...signup, [key]: e.target.value });
+  };
+
+  console.log("login", signup);
+
   // axios
-  //   .post(url, {
-  //     email: loginInfo.email,
-  //     password: loginInfo.password,
+  //   .post("http://localhost:8080/signup", {
+  //     nickname: signup.nickname,
+  //     email: signup.email,
+  //     password: signup.password,
   //   })
-  //   .then((res) => handleResponseSuccess())
+  //   .then((res) => console.log(res))
   //   .catch((err) => console.log(err));
 
   return (
@@ -39,12 +51,33 @@ export default function Signup() {
           />
           <form className="SignUpfrm" onSubmit={(e) => e.preventDefault()}>
             <label className="labelTitle">이메일</label>
-            <input className="email" type="email" />
-            <label className="labelTitle">닉네임</label>
-            <input className="nickname" />
+            <input
+              className="email"
+              type="email"
+              onChange={handleInputValue("email")}
+            />
+            <label
+              className="labelTitle"
+              onChange={handleInputValue("nickname")}
+            >
+              닉네임
+            </label>
+            <input
+              className="nickname"
+              onChange={handleInputValue("nickname")}
+            />
             <div className="passwordfield">
-              <label className="labelTitle">비밀번호</label>
-              <input className="password" type="password" />
+              <label
+                className="labelTitle"
+                onChange={handleInputValue("password")}
+              >
+                비밀번호
+              </label>
+              <input
+                className="password"
+                type="password"
+                onChange={handleInputValue("password")}
+              />
             </div>
             <div className="passwordfield">
               <label className="labelTitle">비밀번호 확인</label>
