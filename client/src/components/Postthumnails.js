@@ -12,15 +12,19 @@ import styled from "styled-components";
 //   flex-direction: row;
 // `;
 const Card = styled.li`
+  /* border: 1px solid red; */
   border: 1px solid grey;
-  //padding: 10px;
-  //box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
-  height: 410px;
+  /* border-radius: 20px; */
+  height: 400px;
+  width: 200px;
   display: flex;
   flex-direction: column;
   align-items: center;
   margin: 10px;
+  cursor: pointer;
   > #Card:hover & {
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
   }
@@ -39,6 +43,9 @@ const Nickname = styled.p`
   text-align:left;
   height:44px;
   white-space:normal;
+  > span {
+    color: #a14efc;
+  }
 `;
 const Meta = styled.div`
   display: flex;
@@ -91,7 +98,9 @@ export default function Postthumnails({ item, onClickDetailHandle }) {
         <h4>
           <b>{item.postTitle}</b>
         </h4>
-        <Nickname>{item.nickname}</Nickname>
+        <Nickname>
+          <span>{item.nickname}</span>
+        </Nickname>
         <Meta>
           <Likes />
           total likes

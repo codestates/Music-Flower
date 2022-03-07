@@ -22,8 +22,7 @@ export default function Landing({ isLogin, meetCode, setMeetCode }) {
   //   location.href = AUTH_URL;
   // }
 
-  //dololak.tistory.com/765 [코끼리를 냉장고에 넣는 방법]
-  출처: https: return (
+  return (
     <div className="landing-body">
       <header>
         <div>

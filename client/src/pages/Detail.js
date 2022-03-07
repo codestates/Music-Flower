@@ -3,11 +3,13 @@ import styled from "styled-components";
 
 const Detailbody = styled.div`
   border: 1px solid red;
-  padding: 10px;
+  /* padding: 200px; */
+
   display: flex;
   flex-direction: column;
-  height: 96vh;
-  width: auto;
+  height: 900px;
+  width: 1200px;
+
   > div {
     border: 1px solid red;
     padding: 10px;
@@ -27,7 +29,9 @@ const Detailbody = styled.div`
       flex: 2 0 auto;
       > div {
         margin: 10px;
-        background-color: rgba(100, 255, 200, 100);
+        > h4 {
+          color: #a14efc;
+        }
       }
     }
   }
@@ -35,11 +39,16 @@ const Detailbody = styled.div`
     display: flex;
     flex: 3 0 auto;
     flex-direction: column;
+    > text {
+      margin-left: 9px;
+    }
     > #postIntro {
       display: flex;
       flex: 1 0 auto;
       > textarea {
         width: 100vw;
+      }
+      > div {
       }
     }
     > #musicList {
@@ -59,32 +68,31 @@ export default function Detail({ detailData }) {
     <div id="detailPage">
       <Detailbody>
         <div id="up">
-          <div id="postImg">
-            <img src={detailData.imageUrl} width="200vw" />
-          </div>
           <div id="postInfo">
-            post 정보
             <div>
-              <text>포스트제목 : {detailData.postTitle}</text>
+              <h1>{detailData.postTitle}</h1>
             </div>
             <div>
-              <text>유저 닉네임 : {detailData.nickname}</text>
+              <h4>{detailData.nickname}</h4>
             </div>
             <div>
-              <text>
+              {/* <text>
                 테그 :
                 {detailData.tags.map((e) => {
                   return <span>{e}, </span>;
                 })}
-              </text>
+              </text> */}
             </div>
+          </div>
+          <div id="postImg">
+            <img src={detailData.imageUrl} width="200vw" />
           </div>
         </div>
         <div id="down">
+          <text>소개글</text>
           <div id="postIntro">
-            <textarea>{detailData.postExplain}</textarea>
+            <text>{detailData.postExplain}</text>
           </div>
-
           <div id="musicList">
             음악 리스트
             {detailData.musicList.map((e) => {

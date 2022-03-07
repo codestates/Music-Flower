@@ -8,7 +8,7 @@ const express = require("express");
 const router = express.Router();
 
 router.get("/", findPost);
-router.post("/:id", createPost);
+router.post("/", createPost);
 router.put("/:id", updatePost);
 router.delete("/:id", deletePost);
 
