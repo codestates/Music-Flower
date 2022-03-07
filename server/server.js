@@ -3,7 +3,13 @@ const cors = require("cors");
 const app = express();
 const { sequelize } = require("./models");
 
-const userRouter = require("./router/userRouter");
+const {
+  logIn,
+  logOut,
+  signUp,
+  findUser,
+} = require("./controller/userController");
+
 const postRouter = require("./router/postRouter");
 const spotifyRouter = require("./router/spotifyRouter");
 
@@ -19,7 +25,11 @@ sequelize
 app.use(cors());
 app.use(express.json());
 
-app.use("/user", userRouter);
+app.post("/login", logIn);
+app.post("/logout", logOut);
+app.post("/signup", signUp);
+app.get("/userinfo", findUser);
+
 app.use("/post", postRouter);
 app.use("/spotify", spotifyRouter);
 
