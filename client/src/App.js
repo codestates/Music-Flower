@@ -9,8 +9,6 @@ import Mypage from "./pages/Mypage";
 import Detail from "./pages/Detail";
 import Editor from "./pages/Editor";
 
-import SpotifyAPP from "./components/SpotifyApp";
-
 import { allPosts } from "./components/dummy/dummyitems";
 import { dummyuser } from "./components/dummy/dummyUser";
 function App() {
@@ -43,11 +41,7 @@ function App() {
   return (
     <Switch>
       <Route exact path="/">
-        <Landing
-          isLogin={isLogin}
-          meetCode={meetCode}
-          setMeetCode={setMeetCode}
-        />
+        <Landing isLogin={isLogin} setMeetCode={setMeetCode} />
       </Route>
       <Route path="/login">
         <Login
@@ -64,7 +58,6 @@ function App() {
           users={userinfo}
           setDetailData={setDetailData}
           handleLogout={handleLogout}
-          meetCode={meetCode}
         ></Main>
       </Route>
       <Route path="/mypage">
@@ -74,7 +67,7 @@ function App() {
         <Detail users={userinfo} detailData={detailData}></Detail>
       </Route>
       <Route path="/editor">
-        <Editor users={userinfo} meetCode={meetCode}></Editor>
+        <Editor users={userinfo}></Editor>
       </Route>
     </Switch>
   );

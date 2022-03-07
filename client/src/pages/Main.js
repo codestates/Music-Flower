@@ -19,18 +19,8 @@ const MainPage = styled.div`
 `;
 
 const Header = styled.div`
-  border: 1px solid red;
-  /* padding: 10px; */
-
   display: flex;
   flex: 1 0 auto;
-
-  > div {
-    border: 1px solid red;
-    /* padding: 10px; */
-
-    flex: 1 0 auto;
-  }
 `;
 
 const SerchArea = styled.div`
@@ -50,7 +40,7 @@ const SerchArea = styled.div`
     margin-left: 40px;
   }
   > #create_post {
-    border: 1px solid red;
+    border: 1px grey;
     /* padding: 10px; */
 
     flex: 1 0 auto;
