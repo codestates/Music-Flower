@@ -38,11 +38,11 @@ const Container = styled.div`
 `;
 const Nickname = styled.p`
   color: #333;
-  line-height:22px
+  line-height: 22px;
   font-size: 16px;
-  text-align:left;
-  height:44px;
-  white-space:normal;
+  text-align: left;
+  height: 44px;
+  white-space: normal;
   > span {
     color: #a14efc;
   }
