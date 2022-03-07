@@ -20,7 +20,6 @@ export default function Login({ handleResponseSuccess, isLogin, setMeetCode }) {
   };
 
   console.log("this", isLogin);
-  const [errorMessage, setErrorMessage] = useState("");
 
   const handleGuest = () => {
     setLoginInfo(
@@ -34,8 +33,7 @@ export default function Login({ handleResponseSuccess, isLogin, setMeetCode }) {
 
   const handleLogin = () => {
     if (!loginInfo.email && !loginInfo.password) {
-      setErrorMessage("이메일과 비밀번호를 입력하세요");
-      return alert(errorMessage);
+      return alert("아이디와 비밀번호 모두 입력 하세요.");
     }
     // } else if (
     //   loginInfo.email !== userDatas.email &&
@@ -57,7 +55,7 @@ export default function Login({ handleResponseSuccess, isLogin, setMeetCode }) {
         }
       )
       .then((res) => handleResponseSuccess())
-      .catch((err) => console.log(err));
+      .catch((err) => alert("아이디 또는 비밀번호가 일치 하지않습니다."));
   };
 
   return (
