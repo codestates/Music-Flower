@@ -18,7 +18,7 @@ export default function useSpotifyAuth(code) {
         setReFreshToken(res.data.refreshToken);
         setExpiresIn(res.data.expiresIn);
         // 링크 지우기
-        window.history.pushState({}, null, "/");
+        window.history.pushState({}, null, "/editor");
       });
   }, [code]);
 

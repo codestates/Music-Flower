@@ -40,15 +40,14 @@ export const InputContainer = styled.div`
 
 export const DropDownContainer = styled.ul`
   background-color: #ffffff;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  list-style-type: none;
-  margin-block-start: 0;
+  /* display: block; */
+  /* list-style-type: none; */
+  /* margin-block-start: 0;
   margin-block-end: 0;
   margin-inline-start: 0px;
   margin-inline-end: 0px;
-  padding-inline-start: 0px;
+  padding-inline-start: 0px; */
+  width: 5rem;
   margin-top: -1px;
   padding: 0.5rem 0;
   border: 1px solid rgb(223, 225, 229);

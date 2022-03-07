@@ -1,7 +1,9 @@
 import React from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { MusicSelector } from "../components/UI_components/MusicSelector";
 import SpotifyAPP from "../components/SpotifyApp";
+import { Switch, Route, useHistory, Redirect } from "react-router-dom";
 
 const EditorBody = styled.div`
   border: 1px solid red;
@@ -50,10 +52,18 @@ const EditorBody = styled.div`
   }
 `;
 
-export default function Editor() {
+export default function Editor({ meetCode }) {
+  const [musicList, setMusicList] = useState([]);
+
+  const history = useHistory();
+  const onClickMainPageHandle = () => {
+    history.push("/main");
+  };
+
   return (
     <div id="editorPage">
       <EditorBody>
+        <button onClick={onClickMainPageHandle}>메인으로 돌아가기</button>
         <div id="up">
           <div id="postImg">
             이미지
@@ -76,11 +86,27 @@ export default function Editor() {
 
           <div id="musicList">
             음악 리스트
-            {/* <SpotifyAPP /> */}
-            <MusicSelector></MusicSelector>
+            {/* <SpotifyAPP meetCode={meetCode} /> */}
+            <MusicSelector
+              musicList={musicList}
+              setMusicList={setMusicList}
+            ></MusicSelector>
+            {musicList.map((e) => {
+              return (
+                <div id="musicList" key={e.albumImageUrl}>
+                  <img
+                    src={e.albumImageUrl}
+                    style={{ height: "64px", width: "64px" }}
+                  />
+                  <span> // </span>
+                  <div>{e.songName}</div>
+                  <div className="serchArtist">{e.artist}</div>
+                </div>
+              );
+            })}
+            {/* <div id="music">music</div>
             <div id="music">music</div>
-            <div id="music">music</div>
-            <div id="music">music</div>
+            <div id="music">music</div> */}
           </div>
         </div>
       </EditorBody>

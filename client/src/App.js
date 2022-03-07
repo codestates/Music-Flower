@@ -8,9 +8,13 @@ import Main from "./pages/Main";
 import Mypage from "./pages/Mypage";
 import Detail from "./pages/Detail";
 import Editor from "./pages/Editor";
+
+// import SpotifyAPP from "./components/SpotifyApp";
+
 import { allPosts } from "./components/dummy/dummyitems";
 import { dummyuser } from "./components/dummy/dummyUser";
 function App() {
+  const [meetCode, setMeetCode] = useState(null);
   const [isLogin, setIsLogin] = useState(false);
   const [userinfo, setUserinfo] = useState(null);
   const history = useHistory();
@@ -35,14 +39,22 @@ function App() {
     setIsLogin(false);
     history.push("/");
   };
-
+  const onClickDetailHandle = (postData) => {
+    // 클릭하면 디테일데이터가 들어가야지 ㅇㅇ
+    console.log("postData:", postData);
+    setDetailData(postData);
+    history.push("/detail");
+  };
   return (
     <Switch>
       <Route exact path="/">
-        <Landing isLogin={isLogin} />
+        <Landing isLogin={isLogin} setMeetCode={setMeetCode} />
       </Route>
       <Route path="/login">
-        <Login handleResponseSuccess={handleResponseSuccess} />
+        <Login
+          handleResponseSuccess={handleResponseSuccess}
+          setMeetCode={setMeetCode}
+        />
       </Route>
       <Route path="/signup">
         <Signup />
@@ -53,10 +65,14 @@ function App() {
           users={userinfo}
           setDetailData={setDetailData}
           handleLogout={handleLogout}
+          onClickDetailHandle={onClickDetailHandle}
         ></Main>
       </Route>
       <Route path="/mypage">
-        <Mypage users={userinfo}></Mypage>
+        <Mypage
+          users={userinfo}
+          onClickDetailHandle={onClickDetailHandle}
+        ></Mypage>
       </Route>
       <Route path="/detail">
         <Detail users={userinfo} detailData={detailData}></Detail>
@@ -65,7 +81,6 @@ function App() {
         <Editor users={userinfo}></Editor>
       </Route>
     </Switch>
-    // <Main items={items} setItems={setItems}></Main>
   );
 }
 
