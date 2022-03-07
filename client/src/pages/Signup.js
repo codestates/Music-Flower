@@ -1,28 +1,35 @@
 import React, { useEffect, useState } from "react";
 import "../css/Signup.css";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
 
 export default function Signup() {
+  const history = useHistory();
   const [signup, setSignup] = useState({
     nickname: "",
     email: "",
     password: "",
+    checkPassword: "",
   });
   const handleInputValue = (key) => (e) => {
     setSignup({ ...signup, [key]: e.target.value });
   };
 
   console.log("login", signup);
-
-  // axios
-  //   .post("http://localhost:8080/signup", {
-  //     nickname: signup.nickname,
-  //     email: signup.email,
-  //     password: signup.password,
-  //   })
-  //   .then((res) => console.log(res))
-  //   .catch((err) => console.log(err));
+  const handleSignup = () => {
+    if (signup.password !== signup.checkPassword) {
+      return alert("비밀번호가 다릅니다");
+    } else {
+      axios
+        .post("http://localhost:8080/signup", {
+          nickname: signup.nickname,
+          email: signup.email,
+          password: signup.password,
+        })
+        .then((res) => history.push("/login"))
+        .catch((err) => alert("이미 존재하는 아이디 입니다."));
+    }
+  };
 
   return (
     <div>
@@ -81,9 +88,15 @@ export default function Signup() {
             </div>
             <div className="passwordfield">
               <label className="labelTitle">비밀번호 확인</label>
-              <input className="password-confirm" type="password" />
+              <input
+                className="password-confirm"
+                type="password"
+                onChange={handleInputValue("checkPassword")}
+              />
             </div>
-            <button className="Signup-btn">Sign Up!</button>
+            <button className="Signup-btn" onClick={handleSignup}>
+              Sign Up!
+            </button>
           </form>
           <div className="option">
             <p>
