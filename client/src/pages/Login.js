@@ -44,7 +44,7 @@ export default function Login({ handleResponseSuccess, isLogin, setMeetCode }) {
     //   setErrorMessage("아이디 또는 비밀번호 가 다릅니다");
     //   return alert(errorMessage);
     // }
-    const url = "http://localhost:8080/user/login";
+    const url = "http://localhost:8080/login";
     axios
       .post(url, {
         email: loginInfo.email,

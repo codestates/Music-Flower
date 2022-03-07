@@ -1,30 +1,53 @@
 //postController.js
 const { User } = require("../models");
-//jwt 라이브러리 불러오기
-const jwt = require("jsonwebtoken");
+const { Post } = require("../models");
 
 module.exports = {
-  //get
-  //토큰이 있을 경우
-  findPost: (req, res) => {
-    res.status(200).json("ok");
+  findPost: async (req, res) => {
+    const postList = await Post.findAll({
+      attributes:{
+      exclude: ['tatalLike', 'totalComment'],
+      include: [
+        {
+          model: User,
+          attributes: 'nickname'
+        }
+      ]
+    }
+    });
+    res.status(200).json({data: postList, message: 'ok'});
   },
-  //post
-  //토큰이 있을 경우
 
-  createPost: (req, res) => {
-    res.status(201).json("ok");
+  createPost: async (req, res) => {
+    const {userId, postTitle, image, postExplain, createdAt} = req.body;
+    const createdPost = await Post.create({
+      userId: userId,
+      postTitle: postTitle,
+      image: image,
+      postExplain: postExplain,
+      createdAt: createdAt
+    })
+    res.status(201).json("successfully created your post");
   },
-  //put
-  //토큰이 있을 경우
-  //post의  user id = user id 가 일치 할 경우에만 update ,delete
-  updatePost: (req, res) => {
-    res.status(200).json("ok");
+
+  updatePost: async (req, res) => {
+    const postId = req.params.id;
+    const {postTitle, image, postExplain} = req.body;
+    await User.update({postTitle, image, postExplain},{
+      where: {
+        postId: postId
+      }
+    });
+    res.status(200).json("successfully updated your post");
   },
-  //delete
-  //토큰이 있을 경우
-  //post의  user id = user id 가 일치 할 경우에만 update ,delete
-  deletePost: (req, res) => {
-    res.status(200).json("ok");
+
+  deletePost: async (req, res) => {
+    const postId = req.params.id;
+    await Post.destroy({
+      where: {
+        id: postId
+      }
+    });
+    res.status(200).json("successfully deleted your post");
   },
 };
