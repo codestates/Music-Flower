@@ -1,7 +1,8 @@
 //이것은 예시이다.
+const db = require("../models");
 const { User } = require("../models");
 const { Post } = require("../models");
-const { Post_MusicData } = require("../models");
+const Post_MusicData = db.sequelize.models.Post_MusicData;
 
 module.exports = {
   create: async(req, res) => {
