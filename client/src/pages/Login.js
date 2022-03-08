@@ -35,13 +35,7 @@ export default function Login({ handleResponseSuccess, isLogin, setMeetCode }) {
     if (!loginInfo.email && !loginInfo.password) {
       return alert("아이디와 비밀번호 모두 입력 하세요.");
     }
-    // } else if (
-    //   loginInfo.email !== userDatas.email &&
-    //   loginInfo.password !== userDatas.password
-    // ) {
-    //   setErrorMessage("아이디 또는 비밀번호 가 다릅니다");
-    //   return alert(errorMessage);
-    // }
+
     const url = "http://localhost:8080/login";
     axios
       .post(

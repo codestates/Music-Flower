@@ -3,8 +3,8 @@ import "../css/Landing.css";
 import { useHistory, Link } from "react-router-dom";
 // import { AUTH_URL } from "../components/SpotifyC";
 
-const code = new URLSearchParams(window.location.search).get("code");
-export default function Landing({ isLogin, meetCode, setMeetCode }) {
+// const code = new URLSearchParams(window.location.search).get("code");
+export default function Landing({ isLogin, meetCode }) {
   // console.log("랜딩", isLogin);
   // setMeetCode(code);
   // console.log("code:", meetCode);

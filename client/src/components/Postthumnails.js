@@ -111,7 +111,7 @@ export default function Postthumnails({ item, onClickDetailHandle }) {
     <Card key={item.id}>
       <img
         onClick={() => onClickDetailHandle(item)}
-        src={item.imageUrl}
+        src={item.image}
         width="200px"
         alt="logo"
       />
@@ -120,16 +120,13 @@ export default function Postthumnails({ item, onClickDetailHandle }) {
           <b onClick={() => onClickDetailHandle(item)}>{item.postTitle}</b>
         </h4>
         <Nickname>
-          <span>{item.nickname}</span>
+          <span>{item.User.nickname}</span>
         </Nickname>
         <Meta>
           <Likes onClick={() => handleLike(item)} />
           {like}
           <Bar>\</Bar>
-          {item.musicList.length}곡
-        </Meta>
-        <Meta>
-          <Tagitem>{item.tags}</Tagitem>
+          {item.MusicData.length}곡
         </Meta>
       </Container>
     </Card>
