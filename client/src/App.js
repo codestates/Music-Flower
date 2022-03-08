@@ -15,8 +15,8 @@ import Editor from "./pages/Editor";
 function App() {
   // const [meetCode, setMeetCode] = useState(null);
 
-  const [isLogin, setIsLogin] = useState(false);
-  const [userinfo, setUserinfo] = useState(null);
+  const [isLogin, setIsLogin] = useState(false); // 로그인 했는지 확인
+  const [userinfo, setUserinfo] = useState(null); // 유저 정보 있는지 확인
   const history = useHistory();
   const [items, setItems] = useState([]);
   const [detailData, setDetailData] = useState({});
@@ -33,7 +33,7 @@ function App() {
         loadMainPage();
       });
   };
-  console.log(userinfo);
+  // console.log(userinfo);
   const handleMainPage = () => {
     history.push("/main");
   };
@@ -82,7 +82,7 @@ function App() {
         <Login handleResponseSuccess={handleResponseSuccess} />
       </Route>
       <Route path="/signup">
-        <Signup loginInfo={userinfo} />
+        <Signup />
       </Route>
       <Route path="/main">
         <Main

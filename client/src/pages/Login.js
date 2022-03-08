@@ -2,26 +2,22 @@ import axios from "axios";
 import React from "react";
 import "../css/Login.css";
 import { useState } from "react";
-import { Link } from "react-router-dom";
 // import spotifyAuth from "../auth/useSpotifyAuth";
-
 //const code = new URLSearchParams(window.location.search).get("code");
+import { Link } from "react-router-dom";
 
-export default function Login({ handleResponseSuccess, isLogin, setMeetCode }) {
-  // const accessToken = spotifyAuth(code);
-  // setMeetCode(accessToken);
-  // console.log("accessToken", accessToken);
+export default function Login({ handleResponseSuccess }) {
   const [loginInfo, setLoginInfo] = useState({
     email: "",
     password: "",
   });
+
+  // 이메일과 비밀번호 입력 핸들
   const handleInputValue = (key) => (e) => {
     setLoginInfo({ ...loginInfo, [key]: e.target.value });
   };
 
-  // console.log("현재 로그인 정보:", isLogin);
-
-  const handleGuest = () => {
+  const handleGuestLogin = () => {
     const url = "http://localhost:8080/login";
     axios
       .post(
@@ -34,12 +30,18 @@ export default function Login({ handleResponseSuccess, isLogin, setMeetCode }) {
           withCredentials: true,
         }
       )
-      .then((res) => handleResponseSuccess())
-      .catch((err) => alert("아이디 또는 비밀번호가 일치 하지않습니다."));
+      .then((res) => {
+        console.log("server login result: " + res);
+        handleResponseSuccess();
+      })
+      .catch((err) => {
+        console.log("게스트 로그인 에러:", err);
+        return alert("아이디 또는 비밀번호가 일치 하지않습니다.");
+      });
   };
 
   const handleLogin = () => {
-    if (!loginInfo.email && !loginInfo.password) {
+    if (!loginInfo.email || !loginInfo.password) {
       return alert("아이디와 비밀번호 모두 입력 하세요.");
     }
 
@@ -105,7 +107,7 @@ export default function Login({ handleResponseSuccess, isLogin, setMeetCode }) {
             <button className="Login-btn" onClick={handleLogin}>
               Login !
             </button>
-            <button className="Login-btn" onClick={handleGuest}>
+            <button className="Login-btn" onClick={handleGuestLogin}>
               Guest !
             </button>
           </form>

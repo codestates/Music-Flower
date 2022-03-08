@@ -10,7 +10,7 @@ module.exports = {
   //포스트와 연결된 userId의 nickname과
   //포스트와 연결된(Post-Post_MusicData-MusicData) MusicData의 정보도 가지고 옴
   findPost: async (req, res) => {
-    console.log(req);
+    // console.log("findPost req",req);
     // const postList = await Post.findAll({
     //   attributes: ["userId", "postTitle", "image", "postExplain", "createdAt"],
     // });
@@ -47,7 +47,7 @@ module.exports = {
         };
       });
       Post_MusicData.bulkCreate(bulkList);
-    })
+    });
 
     // queryInterface.bulkInsert("Post_MusicData", bulkList);
 
