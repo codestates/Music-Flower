@@ -19,7 +19,7 @@ module.exports = {
           attributes: ['nickname']
         },
         {
-          model: MusicData,
+          model: MusicData
         }]
       });
     res.status(200).json({ data: postList, message: "ok" });
@@ -28,10 +28,10 @@ module.exports = {
   //[post] post생성하기
   //Post에 레코드 생성
   //Post_musicData에 PostId에 해당하는 MusicDatumId를 새롭게 생성
-  createPost: async (req, res) => {
+  createPost: (req, res) => {
     const { userId, postTitle, image, postExplain, createdAt, musicList } =
       req.body;
-    const createdPost = await Post.create({
+    Post.create({
       userId: userId,
       postTitle: postTitle,
       image: image,
@@ -40,8 +40,10 @@ module.exports = {
     }).then((result) => {
       //musicList에는 배열로 MusicData의 id가 들어오도록 함
       //key값 관련해서 오류 있을 수 있음.
+      //postId
+      //{PostId: result.id, MusicDatumId:musicList 요소 하나하나}
       const bulkList = musicList.map((el) => {
-        result.id, el;
+        {result.id, el};
       });
       Post_MusicData.bulkcreate(bulkList);
     });
@@ -52,10 +54,10 @@ module.exports = {
   //db에 있는 해당 포스트 id 내용 수정 후
   //post_musicData에 있는 PostId 에 해당하는 데이터 삭제
   //post_musicData에 PostId에 해당하는 MusicDatumId를 새롭게 생성
-  updatePost: async (req, res) => {
+  updatePost: (req, res) => {
     const postId = req.params.id;
     const { postTitle, image, postExplain, musicList } = req.body;
-    await User.update(
+    User.update(
       { postTitle, image, postExplain },
       {
         where: {
@@ -66,13 +68,13 @@ module.exports = {
       .then(() => {
         Post_MusicData.destroy({
           where: {
-            id: postId,
+            PostId: postId,
           },
         });
       })
       .then(() => {
         const bulkList = musicList.map((el) => {
-          postId, el;
+          postId, el
         });
         Post_MusicData.bulkcreate(bulkList);
       });
@@ -83,9 +85,9 @@ module.exports = {
   //post 삭제
   //db에 있는 해당 포스트 id 삭제 후
   //Post_MusicData에 있는 PostId 에 해당하는 데이터 삭제
-  deletePost: async (req, res) => {
+  deletePost: (req, res) => {
     const postId = req.params.id;
-    await Post.destroy({
+    Post.destroy({
       where: {
         id: postId,
       },
