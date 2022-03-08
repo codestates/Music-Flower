@@ -13,7 +13,6 @@ module.exports = {
     res.cookie("jwt", accessToken, {
       domain: "localhost",
       path: "/",
-      httpOnly: true,
       secure: true,
       maxAge: 24 * 6 * 60 * 10000,
       sameSite: "none",
@@ -23,12 +22,13 @@ module.exports = {
   isAuthorized: (req) => {
     // token 말고
     // TODO: JWT 토큰 정보를 받아서 검증합니다.
-    const token = req.cookies.jwt;
+    // console.log("req", req.headers);
+    const token = req.headers.jwt;
     if (!token) {
       return null;
     }
     try {
-      return verify(token);
+      return verify(token, process.env.ACCESS_SECRET);
     } catch (err) {
       return null;
     }
