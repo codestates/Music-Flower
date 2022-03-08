@@ -3,20 +3,20 @@
 module.exports = {
   async up (queryInterface, Sequelize) {
     await queryInterface.bulkInsert('Post_MusicData', [{
-      postId: 1,
-      musicDatumId:1
+      PostId: 1,
+      MusicDatumId:1
     },
     {
-      postId: 1,
-      musicDatumId:2
+      PostId: 1,
+      MusicDatumId:2
     },
     {
-      postId: 2,
-      musicDatumId:3
+      PostId: 2,
+      MusicDatumId:3
     },
     {
-      postId: 3,
-      musicDatumId:4
+      PostId: 3,
+      MusicDatumId:4
     },
   ], {});
   },

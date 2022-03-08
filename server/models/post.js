@@ -12,10 +12,12 @@ module.exports = (sequelize, DataTypes) => {
 
       models.Post.hasMany(models.Like, {
         foreignKey: "postId",
+        onDelete: 'cascade',
         sourceKey: "id",
       });
       models.Post.hasMany(models.Comment, {
         foreignKey: "postId",
+        onDelete: 'cascade',
         sourceKey: "id",
       });
 
@@ -30,7 +32,7 @@ module.exports = (sequelize, DataTypes) => {
         { timestamps: false }
       );
       models.Post.belongsToMany(models.MusicData, {
-        through: "Post_MusicData",
+        through: Post_MusicData,
       });
 
       const Post_Hashtag = sequelize.define(
@@ -38,7 +40,7 @@ module.exports = (sequelize, DataTypes) => {
         {},
         { timestamps: false }
       );
-      models.Post.belongsToMany(models.Hashtag, { through: "Post_Hashtag" });
+      models.Post.belongsToMany(models.Hashtag, { through: Post_Hashtag });
     }
   }
   Post.init(
