@@ -3,7 +3,7 @@ const cors = require("cors");
 const app = express();
 const { sequelize } = require("./models");
 
-const { create, destroy } = require("./test");
+//const { create, destroy } = require("./test");
 
 const {
   logIn,
@@ -29,7 +29,7 @@ app.use(
   cors({
     origin: ["http://localhost:3000"],
     credentials: true,
-    methods: ["GET", "POST", "OPTIONS"],
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   })
 );
 app.use(express.json());
@@ -40,8 +40,8 @@ app.post("/logout", logOut);
 app.post("/signup", signUp);
 app.get("/userinfo", findUser);
 
-app.get("/test1", create);
-app.get("/test2", destroy);
+//app.get("/test1", create);
+//app.get("/test2", destroy);
 app.use("/post", postRouter);
 app.use("/spotify", spotifyRouter);
 //app.use("/musiclist", musicListRouter);
