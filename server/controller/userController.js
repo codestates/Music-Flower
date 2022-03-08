@@ -33,7 +33,7 @@ module.exports = {
   //User DB에서 사용자 정보 찾고 없으면 생성해서 accessToken을 쿠키(jwt)에 담아서 보내줌
   signUp: async (req, res) => {
     const { nickname, email, password } = req.body;
-    
+
     if (!nickname || !email || !password) {
       res.status(422).send("모든 항목을 입력해 주세요");
     }
@@ -45,7 +45,7 @@ module.exports = {
         password,
       },
     });
-    
+
     if (!created) {
       res.status(400).send("user is already exists");
     } else {
@@ -62,6 +62,7 @@ module.exports = {
   //[get]/userinfo
   //쿠키에 토큰을 가지고 있을 경우(jwt) 사용자 정보를 해독한 값 보내줌
   findUser: (req, res) => {
+    console.log("123", res.cookies);
     const accessTokenData = isAuthorized(req);
     if (!accessTokenData) {
       res.json({ data: null, message: "not authorized" });

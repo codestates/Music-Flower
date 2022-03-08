@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Postthumnails from "../components/Postthumnails";
-import { Switch, Route, useHistory, Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 const Mypage = styled.div`
   /* border: 1px solid red; */
   display: flex;
@@ -101,41 +101,11 @@ export default function MyPage({
   onClickDetailHandle,
   handleLogout,
   handleMainPage,
+  myItem,
 }) {
-  const userPosts = users.myposts;
+  const userPosts = myItem;
+  console.log("1", myItem);
 
-  if (users.myposts) {
-    return (
-      <Mypage>
-        <Header>
-          <Link to="/" className="nav-logo">
-            <img src={require("../images/logo.png")} width="220px" alt="logo" />
-          </Link>
-          <Menu>
-            <Nick>
-              <span>{users.nickname}</span>님의 마이페이지 입니다.
-            </Nick>
-            <MenuButton>
-              <button onClick={handleMainPage}>메인페이지</button>
-              <button onClick={handleLogout}>로그아웃</button>
-            </MenuButton>
-          </Menu>
-        </Header>
-        <div id="down">
-          {users.nickname}님의 뮤직
-          <div className="myPost">
-            {userPosts.map((item, idx) => (
-              <Postthumnails
-                item={item}
-                key={idx}
-                onClickDetailHandle={onClickDetailHandle}
-              />
-            ))}
-          </div>
-        </div>
-      </Mypage>
-    );
-  }
   return (
     <Mypage>
       <Header>
@@ -154,7 +124,19 @@ export default function MyPage({
       </Header>
       <div id="down">
         {users.nickname}님의 뮤직
-        <div className="myPost">작성한 포스트가 존재 하지않습니다.</div>
+        {userPosts.length !== 0 ? (
+          <div className="myPost">
+            {userPosts.map((item, idx) => (
+              <Postthumnails
+                item={item}
+                key={idx}
+                onClickDetailHandle={onClickDetailHandle}
+              />
+            ))}
+          </div>
+        ) : (
+          <div className="myPost">작성한 포스트가 존재 하지않습니다.</div>
+        )}
       </div>
     </Mypage>
   );

@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Switch, Route, useHistory } from "react-router-dom";
+import axios from "axios";
 import Landing from "./pages/Landing";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
@@ -7,37 +8,48 @@ import Main from "./pages/Main";
 import Mypage from "./pages/Mypage";
 import Detail from "./pages/Detail";
 import Editor from "./pages/Editor";
+import { allPosts } from "./pages/dummy/dummyitems";
 
 // import SpotifyAPP from "./components/SpotifyApp";
 
-import { allPosts } from "./pages/dummy/dummyitems";
-import { dummyuser } from "./pages/dummy/dummyUser";
+// import { allPosts } from "./pages/dummy/dummyitems";
+// import { dummyuser } from "./pages/dummy/dummyUser";
 function App() {
-  const [meetCode, setMeetCode] = useState(null);
+  // const [meetCode, setMeetCode] = useState(null);
   const [isLogin, setIsLogin] = useState(false);
   const [userinfo, setUserinfo] = useState(null);
   const history = useHistory();
+  const [items, setItems] = useState([]);
+  const [detailData, setDetailData] = useState({});
+  const [myItem, setMypageItem] = useState([]);
 
-  // axios.get("https://localhost:4000/auth").then((res) => {
-  //   console.log(res.data.data.userInfo);
-  //   setUserinfo(res.data.data.userInfo);
-  //   setIsLogin(!isLogin);
-  //   history.push("/mypage");
-  // });
+  const isAuthenticated = (token) => {
+    axios
+      .get("http://localhost:8080/userinfo", { headers: { jwt: token } })
+      .then((res) => {
+        setUserinfo(res.data.data.loginInfo);
+        setIsLogin(!isLogin);
+        history.push("/main");
+        loadMainPage();
+      });
+  };
+  console.log(userinfo);
   const handleMainPage = () => {
     history.push("/main");
   };
   const handleResponseSuccess = () => {
-    setIsLogin(!isLogin);
-    setUserinfo(dummyuser);
-    history.push("/main");
+    const jwt = document.cookie.split("=")[1];
+    console.log(jwt);
+    isAuthenticated(jwt);
   };
-  const [items, setItems] = useState(allPosts);
-  const [detailData, setDetailData] = useState({});
 
   const handleLogout = () => {
+    userLogout();
+  };
+  const userLogout = () => {
     setUserinfo(null);
     setIsLogin(false);
+    document.cookie = "jwt" + "=; expires=Thu, 01 Jan 1999 00:00:10 GMT;";
     history.push("/");
   };
   const onClickDetailHandle = (postData) => {
@@ -46,17 +58,27 @@ function App() {
     setDetailData(postData);
     history.push("/detail");
   };
-
+  const loadMainPage = () => {
+    axios
+      .get("http://localhost:8080/post")
+      .then((res) => setItems(res.data.data));
+  };
+  const loadMypage = () => {
+    if (items.length === 0) {
+      return;
+    } else {
+      const mypageItem = items.filter((item) => item.userId === userinfo.id);
+      setMypageItem(mypageItem);
+      console.log(myItem);
+    }
+  };
   return (
     <Switch>
       <Route exact path="/">
-        <Landing isLogin={isLogin} setMeetCode={setMeetCode} />
+        <Landing isLogin={isLogin} />
       </Route>
       <Route path="/login">
-        <Login
-          handleResponseSuccess={handleResponseSuccess}
-          setMeetCode={setMeetCode}
-        />
+        <Login handleResponseSuccess={handleResponseSuccess} />
       </Route>
       <Route path="/signup">
         <Signup loginInfo={userinfo} />
@@ -65,6 +87,7 @@ function App() {
         <Main
           items={items}
           users={userinfo}
+          loadMypage={loadMypage}
           setDetailData={setDetailData}
           handleLogout={handleLogout}
           onClickDetailHandle={onClickDetailHandle}
@@ -73,6 +96,7 @@ function App() {
       <Route path="/mypage">
         <Mypage
           users={userinfo}
+          myItem={myItem}
           onClickDetailHandle={onClickDetailHandle}
           handleLogout={handleLogout}
           handleMainPage={handleMainPage}
