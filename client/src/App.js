@@ -27,7 +27,7 @@ function App() {
     axios
       .get("http://localhost:8080/userinfo", { headers: { jwt: token } })
       .then((res) => {
-        console.log("res", res);
+        // console.log("res", res);s
         setUserinfo(res.data.data.loginInfo);
         setIsLogin(!isLogin);
         history.push("/main");

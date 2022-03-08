@@ -2,7 +2,6 @@
 const { User } = require("../models");
 const { Post } = require("../models");
 const { MusicData } = require("../models");
-const { Post_MusicData } = require("../models");
 
 module.exports = {
   //[get] 포스트 불러오기
@@ -39,18 +38,15 @@ module.exports = {
       postExplain: postExplain,
     }).then((result) => {
       //musicList에는 배열로 MusicData의 id가 들어오도록 함
-      //key값 관련해서 오류 있을 수 있음.
-      //postId
-      //{PostId: result.id, MusicDatumId:musicList 요소 하나하나}
       const bulkList = musicList.map((el) => {
         return {
-          postId: result.id,
-          musicDatumId: el,
+          PostId: result.id,
+          MusicDatumId: el,
         };
       });
-      console.log(Post_MusicData);
-      // Post_MusicData.bulkcreate(bulkList);
-    });
+      console.log(bulkList);
+      //Post_MusicData.bulkCreate(bulkList);
+    })
 
     // queryInterface.bulkInsert("Post_MusicData", bulkList);
 
@@ -81,9 +77,12 @@ module.exports = {
       })
       .then(() => {
         const bulkList = musicList.map((el) => {
-          postId, el;
+          return {
+            PostId: result.id,
+            MusicDatumId: el,
+          };
         });
-        Post_MusicData.bulkcreate(bulkList);
+        //Post_MusicData.bulkcreate(bulkList);
       });
     res.status(200).json("successfully updated your post");
   },

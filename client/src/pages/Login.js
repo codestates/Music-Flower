@@ -19,7 +19,7 @@ export default function Login({ handleResponseSuccess, isLogin, setMeetCode }) {
     setLoginInfo({ ...loginInfo, [key]: e.target.value });
   };
 
-  console.log("현재 로그인 정보:", isLogin);
+  // console.log("현재 로그인 정보:", isLogin);
 
   const handleGuest = () => {
     setLoginInfo(
@@ -49,8 +49,8 @@ export default function Login({ handleResponseSuccess, isLogin, setMeetCode }) {
         }
       )
       .then((res) => {
-        handleResponseSuccess();
         console.log("해당 유저 있음:", res.statusText);
+        // handleResponseSuccess();
       })
       .catch((err) => alert("아이디 또는 비밀번호가 일치 하지않습니다."));
   };

@@ -3,6 +3,8 @@ const cors = require("cors");
 const app = express();
 const { sequelize } = require("./models");
 
+const { create, destroy } = require("./test");
+
 const {
   logIn,
   logOut,
@@ -38,6 +40,8 @@ app.post("/logout", logOut);
 app.post("/signup", signUp);
 app.get("/userinfo", findUser);
 
+app.get("/test1", create);
+app.get("/test2", destroy);
 app.use("/post", postRouter);
 app.use("/spotify", spotifyRouter);
 //app.use("/musiclist", musicListRouter);
