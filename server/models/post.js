@@ -28,7 +28,7 @@ module.exports = (sequelize, DataTypes) => {
 
       const Post_MusicData = sequelize.define("Post_MusicData", {
         id: {
-           type:DataTypes.INTEGER,
+           type: DataTypes.INTEGER,
            primaryKey: true,
            autoIncrement: true,
            allowNull: false
@@ -55,8 +55,7 @@ module.exports = (sequelize, DataTypes) => {
         { timestamps: false })
 
       models.Post.belongsToMany(models.MusicData, {
-        through: Post_MusicData, onDelete: 'cascade', onUpdate: 'cascade'
-      });
+        through: Post_MusicData });
 
       const Post_Hashtag = sequelize.define(
         "Post_Hashtag",
