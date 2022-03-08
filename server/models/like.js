@@ -11,8 +11,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      models.Like.belongsTo(models.User, { foreignKey: 'userId', targetKey: 'id'});
-      models.Like.belongsTo(models.Post, { foreignKey: 'postId', targetKey: 'id'});
+      models.Like.belongsTo(models.User, { foreignKey: 'userId', onDelete: 'cascade', targetKey: 'id'});
+      models.Like.belongsTo(models.Post, { foreignKey: 'postId', onDelete: 'cascade', targetKey: 'id'});
     }
   }
   Like.init({
