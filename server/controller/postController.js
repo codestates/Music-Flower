@@ -2,6 +2,7 @@
 const { User } = require("../models");
 const { Post } = require("../models");
 const { MusicData } = require("../models");
+const { Post_MusicData } = require("../models");
 
 module.exports = {
   //[get] 포스트 불러오기
@@ -12,16 +13,17 @@ module.exports = {
     // const postList = await Post.findAll({
     //   attributes: ["userId", "postTitle", "image", "postExplain", "createdAt"],
     // });
-      const postList = await Post.findAll({
+    const postList = await Post.findAll({
       include: [
         {
           model: User,
-          attributes: ['nickname']
+          attributes: ["nickname"],
         },
         {
-          model: MusicData
-        }]
-      });
+          model: MusicData,
+        },
+      ],
+    });
     res.status(200).json({ data: postList, message: "ok" });
   },
 
@@ -29,24 +31,29 @@ module.exports = {
   //Post에 레코드 생성
   //Post_musicData에 PostId에 해당하는 MusicDatumId를 새롭게 생성
   createPost: (req, res) => {
-    const { userId, postTitle, image, postExplain, createdAt, musicList } =
-      req.body;
+    const { userId, postTitle, image, postExplain, musicList } = req.body;
     Post.create({
       userId: userId,
       postTitle: postTitle,
       image: image,
       postExplain: postExplain,
-      createdAt: createdAt,
     }).then((result) => {
       //musicList에는 배열로 MusicData의 id가 들어오도록 함
       //key값 관련해서 오류 있을 수 있음.
       //postId
       //{PostId: result.id, MusicDatumId:musicList 요소 하나하나}
       const bulkList = musicList.map((el) => {
-        {result.id, el};
+        return {
+          postId: result.id,
+          musicDatumId: el,
+        };
       });
-      Post_MusicData.bulkcreate(bulkList);
+      console.log(Post_MusicData);
+      // Post_MusicData.bulkcreate(bulkList);
     });
+
+    // queryInterface.bulkInsert("Post_MusicData", bulkList);
+
     res.status(201).json("successfully created your post");
   },
   //[put]/:id 는 postId로 요청할 것
@@ -74,7 +81,7 @@ module.exports = {
       })
       .then(() => {
         const bulkList = musicList.map((el) => {
-          postId, el
+          postId, el;
         });
         Post_MusicData.bulkcreate(bulkList);
       });
