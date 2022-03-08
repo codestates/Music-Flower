@@ -1,6 +1,6 @@
 // myPosts는 sql로 유저와 nickname 같은 포스트 들을 긁음
 
-export const dummyuser = {
+const dummyuser = {
   email: "test@naver.com",
   password: "test",
   nickname: "손코딩",

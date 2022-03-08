@@ -1,3 +1,6 @@
+// import SpotifyAPP from "./components/SpotifyApp";
+// import { allPosts } from "./pages/dummy/dummyitems";
+// import { dummyuser } from "./pages/dummy/dummyUser";
 import React, { useState } from "react";
 import { Switch, Route, useHistory } from "react-router-dom";
 import axios from "axios";
@@ -8,14 +11,10 @@ import Main from "./pages/Main";
 import Mypage from "./pages/Mypage";
 import Detail from "./pages/Detail";
 import Editor from "./pages/Editor";
-import { allPosts } from "./pages/dummy/dummyitems";
 
-// import SpotifyAPP from "./components/SpotifyApp";
-
-// import { allPosts } from "./pages/dummy/dummyitems";
-// import { dummyuser } from "./pages/dummy/dummyUser";
 function App() {
   // const [meetCode, setMeetCode] = useState(null);
+
   const [isLogin, setIsLogin] = useState(false);
   const [userinfo, setUserinfo] = useState(null);
   const history = useHistory();
@@ -27,7 +26,7 @@ function App() {
     axios
       .get("http://localhost:8080/userinfo", { headers: { jwt: token } })
       .then((res) => {
-        // console.log("res", res);s
+        console.log("데이터", res);
         setUserinfo(res.data.data.loginInfo);
         setIsLogin(!isLogin);
         history.push("/main");

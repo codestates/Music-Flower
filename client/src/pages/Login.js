@@ -22,13 +22,20 @@ export default function Login({ handleResponseSuccess, isLogin, setMeetCode }) {
   // console.log("현재 로그인 정보:", isLogin);
 
   const handleGuest = () => {
-    setLoginInfo(
-      {
-        email: "test@naver.com",
-        password: "password",
-      },
-      handleResponseSuccess()
-    );
+    const url = "http://localhost:8080/login";
+    axios
+      .post(
+        url,
+        {
+          email: "test@naver.com",
+          password: "test",
+        },
+        {
+          withCredentials: true,
+        }
+      )
+      .then((res) => handleResponseSuccess())
+      .catch((err) => alert("아이디 또는 비밀번호가 일치 하지않습니다."));
   };
 
   const handleLogin = () => {
@@ -49,8 +56,8 @@ export default function Login({ handleResponseSuccess, isLogin, setMeetCode }) {
         }
       )
       .then((res) => {
-        console.log("해당 유저 있음:", res.statusText);
-        // handleResponseSuccess();
+        // console.log("해당 유저 있음:", res.statusText);
+        handleResponseSuccess();
       })
       .catch((err) => alert("아이디 또는 비밀번호가 일치 하지않습니다."));
   };

@@ -48,13 +48,14 @@ const SerchArea = styled.div`
   /* padding: 10px; */
 
   margin-bottom: 1rem;
-  margin-left: 10rem;
-  margin-right: 10rem;
+  margin-left: 5rem;
+  margin-right: 7rem;
   display: flex;
   align-items: center;
   flex: 0 0 auto;
   flex-direction: row;
   justify-content: center;
+
   > #select_bar {
     /* border: 1px solid red; */
     /* padding: 10px; */
