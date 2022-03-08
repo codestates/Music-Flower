@@ -3,8 +3,14 @@ import React from "react";
 import "../css/Login.css";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+// import spotifyAuth from "../auth/useSpotifyAuth";
 
-export default function Login({ handleResponseSuccess, isLogin }) {
+//const code = new URLSearchParams(window.location.search).get("code");
+
+export default function Login({ handleResponseSuccess, isLogin, setMeetCode }) {
+  // const accessToken = spotifyAuth(code);
+  // setMeetCode(accessToken);
+  // console.log("accessToken", accessToken);
   const [loginInfo, setLoginInfo] = useState({
     email: "",
     password: "",
@@ -14,7 +20,6 @@ export default function Login({ handleResponseSuccess, isLogin }) {
   };
 
   console.log("this", isLogin);
-  const [errorMessage, setErrorMessage] = useState("");
 
   const handleGuest = () => {
     setLoginInfo(
@@ -28,8 +33,7 @@ export default function Login({ handleResponseSuccess, isLogin }) {
 
   const handleLogin = () => {
     if (!loginInfo.email && !loginInfo.password) {
-      setErrorMessage("이메일과 비밀번호를 입력하세요");
-      return alert(errorMessage);
+      return alert("아이디와 비밀번호 모두 입력 하세요.");
     }
     // } else if (
     //   loginInfo.email !== userDatas.email &&
@@ -38,14 +42,20 @@ export default function Login({ handleResponseSuccess, isLogin }) {
     //   setErrorMessage("아이디 또는 비밀번호 가 다릅니다");
     //   return alert(errorMessage);
     // }
-    const url = "http://localhost:8080/user/login";
+    const url = "http://localhost:8080/login";
     axios
-      .post(url, {
-        email: loginInfo.email,
-        password: loginInfo.password,
-      })
+      .post(
+        url,
+        {
+          email: loginInfo.email,
+          password: loginInfo.password,
+        },
+        {
+          withCredentials: true,
+        }
+      )
       .then((res) => handleResponseSuccess())
-      .catch((err) => console.log(err));
+      .catch((err) => alert("아이디 또는 비밀번호가 일치 하지않습니다."));
   };
 
   return (

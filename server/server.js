@@ -3,9 +3,16 @@ const cors = require("cors");
 const app = express();
 const { sequelize } = require("./models");
 
-const userRouter = require("./router/userRouter");
+const {
+  logIn,
+  logOut,
+  signUp,
+  findUser,
+} = require("./controller/userController");
+
 const postRouter = require("./router/postRouter");
 const spotifyRouter = require("./router/spotifyRouter");
+//const musicListRouter = require("./test/musicListRouter");
 
 sequelize
   .sync({ force: false })
@@ -16,12 +23,24 @@ sequelize
     console.error(err);
   });
 
-app.use(cors());
+app.use(
+  cors({
+    origin: ["http://localhost:3000"],
+    credentials: true,
+    methods: ["GET", "POST", "OPTIONS"],
+  })
+);
 app.use(express.json());
+app.use(express.urlencoded({extended: false}));
 
-app.use("/user", userRouter);
+app.post("/login", logIn);
+app.post("/logout", logOut);
+app.post("/signup", signUp);
+app.get("/userinfo", findUser);
+
 app.use("/post", postRouter);
 app.use("/spotify", spotifyRouter);
+//app.use("/musiclist", musicListRouter);
 
 app.get("/", (req, res) => {
   res.status(200).send("Beautiful Music Flower");

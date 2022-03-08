@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
-import { dummyMusics } from "../dummy/dummyMusic";
+import { allPosts } from "../dummy/dummyitems";
 
 const boxShadow = "0 4px 6px rgb(32 33 36 / 28%)";
 const activeBorderRadius = "1rem 1rem 0 0";
 const inactiveBorderRadius = "1rem 1rem 1rem 1rem";
 
 export const InputContainer = styled.div`
+  /* margin-top: 8rem; */
   background-color: #ffffff;
   display: flex;
   flex-direction: row;
@@ -15,10 +16,11 @@ export const InputContainer = styled.div`
   border-radius: ${(props) =>
     props.hasText ? activeBorderRadius : inactiveBorderRadius};
   z-index: 3;
-  box-shadow: ${(props) => (props.hasText ? boxShadow : 0)};
+  /* box-shadow: ${(props) => (props.hasText ? boxShadow : 0)}; */
 
   &:focus-within {
-    box-shadow: ${boxShadow};
+    // 선택시 그림자
+    /* box-shadow: ${boxShadow}; */
   }
 
   > input {
@@ -38,20 +40,19 @@ export const InputContainer = styled.div`
 
 export const DropDownContainer = styled.ul`
   background-color: #ffffff;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  list-style-type: none;
-  margin-block-start: 0;
+  /* display: block; */
+  /* list-style-type: none; */
+  /* margin-block-start: 0;
   margin-block-end: 0;
   margin-inline-start: 0px;
   margin-inline-end: 0px;
-  padding-inline-start: 0px;
+  padding-inline-start: 0px; */
+  width: 5rem;
   margin-top: -1px;
   padding: 0.5rem 0;
   border: 1px solid rgb(223, 225, 229);
   border-radius: 0 0 1rem 1rem;
-  box-shadow: ${boxShadow};
+  /* box-shadow: ${boxShadow}; */
   z-index: 3;
 
   > li {
@@ -67,11 +68,12 @@ export const DropDownContainer = styled.ul`
   }
 `;
 
-export const MusicSelector = () => {
+export const Autocomplete = ({ items, setItems }) => {
   const [hasText, setHasText] = useState(false);
   const [inputValue, setInputValue] = useState("");
-  const [options, setOptions] = useState(dummyMusics);
+  const [options, setOptions] = [items, setItems];
   const [selected, setSelected] = useState(-1);
+  // console.log("valu", inputValue);
 
   useEffect(() => {
     if (inputValue === "") {
@@ -91,17 +93,17 @@ export const MusicSelector = () => {
 
     // dropdown을 위한 기능
     const filterRegex = new RegExp(value, "i");
-    const resultOptions = dummyMusics.filter(
-      (option) =>
-        option.songName.match(filterRegex) || option.artist.match(filterRegex)
+    const resultOptions = allPosts.filter((option) =>
+      option.postTitle.match(filterRegex)
     );
     setOptions(resultOptions);
   };
 
+  // option은 객체
   const handleDropDownClick = (clickedOption) => {
-    setInputValue(clickedOption);
-    const resultOptions = dummyMusics.filter(
-      (option) => option.songName === clickedOption.songName
+    setInputValue(clickedOption.postTitle);
+    const resultOptions = allPosts.filter(
+      (option) => option.postTitle === clickedOption.postTitle
     );
     setOptions(resultOptions);
   };
@@ -175,19 +177,7 @@ export const DropDown = ({ options, handleDropDownClick, selected }) => {
           onClick={() => handleDropDownClick(option)}
           className={selected === idx ? "selected" : ""}
         >
-          <div className="serchMusicText">
-            <img
-              src={option.albumImageUrl}
-              style={{ height: "64px", width: "64px" }}
-            />
-            <span> // </span>
-            <span>{option.songName}</span>
-            <span> // </span>
-            <span className="serchArtist">{option.artist}</span>
-            <div>
-              <br></br>
-            </div>
-          </div>
+          {option.postTitle}
         </li>
       ))}
     </DropDownContainer>

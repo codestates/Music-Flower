@@ -1,13 +1,14 @@
 import React from "react";
 import styled from "styled-components";
-
+import { Link } from "react-router-dom";
 const Detailbody = styled.div`
   border: 1px solid red;
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  height: 96vh;
-  width: auto;
+  /* padding: 200px; */
+  margin: 0 auto;
+  padding: 0 20px;
+  max-width: 1080px;
+  max-height: 1980px;
+
   > div {
     border: 1px solid red;
     padding: 10px;
@@ -27,7 +28,9 @@ const Detailbody = styled.div`
       flex: 2 0 auto;
       > div {
         margin: 10px;
-        background-color: rgba(100, 255, 200, 100);
+        > h4 {
+          color: #a14efc;
+        }
       }
     }
   }
@@ -35,11 +38,16 @@ const Detailbody = styled.div`
     display: flex;
     flex: 3 0 auto;
     flex-direction: column;
+    > text {
+      margin-left: 9px;
+    }
     > #postIntro {
       display: flex;
       flex: 1 0 auto;
       > textarea {
         width: 100vw;
+      }
+      > div {
       }
     }
     > #musicList {
@@ -52,39 +60,112 @@ const Detailbody = styled.div`
     }
   }
 `;
+const Header = styled.div`
+  /* border: 1px solid red; */
+  /* padding: 10px; */
 
-export default function Detail({ detailData }) {
-  console.log("디테일 컴포넌트 정보: ", detailData);
+  display: flex;
+  margin-bottom: 2rem;
+  left: 0px;
+  top: 0;
+  border-bottom: 1px solid #d1d4d9;
+  position: sticky;
+  background-color: rgba(255, 255, 255, 0.96);
+  > div {
+    /* border: 1px solid red; */
+    /* padding: 10px; */
+    flex: 1 0 auto;
+  }
+`;
+const Menu = styled.div`
+  /* border: 1px solid red; */
+  /* padding: 10px; */
+
+  display: flex;
+  flex: 4 0 auto;
+`;
+const Nick = styled.div`
+  /* //border: 1px solid red; */
+  /* padding: 10px; */
+  text-align: center;
+  margin-top: 20px;
+  flex: 3 0 auto;
+  > span {
+    color: #a14efc;
+  }
+`;
+const MenuButton = styled.div`
+  // border: 1px solid red;
+  /* padding: 10px; */
+  margin-top: 10px;
+  display: flex;
+  width: 220px;
+  > button {
+    //border: 1px solid red;
+    /* padding: 10px; */
+    border: 0;
+    background-color: white;
+    cursor: pointer;
+    margin: 10px;
+    margin-top: 0px;
+    height: 40px;
+    font-size: 16px;
+  }
+  > button:hover {
+    color: #a14efc;
+  }
+`;
+
+export default function Detail({
+  detailData,
+  handleMainPage,
+  users,
+  handleLogout,
+}) {
+  // console.log("디테일 컴포넌트 정보: ", detailData);
   return (
     <div id="detailPage">
+      <Header>
+        <Link to="/" className="nav-logo">
+          <img src={require("../images/logo.png")} width="220px" alt="logo" />
+        </Link>
+        <Menu>
+          <Nick>
+            <span>{users.nickname}</span>님 안녕하세요.
+          </Nick>
+          <MenuButton>
+            <button onClick={handleMainPage}>메인페이지</button>
+            <button onClick={handleLogout}>로그아웃</button>
+          </MenuButton>
+        </Menu>
+      </Header>
       <Detailbody>
         <div id="up">
-          <div id="postImg">
-            <img src={detailData.imageUrl} width="200vw" />
-          </div>
           <div id="postInfo">
-            post 정보
             <div>
-              <text>포스트제목 : {detailData.postTitle}</text>
+              <h1>{detailData.postTitle}</h1>
             </div>
             <div>
-              <text>유저 닉네임 : {detailData.nickname}</text>
+              <h4>{detailData.nickname}</h4>
             </div>
             <div>
-              <text>
+              {/* <text>
                 테그 :
                 {detailData.tags.map((e) => {
                   return <span>{e}, </span>;
                 })}
-              </text>
+              </text> */}
             </div>
+          </div>
+          <div id="postImg">
+            <img src={detailData.imageUrl} width="200vw" />
           </div>
         </div>
         <div id="down">
+          <text>소개글</text>
           <div id="postIntro">
-            <textarea>{detailData.postExplain}</textarea>
+            <text>{detailData.postExplain}</text>
           </div>
-
           <div id="musicList">
             음악 리스트
             {detailData.musicList.map((e) => {
