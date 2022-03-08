@@ -27,7 +27,7 @@ function App() {
     axios
       .get("http://localhost:8080/userinfo", { headers: { jwt: token } })
       .then((res) => {
-        console.log("받아온 데이타:", res);
+        console.log("res", res);
         setUserinfo(res.data.data.loginInfo);
         setIsLogin(!isLogin);
         history.push("/main");
@@ -39,8 +39,9 @@ function App() {
     history.push("/main");
   };
   const handleResponseSuccess = () => {
-    const jwt = document.cookie.split("=")[1];
-    console.log("jwt:", jwt);
+    console.log("cookie", document.cookie);
+    const jwt = document.cookie.split("jwt=")[1];
+    console.log(jwt);
     isAuthenticated(jwt);
   };
 

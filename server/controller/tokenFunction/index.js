@@ -22,8 +22,8 @@ module.exports = {
   isAuthorized: (req) => {
     // token 말고
     // TODO: JWT 토큰 정보를 받아서 검증합니다.
-    console.log("req", req.headers);
     const token = req.headers.jwt;
+    console.log("token:", token);
     if (!token) {
       return null;
     }
