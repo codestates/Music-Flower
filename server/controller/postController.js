@@ -2,6 +2,8 @@
 const { User } = require("../models");
 const { Post } = require("../models");
 const { MusicData } = require("../models");
+const db = require("../models");
+const Post_MusicData = db.sequelize.models.Post_MusicData;
 
 module.exports = {
   //[get] 포스트 불러오기
@@ -44,8 +46,7 @@ module.exports = {
           MusicDatumId: el,
         };
       });
-      console.log(bulkList);
-      //Post_MusicData.bulkCreate(bulkList);
+      Post_MusicData.bulkCreate(bulkList);
     })
 
     // queryInterface.bulkInsert("Post_MusicData", bulkList);
@@ -60,7 +61,7 @@ module.exports = {
   updatePost: (req, res) => {
     const postId = req.params.id;
     const { postTitle, image, postExplain, musicList } = req.body;
-    User.update(
+    Post.update(
       { postTitle, image, postExplain },
       {
         where: {
@@ -82,7 +83,7 @@ module.exports = {
             MusicDatumId: el,
           };
         });
-        //Post_MusicData.bulkcreate(bulkList);
+        Post_MusicData.bulkcreate(bulkList);
       });
     res.status(200).json("successfully updated your post");
   },
