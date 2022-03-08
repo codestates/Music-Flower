@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Postthumnails from "../components/Postthumnails";
 import { Autocomplete } from "../pages/UI_components/Autocomplete";
-import { Switch, Route, useHistory, Link, Redirect } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import axios from "axios";
 // import { AUTH_URL } from "../components/SpotifyC";
 // const cId = spotifyC;
@@ -158,8 +158,10 @@ export default function Main({
   setDetailData,
   handleLogout,
   onClickDetailHandle,
+  loadMypage,
 }) {
   const onClickMyPageHandle = () => {
+    loadMypage();
     history.push("/mypage");
   };
   const onClickEditorHandle = () => {
@@ -167,8 +169,6 @@ export default function Main({
   };
 
   const history = useHistory();
-
-  axios.get("http://localhost:8080/post").then((res) => console.log(res));
 
   return (
     <div id="mainPage">
