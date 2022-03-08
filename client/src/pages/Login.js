@@ -20,13 +20,20 @@ export default function Login({ handleResponseSuccess, isLogin, setMeetCode }) {
   };
 
   const handleGuest = () => {
-    setLoginInfo(
-      {
-        email: "test@naver.com",
-        password: "password",
-      },
-      handleResponseSuccess()
-    );
+    const url = "http://localhost:8080/login";
+    axios
+      .post(
+        url,
+        {
+          email: "test@naver.com",
+          password: "test",
+        },
+        {
+          withCredentials: true,
+        }
+      )
+      .then((res) => handleResponseSuccess())
+      .catch((err) => alert("아이디 또는 비밀번호가 일치 하지않습니다."));
   };
 
   const handleLogin = () => {

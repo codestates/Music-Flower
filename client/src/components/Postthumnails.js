@@ -83,21 +83,9 @@ const Bar = styled.i`
   width: 14px;
   height: 12px;
 `;
-const Tagitem = styled.button`
-  border: none;
-  display: inline-block;
-  padding: auto;
-  border-radius: 15px;
-  font-family: "paybooc-Light", sans-serif;
-  box-shadow: 0 5px 35px rgba(0, 0, 0, 0.2);
-  font-weight: 800;
-  transition: 0.25s;
-  background-color: aliceblue;
-  color: #1e6b7b;
-`;
 
 export default function Postthumnails({ item, onClickDetailHandle }) {
-  console.log(item.totalLike);
+  console.log(item);
 
   const [like, setLike] = useState(item.totalLike);
 
