@@ -30,19 +30,17 @@ module.exports = {
 
   findUserPost: async (req, res) => {
     const userId = req.params.id;
-    const userPostList = await Post.findAll(
-      {
-        where: {
-          userId: userId,
+    const userPostList = await Post.findAll({
+      where: {
+        userId: userId,
+      },
+      include: [
+        {
+          model: MusicData,
         },
-        include: [
-          {
-            model: MusicData,
-          }
-        ]
-      }
-    );
-    res.status(200).json({data: userPostList, message: "ok"});
+      ],
+    });
+    res.status(200).json({ data: userPostList, message: "ok" });
   },
 
   //[post] post생성하기
@@ -64,7 +62,7 @@ module.exports = {
         };
       });
       Post_MusicData.bulkCreate(bulkList);
-    })
+    });
 
     // queryInterface.bulkInsert("Post_MusicData", bulkList);
 
