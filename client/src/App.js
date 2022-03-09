@@ -13,16 +13,23 @@ import Detail from "./pages/Detail";
 import Editor from "./pages/Editor";
 
 function App() {
-  const [userinfo, setUserinfo] = useState(null);
   const history = useHistory();
+  const [userinfo, setUserinfo] = useState(null);
   const [items, setItems] = useState([]);
   const [detailData, setDetailData] = useState({});
   const [myItem, setMypageItem] = useState([]);
   const [musicdata, setMusicData] = useState([]);
   const [isRemake, setIsRemake] = useState(false);
 
-  // let serverURL = "http://ec2-3-35-27-251.ap-northeast-2.compute.amazonaws.com";
-  let serverURL = "http://localhost:8080";
+  // editor state
+  const [image, setPostPoto] = useState("");
+  const [postTitle, setPostTitle] = useState("");
+  const [postExplain, setPostintro] = useState("");
+  const [musicList, setMusicList] = useState([]);
+
+  let serverURL = "http://ec2-3-35-27-251.ap-northeast-2.compute.amazonaws.com";
+  // let serverURL = "http://localhost:8080";
+
   const isAuthenticated = (token) => {
     axios
       .get(`${serverURL}/userinfo`, {
@@ -138,6 +145,10 @@ function App() {
           handleLogout={handleLogout}
           setIsRemake={setIsRemake}
           handleMusicData={handleMusicData}
+          setPostPoto={setPostPoto}
+          setPostTitle={setPostTitle}
+          setPostintro={setPostintro}
+          setMusicList={setMusicList}
           serverURL={serverURL}
         ></Detail>
       </Route>
@@ -150,6 +161,14 @@ function App() {
           handleLogout={handleLogout}
           detailData={detailData}
           isRemake={isRemake}
+          image={image}
+          setPostPoto={setPostPoto}
+          postTitle={postTitle}
+          setPostTitle={setPostTitle}
+          postExplain={postExplain}
+          setPostintro={setPostintro}
+          musicList={musicList}
+          setMusicList={setMusicList}
           serverURL={serverURL}
         ></Editor>
       </Route>

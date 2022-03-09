@@ -155,6 +155,10 @@ export default function Detail({
   handleLogout,
   setIsRemake,
   handleMusicData,
+  setPostPoto,
+  setPostTitle,
+  setPostintro,
+  setMusicList,
   serverURL,
 }) {
   const history = useHistory();
@@ -167,6 +171,11 @@ export default function Detail({
   };
   const handleEdit = () => {
     setIsRemake(true);
+    setPostPoto(detailData.image);
+    setPostTitle(detailData.postTitle);
+    setPostintro(detailData.postExplain);
+    setMusicList(detailData.MusicData);
+
     handleMusicData();
     history.push("/editor");
   };
