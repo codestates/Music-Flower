@@ -67,7 +67,7 @@ export const DropDownContainer = styled.ul`
 `;
 
 export const Autocomplete = ({ items, setshowPosts }) => {
-  // console.log("items", items);
+  console.log("items", items);
   const [hasText, setHasText] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const [options, setOptions] = useState(items);

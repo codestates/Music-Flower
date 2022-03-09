@@ -1,12 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Postthumnails from "../components/Postthumnails";
 import { Autocomplete } from "../pages/UI_components/Autocomplete";
 import { useHistory, Link } from "react-router-dom";
 import axios from "axios";
-// import { AUTH_URL } from "../components/SpotifyC";
-// const cId = spotifyC;
-// const AUTH_URL = `https://accounts.spotify.com/authorize?client_id=${cId}&response_type=code&redirect_uri=http://localhost:3000/editor&scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20user-read-playback-state%20user-modify-playback-state`;
 
 const MainPage = styled.div`
   /* border: 1px solid red; */
@@ -162,7 +159,10 @@ export default function Main({
   onClickDetailHandle,
   loadMypage,
 }) {
-  const [showPosts, setshowPosts] = useState([]);
+  const [showPosts, setshowPosts] = useState(items);
+  useEffect(() => {
+    setshowPosts(items);
+  }, [items]);
 
   const onClickMyPageHandle = () => {
     loadMypage();
