@@ -150,6 +150,7 @@ export default function Editor({
   loadMypage,
   detailData,
   isRemake,
+  serverURL,
 }) {
   // console.log("initData:", initData);
   const [image, setPostPoto] = useState("");
@@ -158,43 +159,32 @@ export default function Editor({
   const [musicList, setMusicList] = useState([]);
 
   console.log("수정하기 버튼으로옴?:", isRemake);
-  // let initData;
-  // if (isRemake) {
-  //   initData = {
-  //     img: detailData.image,
-  //     pTitle: detailData.postTitle,
-  //     pExplain: detailData.postExpain,
-  //     mData: detailData.MusicData,
-  //   };
-  // setPostPoto(detailData.image);
-  // setPostTitle(detailData.postTitle);
-  // setPostintro(detailData.postExpain);
-  // setMusicList(detailData.MusicData);
-  // } else {
-  //   initData = {
-  //     img: "",
-  //     pTitle: "",
-  //     pExplain: "",
-  //     mData: [],
-  //   };
-  // }
+  console.log("edit-detailData:", detailData);
+
+  if (isRemake) {
+    //이렇게는 작동 안됨 ㅜㅜ
+    console.log("수정하기 버틍으로오면 작동");
+  }
+
   const submitHandle = () => {
     let musiclistid = musicList.map((el) => el.id);
-    let postData = {
-      userId: users.id,
-      image,
-      postTitle,
-      postExplain,
-      musicList: musiclistid,
-    };
+
     if (!image && !postTitle && !postExplain) {
       return alert("내용을 모두 작성해주세요");
     } else if (musicList.length === 0) {
       return alert("음악을 추가해 주세요");
     } else {
+      const remakeData = {
+        userId: users.id,
+        image,
+        postTitle,
+        postExplain,
+        musicList: musiclistid,
+      };
+      console.log("remakeData", remakeData);
       axios
         .post(
-          "http://ec2-3-35-27-251.ap-northeast-2.compute.amazonaws.com/post",
+          `${serverURL}/post`,
           {
             userId: users.id,
             image,
@@ -210,21 +200,16 @@ export default function Editor({
   };
   const remakeHandle = () => {
     let musiclistid = musicList.map((el) => el.id);
-    let postData = {
-      userId: users.id,
-      image,
-      postTitle,
-      postExplain,
-      musicList: musiclistid,
-    };
-    if (!image && !postTitle && !postExplain) {
-      return alert("내용을 모두 작성해주세요");
+    if (!postTitle && !postExplain) {
+      setPostTitle(detailData.postTitle);
+      setPostintro(detailData.postExplain);
+      return alert("내용을 수정해주세요");
     } else if (musicList.length === 0) {
       return alert("음악을 추가해 주세요");
     } else {
       axios
         .put(
-          `http://ec2-3-35-27-251.ap-northeast-2.compute.amazonaws.com/${detailData.id}`,
+          `${serverURL}/post/${detailData.id}`,
           {
             userId: users.id,
             image,
@@ -246,7 +231,6 @@ export default function Editor({
     // console.log("Inro", e.target.value);
     setPostintro(e.target.value);
   };
-  console.log("edit-detailData:", detailData);
 
   return (
     <div id="editorPage">
@@ -281,7 +265,7 @@ export default function Editor({
               <input
                 type="text"
                 id="textInput"
-                value={detailData.postTitle}
+                value={postTitle || detailData.postTitle}
                 onChange={postTitleChageHandle}
               ></input>
             ) : (
@@ -300,7 +284,7 @@ export default function Editor({
               <input
                 type="textarea"
                 id="textInput"
-                value={detailData.postExplain}
+                value={postExplain || detailData.postExplain}
                 onChange={postInroChageHandle}
               ></input>
             ) : (
@@ -310,11 +294,6 @@ export default function Editor({
                 onChange={postInroChageHandle}
               ></input>
             )}
-            <input
-              type="textarea"
-              id="textInput"
-              onChange={postInroChageHandle}
-            ></input>
           </div>
 
           <div id="musicList">

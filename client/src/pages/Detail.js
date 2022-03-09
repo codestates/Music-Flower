@@ -155,15 +155,14 @@ export default function Detail({
   handleLogout,
   setIsRemake,
   handleMusicData,
+  serverURL,
 }) {
   const history = useHistory();
 
   console.log("디테일 컴포넌트 정보: ", detailData);
   const handleDelete = () => {
     axios
-      .delete(
-        `http://ec2-3-35-27-251.ap-northeast-2.compute.amazonaws.com/post/${detailData.id}`
-      )
+      .delete(`${serverURL}/post/${detailData.id}`)
       .then(() => handleMainPage());
   };
   const handleEdit = () => {
