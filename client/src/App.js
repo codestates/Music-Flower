@@ -19,12 +19,16 @@ function App() {
   const [detailData, setDetailData] = useState({});
   const [myItem, setMypageItem] = useState([]);
   const [musicdata, setMusicData] = useState([]);
+  const [isRemake, setIsRemake] = useState(false);
 
   const isAuthenticated = (token) => {
     axios
-      .get("http://ec2-3-35-27-251.ap-northeast-2.compute.amazonaws.com/userinfo", {
-        headers: { jwt: token },
-      })
+      .get(
+        "http://ec2-3-35-27-251.ap-northeast-2.compute.amazonaws.com/userinfo",
+        {
+          headers: { jwt: token },
+        }
+      )
       .then((res) => {
         setUserinfo(res.data.data.loginInfo);
         // setIsLogin(!isLogin);
@@ -35,7 +39,15 @@ function App() {
     axios
       .get("http://ec2-3-35-27-251.ap-northeast-2.compute.amazonaws.com/post")
       .then((res) => setItems(res.data.data));
-    history.push("/main");
+    // history.push("/main");
+
+    setTimeout(
+      () =>
+        (() => {
+          history.push("/main");
+        })(),
+      300
+    );
   };
   const handleResponseSuccess = () => {
     console.log("cookie", document.cookie);
@@ -61,20 +73,31 @@ function App() {
   };
 
   const loadMypage = () => {
-    setTimeout(() => load(), 300);
+    setTimeout(
+      () =>
+        (() => {
+          axios
+            .get(
+              `http://ec2-3-35-27-251.ap-northeast-2.compute.amazonaws.com/post/${userinfo.id}`
+            )
+            .then((res) => setMypageItem(res.data.data));
+          history.push("/mypage");
+        })(),
+      300
+    );
   };
-  const load = () => {
-    axios
-      .get(
-        `http://ec2-3-35-27-251.ap-northeast-2.compute.amazonaws.com/post/${userinfo.id}`
-      )
-      .then((res) => setMypageItem(res.data.data));
-    history.push("/mypage");
-  };
+  // const load = () => {
+  //   axios
+  //     .get(`http://localhost:8080/post/${userinfo.id}`)
+  //     .then((res) => setMypageItem(res.data.data));
+  //   history.push("/mypage");
+  // };
 
   const handleMusicData = () => {
     axios
-      .get("http://ec2-3-35-27-251.ap-northeast-2.compute.amazonaws.com/musiclist")
+      .get(
+        "http://ec2-3-35-27-251.ap-northeast-2.compute.amazonaws.com/musiclist"
+      )
       .then((res) => setMusicData(res.data.data));
     history.push("/editor");
   };
@@ -85,7 +108,10 @@ function App() {
         <Landing userinfo={userinfo} />
       </Route>
       <Route path="/login">
-        <Login handleResponseSuccess={handleResponseSuccess} />
+        <Login
+          handleResponseSuccess={handleResponseSuccess}
+          loadMypage={loadMypage}
+        />
       </Route>
       <Route path="/signup">
         <Signup />
@@ -99,6 +125,7 @@ function App() {
           handleLogout={handleLogout}
           onClickDetailHandle={onClickDetailHandle}
           handleMusicData={handleMusicData}
+          setIsRemake={setIsRemake}
         ></Main>
       </Route>
       <Route path="/mypage">
@@ -116,6 +143,8 @@ function App() {
           detailData={detailData}
           handleMainPage={handleMainPage}
           handleLogout={handleLogout}
+          setIsRemake={setIsRemake}
+          handleMusicData={handleMusicData}
         ></Detail>
       </Route>
       <Route path="/editor">
@@ -125,6 +154,8 @@ function App() {
           handleMainPage={handleMainPage}
           loadMypage={loadMypage}
           handleLogout={handleLogout}
+          detailData={detailData}
+          isRemake={isRemake}
         ></Editor>
       </Route>
     </Switch>

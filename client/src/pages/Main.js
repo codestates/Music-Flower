@@ -161,6 +161,7 @@ export default function Main({
   handleLogout,
   onClickDetailHandle,
   loadMypage,
+  setIsRemake,
 }) {
   const [showPosts, setshowPosts] = useState(items);
   useEffect(() => {
@@ -171,6 +172,7 @@ export default function Main({
     loadMypage();
   };
   const onClickEditorHandle = () => {
+    setIsRemake(false);
     handleMusicData();
   };
 

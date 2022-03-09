@@ -6,7 +6,7 @@ import { useState } from "react";
 //const code = new URLSearchParams(window.location.search).get("code");
 import { Link } from "react-router-dom";
 
-export default function Login({ handleResponseSuccess }) {
+export default function Login({ handleResponseSuccess, loadMypage }) {
   const [loginInfo, setLoginInfo] = useState({
     email: "",
     password: "",
