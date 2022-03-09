@@ -24,7 +24,7 @@ function App() {
   const isAuthenticated = (token) => {
     axios
       .get(
-        "http://ec2-3-35-27-251.ap-northeast-2.compute.amazonaws.com/userinfo",
+        "http://localhost:8080/userinfo",
         {
           headers: { jwt: token },
         }
@@ -37,7 +37,7 @@ function App() {
   };
   const handleMainPage = () => {
     axios
-      .get("http://ec2-3-35-27-251.ap-northeast-2.compute.amazonaws.com/post")
+      .get("http://localhost:8080/post")
       .then((res) => setItems(res.data.data));
     // history.push("/main");
 
@@ -77,7 +77,7 @@ function App() {
         (() => {
           axios
             .get(
-              `http://ec2-3-35-27-251.ap-northeast-2.compute.amazonaws.com/post/${userinfo.id}`
+              `http://localhost:8080/post/${userinfo.id}`
             )
             .then((res) => setMypageItem(res.data.data));
           history.push("/mypage");
@@ -95,7 +95,7 @@ function App() {
   const handleMusicData = () => {
     axios
       .get(
-        "http://ec2-3-35-27-251.ap-northeast-2.compute.amazonaws.com/musiclist"
+        "http://localhost:8080/musiclist"
       )
       .then((res) => setMusicData(res.data.data));
     history.push("/editor");

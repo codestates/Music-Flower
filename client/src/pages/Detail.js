@@ -162,7 +162,7 @@ export default function Detail({
   const handleDelete = () => {
     axios
       .delete(
-        `http://ec2-3-35-27-251.ap-northeast-2.compute.amazonaws.com/post/${detailData.id}`
+        `http://localhost:8080/post/${detailData.id}`
       )
       .then(() => handleMainPage());
   };

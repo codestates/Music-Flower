@@ -19,7 +19,7 @@ export default function Login({ handleResponseSuccess, loadMypage }) {
 
   const handleGuestLogin = () => {
     const url =
-      "http://ec2-3-35-27-251.ap-northeast-2.compute.amazonaws.com/login";
+      "http://localhost:8080/login";
     axios
       .post(
         url,
@@ -47,7 +47,7 @@ export default function Login({ handleResponseSuccess, loadMypage }) {
     }
 
     const url =
-      "http://ec2-3-35-27-251.ap-northeast-2.compute.amazonaws.com/login";
+      "http://localhost:8080/login";
     axios
       .post(
         url,

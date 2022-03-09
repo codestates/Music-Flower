@@ -194,7 +194,7 @@ export default function Editor({
     } else {
       axios
         .post(
-          "http://ec2-3-35-27-251.ap-northeast-2.compute.amazonaws.com/post",
+          "http://localhost:8080/post",
           {
             userId: users.id,
             image,
@@ -224,7 +224,7 @@ export default function Editor({
     } else {
       axios
         .put(
-          `http://ec2-3-35-27-251.ap-northeast-2.compute.amazonaws.com/${detailData.id}`,
+          `http://localhost:8080/${detailData.id}`,
           {
             userId: users.id,
             image,
