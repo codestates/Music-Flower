@@ -24,23 +24,21 @@ module.exports = {
   // [get]/post:id(userId)
   findUserPost: async (req, res) => {
     const userId = req.params.id;
-    const userPostList = await Post.findAll(
-      {
-        where: {
-          userId: userId,
+    const userPostList = await Post.findAll({
+      where: {
+        userId: userId,
+      },
+      include: [
+        {
+          model: User,
+          attributes: ["nickname"],
         },
-        include: [
-          {
-            model: User,
-            attributes: ["nickname"],
-          },
-          {
-            model: MusicData,
-          }
-        ]
-      }
-    );
-    res.status(200).json({data: userPostList, message: "ok"});
+        {
+          model: MusicData,
+        },
+      ],
+    });
+    res.status(200).json({ data: userPostList, message: "ok" });
   },
 
   // [post]/post
@@ -59,57 +57,63 @@ module.exports = {
         };
       });
       Post_MusicData.bulkCreate(bulkList);
-    })
+    });
     res.status(201).json("successfully created your post");
   },
   // [put]/post/:id(postId)
   updatePost: (req, res) => {
     const postId = req.params.id;
     const { postTitle, image, postExplain, musicList } = req.body;
-    Post.update({
-      postTitle: postTitle},
+    Post.update(
+      {
+        postTitle: postTitle,
+      },
       {
         where: {
           id: postId,
         },
-      },
+      }
     )
-    .then(()=> {
-      Post.update({
-        image: image},
-        {
-          where: {
-            id: postId,
+      .then(() => {
+        Post.update(
+          {
+            image: image,
           },
-        },
-      )
-    })
-    .then(()=> {
-      Post.update({
-        postExplain: postExplain},
-        {
-          where: {
-            id: postId,
+          {
+            where: {
+              id: postId,
+            },
+          }
+        );
+      })
+      .then(() => {
+        Post.update(
+          {
+            postExplain: postExplain,
           },
-        },
-      )
-    })
-    .then(() => {
-      Post_MusicData.destroy({
-        where: {
-          PostId: postId,
-        },
+          {
+            where: {
+              id: postId,
+            },
+          }
+        );
+      })
+      .then(() => {
+        Post_MusicData.destroy({
+          where: {
+            PostId: postId,
+          },
+        });
+      })
+      .then(() => {
+        const bulkList = musicList.map((el) => {
+          return {
+            PostId: postId,
+            MusicDatumId: el,
+          };
+        });
+        Post_MusicData.bulkCreate(bulkList);
       });
-    })
-    .then(() => {
-      const bulkList = musicList.map((el) => {
-        return {
-          PostId: postId,
-          MusicDatumId: el,
-        };
-      });
-      Post_MusicData.bulkCreate(bulkList);
-    });
     res.status(200).json("successfully updated your post");
   },
 

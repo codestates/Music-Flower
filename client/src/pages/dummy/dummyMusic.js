@@ -1,4 +1,4 @@
-export const dummyMusics = [
+const dummyMusics = [
   {
     songName: "Butter",
     artist: "방탄소년단",

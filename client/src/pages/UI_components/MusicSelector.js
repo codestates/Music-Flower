@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
-import { dummyMusics } from "../dummy/dummyMusic";
 
 const boxShadow = "0 4px 6px rgb(32 33 36 / 28%)";
 const activeBorderRadius = "1rem 1rem 0 0";
@@ -67,10 +66,10 @@ export const DropDownContainer = styled.ul`
   }
 `;
 
-export const MusicSelector = ({ musicList, setMusicList }) => {
+export const MusicSelector = ({ musicList, setMusicList, musicData }) => {
   const [hasText, setHasText] = useState(false);
   const [inputValue, setInputValue] = useState("");
-  const [options, setOptions] = useState(dummyMusics);
+  const [options, setOptions] = useState(musicData);
   const [selected, setSelected] = useState(-1);
 
   useEffect(() => {
@@ -91,19 +90,18 @@ export const MusicSelector = ({ musicList, setMusicList }) => {
 
     // dropdown을 위한 기능
     const filterRegex = new RegExp(value, "i");
-    const resultOptions = dummyMusics.filter(
+    const resultOptions = musicData.filter(
       (option) =>
-        option.songName.match(filterRegex) || option.artist.match(filterRegex)
+        option.musicTitle.match(filterRegex) || option.artist.match(filterRegex)
     );
     setOptions(resultOptions);
   };
 
   const handleDropDownClick = (clickedOption) => {
-    console.log("clickedOption:", clickedOption);
     setMusicList([...musicList, clickedOption]);
     setInputValue("");
-    const resultOptions = dummyMusics.filter(
-      (option) => option.songName === clickedOption.songName
+    const resultOptions = musicData.filter(
+      (option) => option.musicTitle === clickedOption.musicTitle
     );
     setOptions(resultOptions);
   };
@@ -179,11 +177,11 @@ export const DropDown = ({ options, handleDropDownClick, selected }) => {
         >
           <div className="serchMusicText">
             <img
-              src={option.albumImageUrl}
+              src={option.musicImage}
               style={{ height: "64px", width: "64px" }}
             />
             <span> // </span>
-            <div>{option.songName}</div>
+            <div>{option.musicTitle}</div>
             <div className="serchArtist">{option.artist}</div>
             <div>
               <br></br>

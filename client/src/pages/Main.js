@@ -156,17 +156,16 @@ export default function Main({
   items,
   setItems,
   users,
-  setDetailData,
+  handleMusicData,
   handleLogout,
   onClickDetailHandle,
   loadMypage,
 }) {
   const onClickMyPageHandle = () => {
     loadMypage();
-    history.push("/mypage");
   };
   const onClickEditorHandle = () => {
-    history.push("/editor");
+    handleMusicData();
   };
 
   const history = useHistory();
