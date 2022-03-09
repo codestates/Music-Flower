@@ -59,6 +59,9 @@ function App() {
   };
 
   const loadMypage = () => {
+    setTimeout(() => load(), 300);
+  };
+  const load = () => {
     axios
       .get(`http://localhost:8080/post/${userinfo.id}`)
       .then((res) => setMypageItem(res.data.data));

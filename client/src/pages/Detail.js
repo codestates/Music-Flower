@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import axios from "axios";
 const Detailbody = styled.div`
-  border: 1px solid red;
+  border: 1px solid grey;
   /* padding: 200px; */
   margin: 0 auto;
   padding: 0 20px;
@@ -27,8 +27,23 @@ const Detailbody = styled.div`
     }
     > #postInfo {
       flex: 2 0 auto;
+
       > div {
         margin: 10px;
+        > button {
+          margin-left: 1rem;
+          width: 70px;
+          height: 25px;
+          border: 1px solid grey;
+          cursor: pointer;
+          color: rgba(30, 22, 54, 0.6);
+          font-size: 14px;
+          border-radius: 30px;
+        }
+        > button:hover {
+          color: rgba(255, 255, 255, 0.85);
+          box-shadow: rgba(30, 22, 54, 0.7) 0 80px 0px 2px inset;
+        }
         > h4 {
           color: #a14efc;
         }
@@ -151,12 +166,18 @@ export default function Detail({
             <div>
               <h1>{detailData.postTitle}</h1>
             </div>
-
             <div>
               <h4>{detailData.User.nickname}</h4>
             </div>
-            <button>수정하기</button>
-            <button onClick={handleDelete}>삭제하기</button>
+            {detailData.User.nickname === users.nickname ? (
+              <div>
+                <button>수정하기</button>
+                <button onClick={handleDelete}>삭제하기</button>
+              </div>
+            ) : (
+              <div></div>
+            )}
+
             <div>
               {/* <text>
                 테그 :
