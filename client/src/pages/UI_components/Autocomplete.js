@@ -1,13 +1,11 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
-import { allPosts } from "../dummy/dummyitems";
 
 const boxShadow = "0 4px 6px rgb(32 33 36 / 28%)";
 const activeBorderRadius = "1rem 1rem 0 0";
 const inactiveBorderRadius = "1rem 1rem 1rem 1rem";
 
 export const InputContainer = styled.div`
-  /* margin-top: 8rem; */
   background-color: #ffffff;
   display: flex;
   flex-direction: row;
@@ -16,11 +14,10 @@ export const InputContainer = styled.div`
   border-radius: ${(props) =>
     props.hasText ? activeBorderRadius : inactiveBorderRadius};
   z-index: 3;
-  /* box-shadow: ${(props) => (props.hasText ? boxShadow : 0)}; */
+  box-shadow: ${(props) => (props.hasText ? boxShadow : 0)};
 
   &:focus-within {
-    // 선택시 그림자
-    /* box-shadow: ${boxShadow}; */
+    box-shadow: ${boxShadow};
   }
 
   > input {
@@ -40,19 +37,20 @@ export const InputContainer = styled.div`
 
 export const DropDownContainer = styled.ul`
   background-color: #ffffff;
-  /* display: block; */
-  /* list-style-type: none; */
-  /* margin-block-start: 0;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  list-style-type: none;
+  margin-block-start: 0;
   margin-block-end: 0;
   margin-inline-start: 0px;
   margin-inline-end: 0px;
-  padding-inline-start: 0px; */
-  width: 5rem;
+  padding-inline-start: 0px;
   margin-top: -1px;
   padding: 0.5rem 0;
   border: 1px solid rgb(223, 225, 229);
   border-radius: 0 0 1rem 1rem;
-  /* box-shadow: ${boxShadow}; */
+  box-shadow: ${boxShadow};
   z-index: 3;
 
   > li {
@@ -68,13 +66,13 @@ export const DropDownContainer = styled.ul`
   }
 `;
 
-export const Autocomplete = ({ items, setItems }) => {
+export const Autocomplete = ({ items, setshowPosts }) => {
+  console.log("items", items);
   const [hasText, setHasText] = useState(false);
   const [inputValue, setInputValue] = useState("");
-  const [options, setOptions] = [items, setItems];
+  const [options, setOptions] = useState(items);
   const [selected, setSelected] = useState(-1);
-  // console.log("valu", inputValue);
-
+  setshowPosts(options);
   useEffect(() => {
     if (inputValue === "") {
       setHasText(false);
@@ -93,16 +91,15 @@ export const Autocomplete = ({ items, setItems }) => {
 
     // dropdown을 위한 기능
     const filterRegex = new RegExp(value, "i");
-    const resultOptions = allPosts.filter((option) =>
+    const resultOptions = items.filter((option) =>
       option.postTitle.match(filterRegex)
     );
     setOptions(resultOptions);
   };
 
-  // option은 객체
   const handleDropDownClick = (clickedOption) => {
-    setInputValue(clickedOption.postTitle);
-    const resultOptions = allPosts.filter(
+    setInputValue(clickedOption);
+    const resultOptions = items.filter(
       (option) => option.postTitle === clickedOption.postTitle
     );
     setOptions(resultOptions);

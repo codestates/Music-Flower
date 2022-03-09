@@ -1,3 +1,6 @@
+// import SpotifyAPP from "./components/SpotifyApp";
+// import { allPosts } from "./pages/dummy/dummyitems";
+// import { dummyuser } from "./pages/dummy/dummyUser";
 import React, { useState } from "react";
 import { Switch, Route, useHistory } from "react-router-dom";
 import axios from "axios";
@@ -26,7 +29,6 @@ function App() {
         handleMainPage();
       });
   };
-
   const handleMainPage = () => {
     axios
       .get("http://localhost:8080/post")
@@ -34,8 +36,9 @@ function App() {
     history.push("/main");
   };
   const handleResponseSuccess = () => {
-    const jwt = document.cookie.split("=")[1];
-    // console.log(jwt);
+    console.log("cookie", document.cookie);
+    const jwt = document.cookie.split("jwt=")[1];
+    console.log(jwt);
     isAuthenticated(jwt);
   };
 
@@ -72,13 +75,13 @@ function App() {
   return (
     <Switch>
       <Route exact path="/">
-        <Landing userinfo={userinfo} />
+        <Landing isLogin={isLogin} userinfo={userinfo} />
       </Route>
       <Route path="/login">
         <Login handleResponseSuccess={handleResponseSuccess} />
       </Route>
       <Route path="/signup">
-        <Signup loginInfo={userinfo} />
+        <Signup />
       </Route>
       <Route path="/main">
         <Main
