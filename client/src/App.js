@@ -22,7 +22,7 @@ function App() {
 
   const isAuthenticated = (token) => {
     axios
-      .get("ec2-3-35-27-251.ap-northeast-2.compute.amazonaws.com/userinfo", {
+      .get("http://ec2-3-35-27-251.ap-northeast-2.compute.amazonaws.com/userinfo", {
         headers: { jwt: token },
       })
       .then((res) => {
@@ -33,7 +33,7 @@ function App() {
   };
   const handleMainPage = () => {
     axios
-      .get("ec2-3-35-27-251.ap-northeast-2.compute.amazonaws.com/post")
+      .get("http://ec2-3-35-27-251.ap-northeast-2.compute.amazonaws.com/post")
       .then((res) => setItems(res.data.data));
     history.push("/main");
   };
@@ -66,7 +66,7 @@ function App() {
   const load = () => {
     axios
       .get(
-        `ec2-3-35-27-251.ap-northeast-2.compute.amazonaws.com/post/${userinfo.id}`
+        `http://ec2-3-35-27-251.ap-northeast-2.compute.amazonaws.com/post/${userinfo.id}`
       )
       .then((res) => setMypageItem(res.data.data));
     history.push("/mypage");
@@ -74,7 +74,7 @@ function App() {
 
   const handleMusicData = () => {
     axios
-      .get("ec2-3-35-27-251.ap-northeast-2.compute.amazonaws.com/musiclist")
+      .get("http://ec2-3-35-27-251.ap-northeast-2.compute.amazonaws.com/musiclist")
       .then((res) => setMusicData(res.data.data));
     history.push("/editor");
   };
@@ -82,7 +82,7 @@ function App() {
   return (
     <Switch>
       <Route exact path="/">
-        <Landing isLogin={isLogin} userinfo={userinfo} />
+        <Landing userinfo={userinfo} />
       </Route>
       <Route path="/login">
         <Login handleResponseSuccess={handleResponseSuccess} />

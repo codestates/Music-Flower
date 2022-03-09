@@ -21,7 +21,7 @@ export default function Signup() {
       return alert("비밀번호가 다릅니다");
     } else {
       axios
-        .post("ec2-3-35-27-251.ap-northeast-2.compute.amazonaws.com/signup", {
+        .post("http://ec2-3-35-27-251.ap-northeast-2.compute.amazonaws.com/signup", {
           nickname: signup.nickname,
           email: signup.email,
           password: signup.password,
