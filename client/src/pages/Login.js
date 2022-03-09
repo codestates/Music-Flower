@@ -17,9 +17,9 @@ export default function Login({ handleResponseSuccess, loadMypage }) {
     setLoginInfo({ ...loginInfo, [key]: e.target.value });
   };
 
-
   const handleGuestLogin = () => {
-    const url = "http://ec2-3-35-27-251.ap-northeast-2.compute.amazonaws.com/login";
+    const url =
+      "http://ec2-3-35-27-251.ap-northeast-2.compute.amazonaws.com/login";
     axios
       .post(
         url,
@@ -33,7 +33,7 @@ export default function Login({ handleResponseSuccess, loadMypage }) {
       )
       .then((res) => {
         console.log("server login result: " + res);
-        handleResponseSuccess();
+        handleResponseSuccess(res);
       })
       .catch((err) => {
         console.log("게스트 로그인 에러:", err);
@@ -46,7 +46,8 @@ export default function Login({ handleResponseSuccess, loadMypage }) {
       return alert("아이디와 비밀번호 모두 입력 하세요.");
     }
 
-    const url = "http://ec2-3-35-27-251.ap-northeast-2.compute.amazonaws.com/login";
+    const url =
+      "http://ec2-3-35-27-251.ap-northeast-2.compute.amazonaws.com/login";
     axios
       .post(
         url,
@@ -60,7 +61,7 @@ export default function Login({ handleResponseSuccess, loadMypage }) {
       )
       .then((res) => {
         // console.log("해당 유저 있음:", res.statusText);
-        handleResponseSuccess();
+        handleResponseSuccess(res);
       })
       .catch((err) => alert("아이디 또는 비밀번호가 일치 하지않습니다."));
   };

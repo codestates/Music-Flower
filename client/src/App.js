@@ -30,8 +30,8 @@ function App() {
         }
       )
       .then((res) => {
+        console.log(res);
         setUserinfo(res.data.data.loginInfo);
-        // setIsLogin(!isLogin);
         handleMainPage();
       });
   };
@@ -49,10 +49,9 @@ function App() {
       300
     );
   };
-  const handleResponseSuccess = () => {
-    console.log("cookie", document.cookie);
-    const jwt = document.cookie.split("jwt=")[1];
-    console.log(jwt);
+  const handleResponseSuccess = (res) => {
+    const jwt = res.data.accessToken;
+
     isAuthenticated(jwt);
   };
 

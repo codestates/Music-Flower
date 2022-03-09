@@ -25,7 +25,6 @@ const Mypage = styled.div`
     flex: 3 0 auto;
     flex-direction: column;
     > #boardName {
-      font-size: 30px;
       display: flex;
       justify-content: space-around;
     }

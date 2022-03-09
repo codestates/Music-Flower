@@ -112,7 +112,6 @@ export default function Postthumnails({ item, onClickDetailHandle }) {
         </Nickname>
         <Meta>
           <Likes onClick={() => handleLike(item)} />
-          {like}
           <Bar>\</Bar>
           {item.MusicData.length}곡
         </Meta>
