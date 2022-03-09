@@ -36,6 +36,10 @@ module.exports = {
       },
       include: [
         {
+          model: User,
+          attributes: ["nickname"],
+        },
+        {
           model: MusicData,
         },
       ],
@@ -65,7 +69,6 @@ module.exports = {
     });
 
     // queryInterface.bulkInsert("Post_MusicData", bulkList);
-
     res.status(201).json("successfully created your post");
   },
   //[put]/:id 는 postId로 요청할 것
@@ -77,29 +80,51 @@ module.exports = {
     const postId = req.params.id;
     const { postTitle, image, postExplain, musicList } = req.body;
     Post.update(
-      { postTitle, image, postExplain },
+      {
+        postTitle: postTitle,
+      },
       {
         where: {
           postId: postId,
         },
       }
-    )
-      .then(() => {
-        Post_MusicData.destroy({
-          where: {
-            PostId: postId,
-          },
-        });
-      })
-      .then(() => {
-        const bulkList = musicList.map((el) => {
-          return {
-            PostId: postId,
-            MusicDatumId: el,
-          };
-        });
-        Post_MusicData.bulkcreate(bulkList);
-      });
+    );
+    // .then(()=> {
+    //   Post.update({
+    //     image: image},
+    //     {
+    //       where: {
+    //         postId: postId,
+    //       },
+    //     },
+    //   )
+    // })
+    // .then(()=> {
+    //   Post.update({
+    //     postExplain: postExplain},
+    //     {
+    //       where: {
+    //         postId: postId,
+    //       },
+    //     },
+    //   )
+    // })
+    // .then(() => {
+    //   Post_MusicData.destroy({
+    //     where: {
+    //       PostId: postId,
+    //     },
+    //   });
+    // })
+    // .then(() => {
+    //   const bulkList = musicList.map((el) => {
+    //     return {
+    //       PostId: postId,
+    //       MusicDatumId: el,
+    //     };
+    //   });
+    //   Post_MusicData.bulkcreate(bulkList);
+    // });
     res.status(200).json("successfully updated your post");
   },
 

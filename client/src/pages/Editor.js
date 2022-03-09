@@ -1,6 +1,7 @@
 // import SpotifyAPP from "../components/SpotifyApp";
-import React, { useState, useEffect } from "react";
-import { Link, Switch, Route, useHistory, Redirect } from "react-router-dom";
+import axios from "axios";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { MusicSelector } from "./UI_components/MusicSelector";
 import PostThumnailSelecter from "./UI_components/PostThumnailSelector";
@@ -141,19 +142,35 @@ const MenuButton = styled.div`
     color: #a14efc;
   }
 `;
-export default function Editor({ handleLogout, handleMainPage }) {
+export default function Editor({
+  handleLogout,
+  handleMainPage,
+  musicdata,
+  users,
+}) {
   const [musicList, setMusicList] = useState([]);
-  const [postPoto, setPostPoto] = useState("");
+  const [image, setPostPoto] = useState("");
   const [postTitle, setPostTitle] = useState("");
-  const [postIntro, setPostintro] = useState("");
-
+  const [postExplain, setPostintro] = useState("");
+  const [userId, setUserId] = useState(users.id);
   const submitHandle = () => {
+    let musiclistid = musicList.map((el) => el.id);
     let postData = {
-      postPoto,
+      userId,
+      image,
       postTitle,
-      postIntro,
-      musicList,
+      postExplain,
+      musicList: musiclistid,
     };
+    // axios
+    //   .post("http://localhost:8080/post", {
+    //     userId,
+    //     image,
+    //     postTitle,
+    //     postExplain,
+    //     musicList,
+    //   })
+    //   .then((res) => console.log(res));
     console.log("전송정보", postData);
   };
   const postTitleChageHandle = (e) => {
@@ -215,6 +232,7 @@ export default function Editor({ handleLogout, handleMainPage }) {
             <div id="music">
               <div id="musicserch">
                 <MusicSelector
+                  musicData={musicdata}
                   musicList={musicList}
                   setMusicList={setMusicList}
                 ></MusicSelector>

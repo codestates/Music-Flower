@@ -36,11 +36,11 @@ export default function SelectMusicList({
       <SelectMusic>
         <div id="musicInfo">
           <img
-            src={music.albumImageUrl}
+            src={music.musicImage}
             style={{ height: "64px", width: "64px" }}
           />
           <div>
-            <div>{music.songName}</div>
+            <div>{music.musicTitle}</div>
             <div id="serchArtist">{music.artist}</div>
           </div>
         </div>

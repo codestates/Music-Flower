@@ -8,20 +8,14 @@ import Main from "./pages/Main";
 import Mypage from "./pages/Mypage";
 import Detail from "./pages/Detail";
 import Editor from "./pages/Editor";
-import { allPosts } from "./pages/dummy/dummyitems";
 
-// import SpotifyAPP from "./components/SpotifyApp";
-
-// import { allPosts } from "./pages/dummy/dummyitems";
-// import { dummyuser } from "./pages/dummy/dummyUser";
 function App() {
-  // const [meetCode, setMeetCode] = useState(null);
-  // const [isLogin, setIsLogin] = useState(false);
   const [userinfo, setUserinfo] = useState(null);
   const history = useHistory();
   const [items, setItems] = useState([]);
   const [detailData, setDetailData] = useState({});
   const [myItem, setMypageItem] = useState([]);
+  const [musicdata, setMusicData] = useState([]);
 
   const isAuthenticated = (token) => {
     axios
@@ -65,7 +59,16 @@ function App() {
     axios
       .get(`http://localhost:8080/post/${userinfo.id}`)
       .then((res) => setMypageItem(res.data.data));
+    history.push("/mypage");
   };
+
+  const handleMusicData = () => {
+    axios
+      .get("http://localhost:8080/musiclist")
+      .then((res) => setMusicData(res.data.data));
+    history.push("/editor");
+  };
+  console.log(musicdata);
   return (
     <Switch>
       <Route exact path="/">
@@ -85,6 +88,7 @@ function App() {
           setDetailData={setDetailData}
           handleLogout={handleLogout}
           onClickDetailHandle={onClickDetailHandle}
+          handleMusicData={handleMusicData}
         ></Main>
       </Route>
       <Route path="/mypage">
@@ -107,6 +111,7 @@ function App() {
       <Route path="/editor">
         <Editor
           users={userinfo}
+          musicdata={musicdata}
           handleMainPage={handleMainPage}
           handleLogout={handleLogout}
         ></Editor>
