@@ -9,19 +9,17 @@ const Detailbody = styled.div`
   padding: 0 20px;
   max-width: 1080px;
   max-height: 1980px;
+  border-radius: 10px;
 
   > div {
-    border: 1px solid red;
     padding: 10px;
     display: flex;
-
-    > div {
-      border: 1px solid red;
-      padding: 10px;
-    }
   }
   > #up {
     flex: 1 0 auto;
+    border: 1px solid grey;
+    margin-top: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     > #postImg {
       flex: 1 0 auto;
     }
@@ -30,6 +28,7 @@ const Detailbody = styled.div`
 
       > div {
         margin: 10px;
+
         > button {
           margin-left: 1rem;
           width: 70px;
@@ -54,24 +53,39 @@ const Detailbody = styled.div`
     display: flex;
     flex: 3 0 auto;
     flex-direction: column;
-    > text {
+    > h3 {
       margin-left: 9px;
+      border-bottom: 1px solid #c7cad0;
+      padding-bottom: 7px;
     }
     > #postIntro {
       display: flex;
       flex: 1 0 auto;
-      > textarea {
-        width: 100vw;
-      }
-      > div {
+      margin-left: 9px;
+
+      > text {
+        font-size: 17px;
+        font-style: inherit;
+        color: #767676;
       }
     }
     > #musicList {
       flex: 4 0 auto;
+      margin-left: 9px;
+      margin-top: 25px;
+      > h3 {
+        border-bottom: 1px solid #c7cad0;
+      }
+
       > #music {
-        border: 1px solid red;
+        border-bottom: 1px solid #c7cad0;
         padding: 10px;
         display: flex;
+        > div {
+          padding: 10px;
+          font-size: 17px;
+          font-style: inherit;
+        }
       }
     }
   }
@@ -103,6 +117,7 @@ const Menu = styled.div`
 const Nick = styled.div`
   /* //border: 1px solid red; */
   /* padding: 10px; */
+  font-size: 20px;
   text-align: center;
   margin-top: 20px;
   flex: 3 0 auto;
@@ -192,12 +207,12 @@ export default function Detail({
           </div>
         </div>
         <div id="down">
-          <text>소개글</text>
+          <h3>소개글</h3>
           <div id="postIntro">
             <text>{detailData.postExplain}</text>
           </div>
           <div id="musicList">
-            음악 리스트
+            <h3>음악 리스트</h3>
             {detailData.MusicData.map((e) => {
               return (
                 <div id="music">
@@ -206,10 +221,10 @@ export default function Detail({
                   </div>
                   <div>
                     <div>
-                      <text>노래이름 : {e.musicTitle}</text>
+                      <text> {e.musicTitle}</text>
                     </div>
                     <div>
-                      <text>아티스트 : {e.artist}</text>
+                      <text> {e.artist}</text>
                     </div>
                   </div>
                 </div>
