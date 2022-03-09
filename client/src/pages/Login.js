@@ -20,7 +20,7 @@ export default function Login({ handleResponseSuccess, isLogin, setMeetCode }) {
   };
 
   const handleGuest = () => {
-    const url = "http://localhost:8080/login";
+    const url = "ec2-3-35-27-251.ap-northeast-2.compute.amazonaws.com/login";
     axios
       .post(
         url,
@@ -41,7 +41,7 @@ export default function Login({ handleResponseSuccess, isLogin, setMeetCode }) {
       return alert("아이디와 비밀번호 모두 입력 하세요.");
     }
 
-    const url = "http://localhost:8080/login";
+    const url = "ec2-3-35-27-251.ap-northeast-2.compute.amazonaws.com/login";
     axios
       .post(
         url,
