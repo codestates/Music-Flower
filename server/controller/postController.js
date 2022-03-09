@@ -28,6 +28,23 @@ module.exports = {
     res.status(200).json({ data: postList, message: "ok" });
   },
 
+  findUserPost: async (req, res) => {
+    const userId = req.params.id;
+    const userPostList = await Post.findAll(
+      {
+        where: {
+          userId: userId,
+        },
+        include: [
+          {
+            model: MusicData,
+          }
+        ]
+      }
+    );
+    res.status(200).json({data: userPostList, message: "ok"});
+  },
+
   //[post] post생성하기
   //Post에 레코드 생성
   //Post_musicData에 PostId에 해당하는 MusicDatumId를 새롭게 생성
@@ -79,7 +96,7 @@ module.exports = {
       .then(() => {
         const bulkList = musicList.map((el) => {
           return {
-            PostId: result.id,
+            PostId: postId,
             MusicDatumId: el,
           };
         });

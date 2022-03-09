@@ -64,6 +64,7 @@ function App() {
       .get("http://localhost:8080/post")
       .then((res) => setItems(res.data.data));
   };
+  console.log(items);
   const loadMypage = () => {
     if (items.length === 0) {
       return;

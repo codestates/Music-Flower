@@ -1,4 +1,5 @@
 const { User } = require("../models");
+const { Post } = require("../models");
 const {
   generateAccessToken,
   sendAccessToken,
@@ -69,7 +70,10 @@ module.exports = {
   //[get]/userinfo
   //쿠키에 토큰을 가지고 있을 경우(jwt) 사용자 정보를 해독한 값 보내줌
   findUser: (req, res) => {
+<<<<<<< HEAD
     // console.log("findUser req", req);
+=======
+>>>>>>> 373a8767487b929167ccd3ca71d904f295dc6c08
     const accessTokenData = isAuthorized(req);
     // console.log("accessTokenData :", accessTokenData);
     if (!accessTokenData) {
