@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import axios from "axios";
 const Detailbody = styled.div`
   border: 1px solid red;
   /* padding: 200px; */
@@ -122,7 +123,12 @@ export default function Detail({
   users,
   handleLogout,
 }) {
-  // console.log("디테일 컴포넌트 정보: ", detailData);
+  console.log("디테일 컴포넌트 정보: ", detailData);
+  const handleDelete = () => {
+    axios
+      .delete(`http://localhost:8080/post/${detailData.id}`)
+      .then(() => handleMainPage());
+  };
   return (
     <div id="detailPage">
       <Header>
@@ -145,9 +151,12 @@ export default function Detail({
             <div>
               <h1>{detailData.postTitle}</h1>
             </div>
+
             <div>
-              <h4>{detailData.nickname}</h4>
+              <h4>{detailData.User.nickname}</h4>
             </div>
+            <button>수정하기</button>
+            <button onClick={handleDelete}>삭제하기</button>
             <div>
               {/* <text>
                 테그 :
@@ -158,7 +167,7 @@ export default function Detail({
             </div>
           </div>
           <div id="postImg">
-            <img src={detailData.imageUrl} width="200vw" />
+            <img src={detailData.image} width="200vw" />
           </div>
         </div>
         <div id="down">
@@ -168,15 +177,15 @@ export default function Detail({
           </div>
           <div id="musicList">
             음악 리스트
-            {detailData.musicList.map((e) => {
+            {detailData.MusicData.map((e) => {
               return (
                 <div id="music">
                   <div>
-                    <img src={e.albumImageUrl} alt="1" width="100vw"></img>
+                    <img src={e.musicImage} alt="1" width="100vw"></img>
                   </div>
                   <div>
                     <div>
-                      <text>노래이름 : {e.songName}</text>
+                      <text>노래이름 : {e.musicTitle}</text>
                     </div>
                     <div>
                       <text>아티스트 : {e.artist}</text>

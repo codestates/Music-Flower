@@ -1,6 +1,7 @@
 // import SpotifyAPP from "../components/SpotifyApp";
-import React, { useState, useEffect } from "react";
-import { Link, Switch, Route, useHistory, Redirect } from "react-router-dom";
+import axios from "axios";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { MusicSelector } from "./UI_components/MusicSelector";
 import PostThumnailSelecter from "./UI_components/PostThumnailSelector";
@@ -141,27 +142,54 @@ const MenuButton = styled.div`
     color: #a14efc;
   }
 `;
-export default function Editor({ handleLogout, handleMainPage }) {
+export default function Editor({
+  handleLogout,
+  handleMainPage,
+  musicdata,
+  users,
+  loadMypage,
+}) {
   const [musicList, setMusicList] = useState([]);
-  const [postPoto, setPostPoto] = useState("");
+  const [image, setPostPoto] = useState("");
   const [postTitle, setPostTitle] = useState("");
-  const [postIntro, setPostintro] = useState("");
-
+  const [postExplain, setPostintro] = useState("");
+  const [userId, setUserId] = useState("");
   const submitHandle = () => {
+    let musiclistid = musicList.map((el) => el.id);
     let postData = {
-      postPoto,
+      userId: users.id,
+      image,
       postTitle,
-      postIntro,
-      musicList,
+      postExplain,
+      musicList: musiclistid,
     };
-    console.log("전송정보", postData);
+    if (!userId && !image && !postTitle && !postExplain) {
+      return alert("내용을 모두 작성해주세요");
+    } else if (musicList.length === 0) {
+      return alert("음악을 추가해 주세요");
+    } else {
+      axios
+        .post(
+          "http://localhost:8080/post",
+          {
+            userId: users.id,
+            image,
+            postTitle,
+            postExplain,
+            musicList: musiclistid,
+          },
+          { headers: { "Content-Type": "application/json" } }
+        )
+        .then((res) => loadMypage());
+      //console.log("전송정보", postData);
+    }
   };
   const postTitleChageHandle = (e) => {
-    console.log("title", e.target.value);
+    //console.log("title", e.target.value);
     setPostTitle(e.target.value);
   };
   const postInroChageHandle = (e) => {
-    console.log("Inro", e.target.value);
+    // console.log("Inro", e.target.value);
     setPostintro(e.target.value);
   };
 
@@ -215,6 +243,7 @@ export default function Editor({ handleLogout, handleMainPage }) {
             <div id="music">
               <div id="musicserch">
                 <MusicSelector
+                  musicData={musicdata}
                   musicList={musicList}
                   setMusicList={setMusicList}
                 ></MusicSelector>

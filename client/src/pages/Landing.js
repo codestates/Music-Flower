@@ -2,13 +2,13 @@ import React from "react";
 import "../css/Landing.css";
 import { useHistory, Link } from "react-router-dom";
 
-export default function Landing({ isLogin, userinfo }) {
+export default function Landing({ userinfo }) {
   const history = useHistory();
   const handleRecord = () => {
-    if (userinfo) {
-      history.push("/main");
-    } else {
+    if (userinfo === null) {
       history.push("/login");
+    } else {
+      history.push("/main");
     }
   };
 

@@ -92,7 +92,7 @@ export default function Postthumnails({ item, onClickDetailHandle }) {
   const handleLike = (item) => {
     setLike(Number(like) + 1);
   };
-
+  console.log("items", item);
   return (
     // <Post>
 
