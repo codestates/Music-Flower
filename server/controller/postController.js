@@ -67,7 +67,7 @@ module.exports = {
       });
       Post_MusicData.bulkCreate(bulkList);
     });
-
+    //
     // queryInterface.bulkInsert("Post_MusicData", bulkList);
     res.status(201).json("successfully created your post");
   },
