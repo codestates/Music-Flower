@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Postthumnails from "../components/Postthumnails";
 import { Autocomplete } from "../pages/UI_components/Autocomplete";
@@ -162,6 +162,8 @@ export default function Main({
   onClickDetailHandle,
   loadMypage,
 }) {
+  const [showPosts, setshowPosts] = useState([]);
+
   const onClickMyPageHandle = () => {
     loadMypage();
     history.push("/mypage");
@@ -192,7 +194,10 @@ export default function Main({
         <div id="bottom">
           <SerchArea>
             <div id="select_bar">
-              <Autocomplete items={items} setItems={setItems}></Autocomplete>
+              <Autocomplete
+                items={items}
+                setshowPosts={setshowPosts}
+              ></Autocomplete>
             </div>
             <div id="create_post">
               <button className="12134" onClick={onClickEditorHandle}>
@@ -203,7 +208,7 @@ export default function Main({
           <Body>
             <div id="BoardName">이것은 예시입니다</div>
             <div id="Posts">
-              {items.map((item, idx) => (
+              {showPosts.map((item, idx) => (
                 <Postthumnails
                   onClickDetailHandle={onClickDetailHandle}
                   item={item}

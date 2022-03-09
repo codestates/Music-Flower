@@ -10,7 +10,7 @@ module.exports = {
   //포스트와 연결된 userId의 nickname과
   //포스트와 연결된(Post-Post_MusicData-MusicData) MusicData의 정보도 가지고 옴
   findPost: async (req, res) => {
-    // console.log("findPost req",req);
+    console.log(req);
     // const postList = await Post.findAll({
     //   attributes: ["userId", "postTitle", "image", "postExplain", "createdAt"],
     // });
@@ -30,19 +30,17 @@ module.exports = {
 
   findUserPost: async (req, res) => {
     const userId = req.params.id;
-    const userPostList = await Post.findAll(
-      {
-        where: {
-          userId: userId,
+    const userPostList = await Post.findAll({
+      where: {
+        userId: userId,
+      },
+      include: [
+        {
+          model: MusicData,
         },
-        include: [
-          {
-            model: MusicData,
-          }
-        ]
-      }
-    );
-    res.status(200).json({data: userPostList, message: "ok"});
+      ],
+    });
+    res.status(200).json({ data: userPostList, message: "ok" });
   },
 
   //[post] post생성하기

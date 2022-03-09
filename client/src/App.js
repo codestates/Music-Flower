@@ -55,14 +55,15 @@ function App() {
   };
   const onClickDetailHandle = (postData) => {
     // 클릭하면 디테일데이터가 들어가야지 ㅇㅇ
-    console.log("postData:", postData);
+    // console.log("postData:", postData);
     setDetailData(postData);
     history.push("/detail");
   };
   const loadMainPage = () => {
-    axios
-      .get("http://localhost:8080/post")
-      .then((res) => setItems(res.data.data));
+    axios.get("http://localhost:8080/post").then((res) => {
+      console.log("postData:", res.data.data);
+      setItems(res.data.data);
+    });
   };
   console.log(items);
   const loadMypage = () => {

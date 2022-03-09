@@ -1,48 +1,11 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 
-const AllPostData = [
-  {
-    userId: 1,
-    postTitle: "봄에 듣기 좋은 노래",
-    image:
-      "https://image.bugsm.co.kr/album/images/original/2669/266970.jpg?version=undefined",
-    postExplain:
-      "봄날의 꿈, 잘 꾸고 게신가요? 꿈결 같은 봄에 들으면 더 좋은 노래입니다",
-    totalLike: 0,
-    totalComment: 0,
-    createdAt: new Date(),
-  },
-  {
-    userId: 2,
-    postTitle: "여름에 듣기 좋은 노래",
-    image:
-      "https://image.bugsm.co.kr/album/images/original/2669/266970.jpg?version=undefined",
-    postExplain:
-      "더운 여름 어떻게 보내고 계신가요? 저는 이 노래를 들으며 더위를 식혀요",
-    totalLike: 0,
-    totalComment: 0,
-    createdAt: new Date(),
-  },
-  {
-    userId: 2,
-    postTitle: "겨을에 듣기 좋은 노래",
-    image:
-      "https://image.bugsm.co.kr/album/images/original/2669/266970.jpg?version=undefined",
-    postExplain:
-      "크리스마스가 다가오네요. 겨울에 듣기 좋은 노래들을 모아봤습니다. 즐거운 성탄절 되시길!",
-    totalLike: 0,
-    totalComment: 0,
-    createdAt: new Date(),
-  },
-];
-
 const boxShadow = "0 4px 6px rgb(32 33 36 / 28%)";
 const activeBorderRadius = "1rem 1rem 0 0";
 const inactiveBorderRadius = "1rem 1rem 1rem 1rem";
 
 export const InputContainer = styled.div`
-  /* width: 100px; */
   background-color: #ffffff;
   display: flex;
   flex-direction: row;
@@ -103,14 +66,13 @@ export const DropDownContainer = styled.ul`
   }
 `;
 
-export const Autocomplete = (setItems) => {
+export const Autocomplete = ({ items, setshowPosts }) => {
+  // console.log("items", items);
   const [hasText, setHasText] = useState(false);
   const [inputValue, setInputValue] = useState("");
-  const [options, setOptions] = useState(AllPostData);
+  const [options, setOptions] = useState(items);
   const [selected, setSelected] = useState(-1);
-
-  // setItems(options);
-
+  setshowPosts(options);
   useEffect(() => {
     if (inputValue === "") {
       setHasText(false);
@@ -129,7 +91,7 @@ export const Autocomplete = (setItems) => {
 
     // dropdown을 위한 기능
     const filterRegex = new RegExp(value, "i");
-    const resultOptions = AllPostData.filter((option) =>
+    const resultOptions = items.filter((option) =>
       option.postTitle.match(filterRegex)
     );
     setOptions(resultOptions);
@@ -137,7 +99,7 @@ export const Autocomplete = (setItems) => {
 
   const handleDropDownClick = (clickedOption) => {
     setInputValue(clickedOption);
-    const resultOptions = AllPostData.filter(
+    const resultOptions = items.filter(
       (option) => option.postTitle === clickedOption.postTitle
     );
     setOptions(resultOptions);
@@ -148,6 +110,8 @@ export const Autocomplete = (setItems) => {
   };
 
   const handleKeyUp = (event) => {
+    // https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/getModifierState#example
+    // eslint-disable-next-line
     if (
       event.getModifierState("Fn") ||
       event.getModifierState("Hyper") ||
