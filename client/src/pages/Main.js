@@ -60,12 +60,13 @@ const SerchArea = styled.div`
     /* border: 1px solid red; */
     /* padding: 10px; */
 
-    flex: 2 0 auto;
-    margin-left: 40px;
+    width: 40vh;
+    margin-left: 20px;
   }
   > #create_post {
     /* border: 1px solid red; */
     /* padding: 10px; */
+    flex: 1 0 auto;
 
     > button {
       margin-left: 8rem;

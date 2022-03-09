@@ -1,13 +1,48 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
-import { allPosts } from "../dummy/dummyitems";
+
+const AllPostData = [
+  {
+    userId: 1,
+    postTitle: "봄에 듣기 좋은 노래",
+    image:
+      "https://image.bugsm.co.kr/album/images/original/2669/266970.jpg?version=undefined",
+    postExplain:
+      "봄날의 꿈, 잘 꾸고 게신가요? 꿈결 같은 봄에 들으면 더 좋은 노래입니다",
+    totalLike: 0,
+    totalComment: 0,
+    createdAt: new Date(),
+  },
+  {
+    userId: 2,
+    postTitle: "여름에 듣기 좋은 노래",
+    image:
+      "https://image.bugsm.co.kr/album/images/original/2669/266970.jpg?version=undefined",
+    postExplain:
+      "더운 여름 어떻게 보내고 계신가요? 저는 이 노래를 들으며 더위를 식혀요",
+    totalLike: 0,
+    totalComment: 0,
+    createdAt: new Date(),
+  },
+  {
+    userId: 2,
+    postTitle: "겨을에 듣기 좋은 노래",
+    image:
+      "https://image.bugsm.co.kr/album/images/original/2669/266970.jpg?version=undefined",
+    postExplain:
+      "크리스마스가 다가오네요. 겨울에 듣기 좋은 노래들을 모아봤습니다. 즐거운 성탄절 되시길!",
+    totalLike: 0,
+    totalComment: 0,
+    createdAt: new Date(),
+  },
+];
 
 const boxShadow = "0 4px 6px rgb(32 33 36 / 28%)";
 const activeBorderRadius = "1rem 1rem 0 0";
 const inactiveBorderRadius = "1rem 1rem 1rem 1rem";
 
 export const InputContainer = styled.div`
-  /* margin-top: 8rem; */
+  /* width: 100px; */
   background-color: #ffffff;
   display: flex;
   flex-direction: row;
@@ -16,11 +51,10 @@ export const InputContainer = styled.div`
   border-radius: ${(props) =>
     props.hasText ? activeBorderRadius : inactiveBorderRadius};
   z-index: 3;
-  /* box-shadow: ${(props) => (props.hasText ? boxShadow : 0)}; */
+  box-shadow: ${(props) => (props.hasText ? boxShadow : 0)};
 
   &:focus-within {
-    // 선택시 그림자
-    /* box-shadow: ${boxShadow}; */
+    box-shadow: ${boxShadow};
   }
 
   > input {
@@ -40,19 +74,20 @@ export const InputContainer = styled.div`
 
 export const DropDownContainer = styled.ul`
   background-color: #ffffff;
-  /* display: block; */
-  /* list-style-type: none; */
-  /* margin-block-start: 0;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  list-style-type: none;
+  margin-block-start: 0;
   margin-block-end: 0;
   margin-inline-start: 0px;
   margin-inline-end: 0px;
-  padding-inline-start: 0px; */
-  width: 5rem;
+  padding-inline-start: 0px;
   margin-top: -1px;
   padding: 0.5rem 0;
   border: 1px solid rgb(223, 225, 229);
   border-radius: 0 0 1rem 1rem;
-  /* box-shadow: ${boxShadow}; */
+  box-shadow: ${boxShadow};
   z-index: 3;
 
   > li {
@@ -68,12 +103,13 @@ export const DropDownContainer = styled.ul`
   }
 `;
 
-export const Autocomplete = ({ items, setItems }) => {
+export const Autocomplete = (setItems) => {
   const [hasText, setHasText] = useState(false);
   const [inputValue, setInputValue] = useState("");
-  const [options, setOptions] = [items, setItems];
+  const [options, setOptions] = useState(AllPostData);
   const [selected, setSelected] = useState(-1);
-  // console.log("valu", inputValue);
+
+  // setItems(options);
 
   useEffect(() => {
     if (inputValue === "") {
@@ -93,16 +129,15 @@ export const Autocomplete = ({ items, setItems }) => {
 
     // dropdown을 위한 기능
     const filterRegex = new RegExp(value, "i");
-    const resultOptions = allPosts.filter((option) =>
+    const resultOptions = AllPostData.filter((option) =>
       option.postTitle.match(filterRegex)
     );
     setOptions(resultOptions);
   };
 
-  // option은 객체
   const handleDropDownClick = (clickedOption) => {
-    setInputValue(clickedOption.postTitle);
-    const resultOptions = allPosts.filter(
+    setInputValue(clickedOption);
+    const resultOptions = AllPostData.filter(
       (option) => option.postTitle === clickedOption.postTitle
     );
     setOptions(resultOptions);
@@ -113,8 +148,6 @@ export const Autocomplete = ({ items, setItems }) => {
   };
 
   const handleKeyUp = (event) => {
-    // https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/getModifierState#example
-    // eslint-disable-next-line
     if (
       event.getModifierState("Fn") ||
       event.getModifierState("Hyper") ||
