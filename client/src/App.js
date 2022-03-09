@@ -16,7 +16,7 @@ import { allPosts } from "./pages/dummy/dummyitems";
 // import { dummyuser } from "./pages/dummy/dummyUser";
 function App() {
   // const [meetCode, setMeetCode] = useState(null);
-  const [isLogin, setIsLogin] = useState(false);
+  // const [isLogin, setIsLogin] = useState(false);
   const [userinfo, setUserinfo] = useState(null);
   const history = useHistory();
   const [items, setItems] = useState([]);
@@ -28,18 +28,20 @@ function App() {
       .get("http://localhost:8080/userinfo", { headers: { jwt: token } })
       .then((res) => {
         setUserinfo(res.data.data.loginInfo);
-        setIsLogin(!isLogin);
-        history.push("/main");
-        loadMainPage();
+        // setIsLogin(!isLogin);
+        handleMainPage();
       });
   };
 
   const handleMainPage = () => {
+    axios
+      .get("http://localhost:8080/post")
+      .then((res) => setItems(res.data.data));
     history.push("/main");
   };
   const handleResponseSuccess = () => {
     const jwt = document.cookie.split("=")[1];
-    console.log(jwt);
+    // console.log(jwt);
     isAuthenticated(jwt);
   };
 
@@ -48,35 +50,26 @@ function App() {
   };
   const userLogout = () => {
     setUserinfo(null);
-    setIsLogin(false);
+    // setIsLogin(false);
     document.cookie = "jwt" + "=; expires=Thu, 01 Jan 1999 00:00:10 GMT;";
     history.push("/");
   };
   const onClickDetailHandle = (postData) => {
     // 클릭하면 디테일데이터가 들어가야지 ㅇㅇ
-    console.log("postData:", postData);
+    // console.log("postData:", postData);
     setDetailData(postData);
     history.push("/detail");
   };
-  const loadMainPage = () => {
-    axios
-      .get("http://localhost:8080/post")
-      .then((res) => setItems(res.data.data));
-  };
-  console.log(items);
+
   const loadMypage = () => {
-    if (items.length === 0) {
-      return;
-    } else {
-      const mypageItem = items.filter((item) => item.userId === userinfo.id);
-      setMypageItem(mypageItem);
-      console.log(myItem);
-    }
+    axios
+      .get(`http://localhost:8080/post/${userinfo.id}`)
+      .then((res) => setMypageItem(res.data.data));
   };
   return (
     <Switch>
       <Route exact path="/">
-        <Landing isLogin={isLogin} />
+        <Landing userinfo={userinfo} />
       </Route>
       <Route path="/login">
         <Login handleResponseSuccess={handleResponseSuccess} />
