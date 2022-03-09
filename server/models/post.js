@@ -26,14 +26,36 @@ module.exports = (sequelize, DataTypes) => {
         targetKey: "id",
       });
 
-      const Post_MusicData = sequelize.define(
-        "Post_MusicData",
-        {},
-        { timestamps: false }
-      );
+      const Post_MusicData = sequelize.define("Post_MusicData", {
+        id: {
+           type: DataTypes.INTEGER,
+           primaryKey: true,
+           autoIncrement: true,
+           allowNull: false
+        },
+        PostId: {
+          type: 'foreign key',
+          references: {
+            model: "Posts",
+            key: "id",
+          },
+          onDelete: 'cascade',
+          onUpdate: 'cascade'
+        },
+        MusicDatumId: {
+          type: 'foreign key',
+          references: {
+            model: "MusicData",
+            key: "id",
+          },
+          onDelete: 'cascade',
+          onUpdate: 'cascade'
+        },
+      },
+        { timestamps: false })
+
       models.Post.belongsToMany(models.MusicData, {
-        through: Post_MusicData,
-      });
+        through: Post_MusicData });
 
       const Post_Hashtag = sequelize.define(
         "Post_Hashtag",
