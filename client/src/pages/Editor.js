@@ -277,16 +277,39 @@ export default function Editor({
           </div>
           <div id="postInfo">
             post 제목
-            <input
-              type="text"
-              id="textInput"
-              onChange={postTitleChageHandle}
-            ></input>
+            {isRemake ? (
+              <input
+                type="text"
+                id="textInput"
+                value={detailData.postTitle}
+                onChange={postTitleChageHandle}
+              ></input>
+            ) : (
+              <input
+                type="text"
+                id="textInput"
+                onChange={postTitleChageHandle}
+              ></input>
+            )}
           </div>
         </div>
         <div id="down">
           <div>post 소개</div>
           <div id="postIntro">
+            {isRemake ? (
+              <input
+                type="textarea"
+                id="textInput"
+                value={detailData.postExplain}
+                onChange={postInroChageHandle}
+              ></input>
+            ) : (
+              <input
+                type="textarea"
+                id="textInput"
+                onChange={postInroChageHandle}
+              ></input>
+            )}
             <input
               type="textarea"
               id="textInput"

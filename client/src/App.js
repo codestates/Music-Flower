@@ -34,7 +34,15 @@ function App() {
     axios
       .get("http://localhost:8080/post")
       .then((res) => setItems(res.data.data));
-    history.push("/main");
+    // history.push("/main");
+
+    setTimeout(
+      () =>
+        (() => {
+          history.push("/main");
+        })(),
+      300
+    );
   };
   const handleResponseSuccess = () => {
     console.log("cookie", document.cookie);
