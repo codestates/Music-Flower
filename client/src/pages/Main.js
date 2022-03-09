@@ -1,12 +1,9 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Postthumnails from "../components/Postthumnails";
 import { Autocomplete } from "../pages/UI_components/Autocomplete";
 import { useHistory, Link } from "react-router-dom";
 import axios from "axios";
-// import { AUTH_URL } from "../components/SpotifyC";
-// const cId = spotifyC;
-// const AUTH_URL = `https://accounts.spotify.com/authorize?client_id=${cId}&response_type=code&redirect_uri=http://localhost:3000/editor&scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20user-read-playback-state%20user-modify-playback-state`;
 
 const MainPage = styled.div`
   /* border: 1px solid red; */
@@ -60,12 +57,13 @@ const SerchArea = styled.div`
     /* border: 1px solid red; */
     /* padding: 10px; */
 
-    flex: 2 0 auto;
-    margin-left: 40px;
+    width: 40vh;
+    margin-left: 20px;
   }
   > #create_post {
     /* border: 1px solid red; */
     /* padding: 10px; */
+    flex: 1 0 auto;
 
     > button {
       margin-left: 8rem;
@@ -163,11 +161,18 @@ export default function Main({
   handleLogout,
   onClickDetailHandle,
   loadMypage,
+  setIsRemake,
 }) {
+  const [showPosts, setshowPosts] = useState(items);
+  useEffect(() => {
+    setshowPosts(items);
+  }, [items]);
+
   const onClickMyPageHandle = () => {
     loadMypage();
   };
   const onClickEditorHandle = () => {
+    setIsRemake(false);
     handleMusicData();
   };
 
@@ -193,7 +198,10 @@ export default function Main({
         <div id="bottom">
           <SerchArea>
             <div id="select_bar">
-              <Autocomplete items={items} setItems={setItems}></Autocomplete>
+              <Autocomplete
+                items={items}
+                setshowPosts={setshowPosts}
+              ></Autocomplete>
             </div>
             <div id="create_post">
               <button className="12134" onClick={onClickEditorHandle}>
@@ -204,7 +212,7 @@ export default function Main({
           <Body>
             <div id="BoardName">이것은 예시입니다</div>
             <div id="Posts">
-              {items.map((item, idx) => (
+              {showPosts.map((item, idx) => (
                 <Postthumnails
                   onClickDetailHandle={onClickDetailHandle}
                   item={item}

@@ -1,3 +1,6 @@
+// import SpotifyAPP from "./components/SpotifyApp";
+// import { allPosts } from "./pages/dummy/dummyitems";
+// import { dummyuser } from "./pages/dummy/dummyUser";
 import React, { useState } from "react";
 import { Switch, Route, useHistory } from "react-router-dom";
 import axios from "axios";
@@ -16,6 +19,7 @@ function App() {
   const [detailData, setDetailData] = useState({});
   const [myItem, setMypageItem] = useState([]);
   const [musicdata, setMusicData] = useState([]);
+  const [isRemake, setIsRemake] = useState(false);
 
   const isAuthenticated = (token) => {
     axios
@@ -31,12 +35,19 @@ function App() {
         handleMainPage();
       });
   };
-
   const handleMainPage = () => {
     axios
       .get("http://ec2-3-35-27-251.ap-northeast-2.compute.amazonaws.com/post")
       .then((res) => setItems(res.data.data));
-    history.push("/main");
+    // history.push("/main");
+
+    setTimeout(
+      () =>
+        (() => {
+          history.push("/main");
+        })(),
+      300
+    );
   };
   const handleResponseSuccess = (res) => {
     const jwt = res.data.accessToken;
@@ -61,16 +72,25 @@ function App() {
   };
 
   const loadMypage = () => {
-    setTimeout(() => load(), 300);
+    setTimeout(
+      () =>
+        (() => {
+          axios
+            .get(
+              `http://ec2-3-35-27-251.ap-northeast-2.compute.amazonaws.com/post/${userinfo.id}`
+            )
+            .then((res) => setMypageItem(res.data.data));
+          history.push("/mypage");
+        })(),
+      300
+    );
   };
-  const load = () => {
-    axios
-      .get(
-        `http://ec2-3-35-27-251.ap-northeast-2.compute.amazonaws.com/post/${userinfo.id}`
-      )
-      .then((res) => setMypageItem(res.data.data));
-    history.push("/mypage");
-  };
+  // const load = () => {
+  //   axios
+  //     .get(`http://localhost:8080/post/${userinfo.id}`)
+  //     .then((res) => setMypageItem(res.data.data));
+  //   history.push("/mypage");
+  // };
 
   const handleMusicData = () => {
     axios
@@ -87,10 +107,13 @@ function App() {
         <Landing userinfo={userinfo} />
       </Route>
       <Route path="/login">
-        <Login handleResponseSuccess={handleResponseSuccess} />
+        <Login
+          handleResponseSuccess={handleResponseSuccess}
+          loadMypage={loadMypage}
+        />
       </Route>
       <Route path="/signup">
-        <Signup loginInfo={userinfo} />
+        <Signup />
       </Route>
       <Route path="/main">
         <Main
@@ -101,6 +124,7 @@ function App() {
           handleLogout={handleLogout}
           onClickDetailHandle={onClickDetailHandle}
           handleMusicData={handleMusicData}
+          setIsRemake={setIsRemake}
         ></Main>
       </Route>
       <Route path="/mypage">
@@ -118,6 +142,8 @@ function App() {
           detailData={detailData}
           handleMainPage={handleMainPage}
           handleLogout={handleLogout}
+          setIsRemake={setIsRemake}
+          handleMusicData={handleMusicData}
         ></Detail>
       </Route>
       <Route path="/editor">
@@ -127,6 +153,8 @@ function App() {
           handleMainPage={handleMainPage}
           loadMypage={loadMypage}
           handleLogout={handleLogout}
+          detailData={detailData}
+          isRemake={isRemake}
         ></Editor>
       </Route>
     </Switch>

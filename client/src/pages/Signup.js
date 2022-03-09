@@ -22,7 +22,7 @@ export default function Signup() {
     } else {
       axios
         .post(
-          "https://ec2-3-35-27-251.ap-northeast-2.compute.amazonaws.com/signup",
+          "http://ec2-3-35-27-251.ap-northeast-2.compute.amazonaws.com/signup",
           {
             nickname: signup.nickname,
             email: signup.email,

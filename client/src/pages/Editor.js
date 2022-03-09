@@ -148,12 +148,36 @@ export default function Editor({
   musicdata,
   users,
   loadMypage,
+  detailData,
+  isRemake,
 }) {
-  const [musicList, setMusicList] = useState([]);
+  // console.log("initData:", initData);
   const [image, setPostPoto] = useState("");
   const [postTitle, setPostTitle] = useState("");
   const [postExplain, setPostintro] = useState("");
-  const [userId, setUserId] = useState("");
+  const [musicList, setMusicList] = useState([]);
+
+  console.log("수정하기 버튼으로옴?:", isRemake);
+  // let initData;
+  // if (isRemake) {
+  //   initData = {
+  //     img: detailData.image,
+  //     pTitle: detailData.postTitle,
+  //     pExplain: detailData.postExpain,
+  //     mData: detailData.MusicData,
+  //   };
+  // setPostPoto(detailData.image);
+  // setPostTitle(detailData.postTitle);
+  // setPostintro(detailData.postExpain);
+  // setMusicList(detailData.MusicData);
+  // } else {
+  //   initData = {
+  //     img: "",
+  //     pTitle: "",
+  //     pExplain: "",
+  //     mData: [],
+  //   };
+  // }
   const submitHandle = () => {
     let musiclistid = musicList.map((el) => el.id);
     let postData = {
@@ -163,14 +187,44 @@ export default function Editor({
       postExplain,
       musicList: musiclistid,
     };
-    if (!userId && !image && !postTitle && !postExplain) {
+    if (!image && !postTitle && !postExplain) {
       return alert("내용을 모두 작성해주세요");
     } else if (musicList.length === 0) {
       return alert("음악을 추가해 주세요");
     } else {
       axios
         .post(
-          "https://ec2-3-35-27-251.ap-northeast-2.compute.amazonaws.com/post",
+          "http://ec2-3-35-27-251.ap-northeast-2.compute.amazonaws.com/post",
+          {
+            userId: users.id,
+            image,
+            postTitle,
+            postExplain,
+            musicList: musiclistid,
+          },
+          { headers: { "Content-Type": "application/json" } }
+        )
+        .then((res) => loadMypage());
+      //console.log("전송정보", postData);
+    }
+  };
+  const remakeHandle = () => {
+    let musiclistid = musicList.map((el) => el.id);
+    let postData = {
+      userId: users.id,
+      image,
+      postTitle,
+      postExplain,
+      musicList: musiclistid,
+    };
+    if (!image && !postTitle && !postExplain) {
+      return alert("내용을 모두 작성해주세요");
+    } else if (musicList.length === 0) {
+      return alert("음악을 추가해 주세요");
+    } else {
+      axios
+        .put(
+          `http://ec2-3-35-27-251.ap-northeast-2.compute.amazonaws.com/${detailData.id}`,
           {
             userId: users.id,
             image,
@@ -192,6 +246,7 @@ export default function Editor({
     // console.log("Inro", e.target.value);
     setPostintro(e.target.value);
   };
+  console.log("edit-detailData:", detailData);
 
   return (
     <div id="editorPage">
@@ -201,7 +256,7 @@ export default function Editor({
         </Link>
         <Menu>
           <Nick>
-            <span>글 작성 페이지</span>
+            {isRemake ? <span>수정 페이지</span> : <span>글 작성 페이지</span>}
           </Nick>
           <MenuButton>
             <button onClick={handleMainPage}>메인페이지</button>
@@ -216,20 +271,45 @@ export default function Editor({
             <br />
             <PostThumnailSelecter
               setPostPoto={setPostPoto}
+              image={image}
+              detailData={detailData}
             ></PostThumnailSelecter>
           </div>
           <div id="postInfo">
             post 제목
-            <input
-              type="text"
-              id="textInput"
-              onChange={postTitleChageHandle}
-            ></input>
+            {isRemake ? (
+              <input
+                type="text"
+                id="textInput"
+                value={detailData.postTitle}
+                onChange={postTitleChageHandle}
+              ></input>
+            ) : (
+              <input
+                type="text"
+                id="textInput"
+                onChange={postTitleChageHandle}
+              ></input>
+            )}
           </div>
         </div>
         <div id="down">
           <div>post 소개</div>
           <div id="postIntro">
+            {isRemake ? (
+              <input
+                type="textarea"
+                id="textInput"
+                value={detailData.postExplain}
+                onChange={postInroChageHandle}
+              ></input>
+            ) : (
+              <input
+                type="textarea"
+                id="textInput"
+                onChange={postInroChageHandle}
+              ></input>
+            )}
             <input
               type="textarea"
               id="textInput"
@@ -239,7 +319,6 @@ export default function Editor({
 
           <div id="musicList">
             음악 리스트
-            {/* <SpotifyAPP meetCode={meetCode} /> */}
             <div id="music">
               <div id="musicserch">
                 <MusicSelector
@@ -267,7 +346,11 @@ export default function Editor({
             </div>
           </div>
         </div>
-        <button onClick={submitHandle}>작성완료</button>
+        {isRemake ? (
+          <button onClick={remakeHandle}>수정완료</button>
+        ) : (
+          <button onClick={submitHandle}>작성완료</button>
+        )}
       </EditorBody>
     </div>
   );

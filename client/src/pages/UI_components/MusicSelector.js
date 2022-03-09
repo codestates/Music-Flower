@@ -111,8 +111,6 @@ export const MusicSelector = ({ musicList, setMusicList, musicData }) => {
   };
 
   const handleKeyUp = (event) => {
-    // https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/getModifierState#example
-    // eslint-disable-next-line
     if (
       event.getModifierState("Fn") ||
       event.getModifierState("Hyper") ||

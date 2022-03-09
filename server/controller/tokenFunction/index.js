@@ -4,6 +4,7 @@ require("dotenv").config();
 module.exports = {
   generateAccessToken: (data) => {
     // TODO: Access token으로 sign합니다.
+
     return sign(data, process.env.ACCESS_SECRET, { expiresIn: "1h" });
   },
 
@@ -17,14 +18,14 @@ module.exports = {
     //   maxAge: 24 * 6 * 60 * 10000,
     //   sameSite: "none",
     // });
-    res.status(200).json({ data: null, accessToken, message: "ok" });
+    return res.status(200).json({ data: null, accessToken, message: "ok" });
   },
 
   isAuthorized: (req) => {
     // token 말고
     // TODO: JWT 토큰 정보를 받아서 검증합니다.
-    // console.log("req", req.headers);
     const token = req.headers.jwt;
+    // console.log("isAuthorized token:", token);
     if (!token) {
       return null;
     }
