@@ -180,7 +180,6 @@ export const DropDown = ({ options, handleDropDownClick, selected }) => {
               src={option.musicImage}
               style={{ height: "64px", width: "64px" }}
             />
-            <span> // </span>
             <div>{option.musicTitle}</div>
             <div className="serchArtist">{option.artist}</div>
             <div>
