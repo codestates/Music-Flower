@@ -6,7 +6,11 @@ import { useState } from "react";
 //const code = new URLSearchParams(window.location.search).get("code");
 import { Link } from "react-router-dom";
 
-export default function Login({ handleResponseSuccess, loadMypage }) {
+export default function Login({
+  handleResponseSuccess,
+  loadMypage,
+  serverURL,
+}) {
   const [loginInfo, setLoginInfo] = useState({
     email: "",
     password: "",
@@ -18,8 +22,7 @@ export default function Login({ handleResponseSuccess, loadMypage }) {
   };
 
   const handleGuestLogin = () => {
-    const url =
-      "http://ec2-3-35-27-251.ap-northeast-2.compute.amazonaws.com/login";
+    const url = `${serverURL}/login`;
     axios
       .post(
         url,
@@ -46,8 +49,7 @@ export default function Login({ handleResponseSuccess, loadMypage }) {
       return alert("아이디와 비밀번호 모두 입력 하세요.");
     }
 
-    const url =
-      "http://ec2-3-35-27-251.ap-northeast-2.compute.amazonaws.com/login";
+    const url = `${serverURL}/login`;
     axios
       .post(
         url,

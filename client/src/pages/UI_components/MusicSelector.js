@@ -165,6 +165,15 @@ export const MusicSelector = ({ musicList, setMusicList, musicData }) => {
 };
 
 export const DropDown = ({ options, handleDropDownClick, selected }) => {
+  const SerchMusicText = styled.div`
+    border-bottom: 1px solid grey;
+    padding-bottom: 20px;
+    display: flex;
+    > div {
+      /* border: 1px solid grey; */
+      padding: 5px 0px 0px 10px;
+    }
+  `;
   return (
     <DropDownContainer>
       {options.map((option, idx) => (
@@ -174,12 +183,16 @@ export const DropDown = ({ options, handleDropDownClick, selected }) => {
           className={selected === idx ? "selected" : ""}
         >
           <div className="serchMusicText">
-            <img
-              src={option.musicImage}
-              style={{ height: "64px", width: "64px" }}
-            />
-            <div>{option.musicTitle}</div>
-            <div className="serchArtist">{option.artist}</div>
+            <SerchMusicText>
+              <img
+                src={option.musicImage}
+                style={{ height: "64px", width: "64px" }}
+              />
+              <div>
+                <div>{option.musicTitle}</div>
+                <div className="serchArtist">{option.artist}</div>
+              </div>
+            </SerchMusicText>
             <div>
               <br></br>
             </div>

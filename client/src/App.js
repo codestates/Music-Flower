@@ -21,14 +21,13 @@ function App() {
   const [musicdata, setMusicData] = useState([]);
   const [isRemake, setIsRemake] = useState(false);
 
+  // let serverURL = "http://ec2-3-35-27-251.ap-northeast-2.compute.amazonaws.com";
+  let serverURL = "http://localhost:8080";
   const isAuthenticated = (token) => {
     axios
-      .get(
-        "http://ec2-3-35-27-251.ap-northeast-2.compute.amazonaws.com/userinfo",
-        {
-          headers: { jwt: token },
-        }
-      )
+      .get(`${serverURL}/userinfo`, {
+        headers: { jwt: token },
+      })
       .then((res) => {
         console.log(res);
         setUserinfo(res.data.data.loginInfo);
@@ -36,9 +35,7 @@ function App() {
       });
   };
   const handleMainPage = () => {
-    axios
-      .get("http://ec2-3-35-27-251.ap-northeast-2.compute.amazonaws.com/post")
-      .then((res) => setItems(res.data.data));
+    axios.get(`${serverURL}/post`).then((res) => setItems(res.data.data));
     // history.push("/main");
 
     setTimeout(
@@ -76,9 +73,7 @@ function App() {
       () =>
         (() => {
           axios
-            .get(
-              `http://ec2-3-35-27-251.ap-northeast-2.compute.amazonaws.com/post/${userinfo.id}`
-            )
+            .get(`${serverURL}/post/${userinfo.id}`)
             .then((res) => setMypageItem(res.data.data));
           history.push("/mypage");
         })(),
@@ -94,9 +89,7 @@ function App() {
 
   const handleMusicData = () => {
     axios
-      .get(
-        "http://ec2-3-35-27-251.ap-northeast-2.compute.amazonaws.com/musiclist"
-      )
+      .get(`${serverURL}/musiclist`)
       .then((res) => setMusicData(res.data.data));
     history.push("/editor");
   };
@@ -110,10 +103,11 @@ function App() {
         <Login
           handleResponseSuccess={handleResponseSuccess}
           loadMypage={loadMypage}
+          serverURL={serverURL}
         />
       </Route>
       <Route path="/signup">
-        <Signup />
+        <Signup serverURL={serverURL} />
       </Route>
       <Route path="/main">
         <Main
@@ -144,6 +138,7 @@ function App() {
           handleLogout={handleLogout}
           setIsRemake={setIsRemake}
           handleMusicData={handleMusicData}
+          serverURL={serverURL}
         ></Detail>
       </Route>
       <Route path="/editor">
@@ -155,6 +150,7 @@ function App() {
           handleLogout={handleLogout}
           detailData={detailData}
           isRemake={isRemake}
+          serverURL={serverURL}
         ></Editor>
       </Route>
     </Switch>

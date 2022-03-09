@@ -66,7 +66,10 @@ const PostThumnailSelecter = ({ setPostPoto, image, detailData }) => {
           ))}
         </select>
       </div>
-      <img src={images[photo]} style={{ height: "20vh", width: "20vh" }} />
+      <img
+        src={images[photo] || detailData.image}
+        style={{ height: "20vh", width: "20vh" }}
+      />
     </div>
   );
 };

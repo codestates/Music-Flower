@@ -3,7 +3,7 @@ import "../css/Signup.css";
 import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
 
-export default function Signup() {
+export default function Signup({ serverURL }) {
   const history = useHistory();
   const [signup, setSignup] = useState({
     nickname: "",
@@ -21,14 +21,11 @@ export default function Signup() {
       return alert("비밀번호가 다릅니다");
     } else {
       axios
-        .post(
-          "http://ec2-3-35-27-251.ap-northeast-2.compute.amazonaws.com/signup",
-          {
-            nickname: signup.nickname,
-            email: signup.email,
-            password: signup.password,
-          }
-        )
+        .post(`${serverURL}/signup`, {
+          nickname: signup.nickname,
+          email: signup.email,
+          password: signup.password,
+        })
         .then((res) => history.push("/login"))
         .catch((err) => alert("이미 존재하는 아이디 입니다."));
     }

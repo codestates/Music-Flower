@@ -85,17 +85,13 @@ const Bar = styled.i`
 `;
 
 export default function Postthumnails({ item, onClickDetailHandle }) {
-  console.log(item);
-
   const [like, setLike] = useState(item.totalLike);
 
   const handleLike = (item) => {
     setLike(Number(like) + 1);
   };
-  console.log("items", item);
   return (
     // <Post>
-
     <Card key={item.id}>
       <img
         onClick={() => onClickDetailHandle(item)}
