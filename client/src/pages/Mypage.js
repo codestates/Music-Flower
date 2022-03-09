@@ -70,6 +70,7 @@ const Menu = styled.div`
 const Nick = styled.div`
   /* //border: 1px solid red; */
   /* padding: 10px; */
+  font-size: 20px;
   margin-top: 20px;
   flex: 3 0 auto;
   > span {
