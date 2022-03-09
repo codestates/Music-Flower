@@ -27,6 +27,7 @@ function App() {
     axios
       .get("http://localhost:8080/userinfo", { headers: { jwt: token } })
       .then((res) => {
+        console.log("데이터", res);
         setUserinfo(res.data.data.loginInfo);
         setIsLogin(!isLogin);
         history.push("/main");
@@ -63,6 +64,7 @@ function App() {
       .get("http://localhost:8080/post")
       .then((res) => setItems(res.data.data));
   };
+  console.log(items);
   const loadMypage = () => {
     if (items.length === 0) {
       return;
