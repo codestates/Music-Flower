@@ -75,7 +75,7 @@ function App() {
   return (
     <Switch>
       <Route exact path="/">
-        <Landing isLogin={isLogin} userinfo={userinfo} />
+        <Landing userinfo={userinfo} />
       </Route>
       <Route path="/login">
         <Login handleResponseSuccess={handleResponseSuccess} />
@@ -118,6 +118,7 @@ function App() {
           handleMainPage={handleMainPage}
           loadMypage={loadMypage}
           handleLogout={handleLogout}
+          detailData={detailData}
         ></Editor>
       </Route>
     </Switch>

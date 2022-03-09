@@ -148,6 +148,7 @@ export default function Editor({
   musicdata,
   users,
   loadMypage,
+  detailData,
 }) {
   const [musicList, setMusicList] = useState([]);
   const [image, setPostPoto] = useState("");
@@ -192,6 +193,7 @@ export default function Editor({
     // console.log("Inro", e.target.value);
     setPostintro(e.target.value);
   };
+  console.log("edit-detailData:", detailData);
 
   return (
     <div id="editorPage">

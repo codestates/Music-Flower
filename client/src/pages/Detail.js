@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, Switch, Route, useHistory } from "react-router-dom";
 import axios from "axios";
+
 const Detailbody = styled.div`
   border: 1px solid red;
   /* padding: 200px; */
@@ -123,11 +124,16 @@ export default function Detail({
   users,
   handleLogout,
 }) {
+  const history = useHistory();
+
   console.log("디테일 컴포넌트 정보: ", detailData);
   const handleDelete = () => {
     axios
       .delete(`http://localhost:8080/post/${detailData.id}`)
       .then(() => handleMainPage());
+  };
+  const handleEdit = () => {
+    history.push("/editor");
   };
   return (
     <div id="detailPage">
@@ -155,7 +161,7 @@ export default function Detail({
             <div>
               <h4>{detailData.User.nickname}</h4>
             </div>
-            <button>수정하기</button>
+            <button onClick={handleEdit}>수정하기</button>
             <button onClick={handleDelete}>삭제하기</button>
             <div>
               {/* <text>
