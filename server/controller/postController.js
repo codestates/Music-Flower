@@ -6,14 +6,8 @@ const db = require("../models");
 const Post_MusicData = db.sequelize.models.Post_MusicData;
 
 module.exports = {
-  //[get] 포스트 불러오기
-  //포스트와 연결된 userId의 nickname과
-  //포스트와 연결된(Post-Post_MusicData-MusicData) MusicData의 정보도 가지고 옴
+  // [get]/post
   findPost: async (req, res) => {
-    console.log(req);
-    // const postList = await Post.findAll({
-    //   attributes: ["userId", "postTitle", "image", "postExplain", "createdAt"],
-    // });
     const postList = await Post.findAll({
       include: [
         {
@@ -27,7 +21,7 @@ module.exports = {
     });
     res.status(200).json({ data: postList, message: "ok" });
   },
-
+  // [get]/post:id(userId)
   findUserPost: async (req, res) => {
     const userId = req.params.id;
     const userPostList = await Post.findAll({
@@ -47,9 +41,7 @@ module.exports = {
     res.status(200).json({ data: userPostList, message: "ok" });
   },
 
-  //[post] post생성하기
-  //Post에 레코드 생성
-  //Post_musicData에 PostId에 해당하는 MusicDatumId를 새롭게 생성
+  // [post]/post
   createPost: (req, res) => {
     const { userId, postTitle, image, postExplain, musicList } = req.body;
     Post.create({
@@ -58,7 +50,6 @@ module.exports = {
       image: image,
       postExplain: postExplain,
     }).then((result) => {
-      //musicList에는 배열로 MusicData의 id가 들어오도록 함
       const bulkList = musicList.map((el) => {
         return {
           PostId: result.id,
@@ -67,15 +58,9 @@ module.exports = {
       });
       Post_MusicData.bulkCreate(bulkList);
     });
-    //
-    // queryInterface.bulkInsert("Post_MusicData", bulkList);
     res.status(201).json("successfully created your post");
   },
-  //[put]/:id 는 postId로 요청할 것
-  //post 수정
-  //db에 있는 해당 포스트 id 내용 수정 후
-  //post_musicData에 있는 PostId 에 해당하는 데이터 삭제
-  //post_musicData에 PostId에 해당하는 MusicDatumId를 새롭게 생성
+  // [put]/post/:id(postId)
   updatePost: (req, res) => {
     const postId = req.params.id;
     const { postTitle, image, postExplain, musicList } = req.body;
@@ -85,53 +70,54 @@ module.exports = {
       },
       {
         where: {
-          postId: postId,
+          id: postId,
         },
       }
-    );
-    // .then(()=> {
-    //   Post.update({
-    //     image: image},
-    //     {
-    //       where: {
-    //         postId: postId,
-    //       },
-    //     },
-    //   )
-    // })
-    // .then(()=> {
-    //   Post.update({
-    //     postExplain: postExplain},
-    //     {
-    //       where: {
-    //         postId: postId,
-    //       },
-    //     },
-    //   )
-    // })
-    // .then(() => {
-    //   Post_MusicData.destroy({
-    //     where: {
-    //       PostId: postId,
-    //     },
-    //   });
-    // })
-    // .then(() => {
-    //   const bulkList = musicList.map((el) => {
-    //     return {
-    //       PostId: postId,
-    //       MusicDatumId: el,
-    //     };
-    //   });
-    //   Post_MusicData.bulkcreate(bulkList);
-    // });
+    )
+      .then(() => {
+        Post.update(
+          {
+            image: image,
+          },
+          {
+            where: {
+              id: postId,
+            },
+          }
+        );
+      })
+      .then(() => {
+        Post.update(
+          {
+            postExplain: postExplain,
+          },
+          {
+            where: {
+              id: postId,
+            },
+          }
+        );
+      })
+      .then(() => {
+        Post_MusicData.destroy({
+          where: {
+            PostId: postId,
+          },
+        });
+      })
+      .then(() => {
+        const bulkList = musicList.map((el) => {
+          return {
+            PostId: postId,
+            MusicDatumId: el,
+          };
+        });
+        Post_MusicData.bulkCreate(bulkList);
+      });
     res.status(200).json("successfully updated your post");
   },
 
-  //[delete]/:id 는 postId로 요청할 것
-  //post 삭제
-  //db에 있는 해당 포스트 id 삭제 후
-  //Post_MusicData에 있는 PostId 에 해당하는 데이터 삭제
+  //[delete]/:id(postId)
   deletePost: (req, res) => {
     const postId = req.params.id;
     Post.destroy({
