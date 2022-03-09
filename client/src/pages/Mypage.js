@@ -6,32 +6,34 @@ const Mypage = styled.div`
   /* border: 1px solid red; */
   display: flex;
   text-align: center;
-
   flex-direction: column;
 
   > #up {
     /* border: 1px solid red; */
     padding: 10px;
-
     flex: 1 0 auto;
   }
   > #down {
     margin: 0 auto;
-    padding: 0 20px;
+
     max-width: 1080px;
     max-height: 1980px;
     /* border: 1px solid red; */
     border: 1px solid grey;
     border-radius: 10px;
-    padding: 10px;
     display: flex;
     flex: 3 0 auto;
     flex-direction: column;
+    > #boardName {
+      font-size: 30px;
+      display: flex;
+      justify-content: space-around;
+    }
     > div {
       /* border: 1px solid red; */
-      padding: 10px;
       display: flex;
       flex-wrap: wrap;
+      margin-left: 9px;
 
       > .myPost {
         /* border: 1px solid red; */
@@ -123,7 +125,7 @@ export default function MyPage({
         </Menu>
       </Header>
       <div id="down">
-        {users.nickname}님의 뮤직
+        <div id="boardName">{users.nickname}님의 뮤직</div>
         {userPosts.length !== 0 ? (
           <div className="myPost">
             {userPosts.map((item, idx) => (

@@ -19,6 +19,7 @@ function App() {
   const [detailData, setDetailData] = useState({});
   const [myItem, setMypageItem] = useState([]);
   const [musicdata, setMusicData] = useState([]);
+  const [isRemake, setIsRemake] = useState(false);
 
   const isAuthenticated = (token) => {
     axios
@@ -59,11 +60,23 @@ function App() {
   };
 
   const loadMypage = () => {
-    axios
-      .get(`http://localhost:8080/post/${userinfo.id}`)
-      .then((res) => setMypageItem(res.data.data));
-    history.push("/mypage");
+    setTimeout(
+      () =>
+        (() => {
+          axios
+            .get(`http://localhost:8080/post/${userinfo.id}`)
+            .then((res) => setMypageItem(res.data.data));
+          history.push("/mypage");
+        })(),
+      300
+    );
   };
+  // const load = () => {
+  //   axios
+  //     .get(`http://localhost:8080/post/${userinfo.id}`)
+  //     .then((res) => setMypageItem(res.data.data));
+  //   history.push("/mypage");
+  // };
 
   const handleMusicData = () => {
     axios
@@ -78,7 +91,10 @@ function App() {
         <Landing userinfo={userinfo} />
       </Route>
       <Route path="/login">
-        <Login handleResponseSuccess={handleResponseSuccess} />
+        <Login
+          handleResponseSuccess={handleResponseSuccess}
+          loadMypage={loadMypage}
+        />
       </Route>
       <Route path="/signup">
         <Signup />
@@ -92,6 +108,7 @@ function App() {
           handleLogout={handleLogout}
           onClickDetailHandle={onClickDetailHandle}
           handleMusicData={handleMusicData}
+          setIsRemake={setIsRemake}
         ></Main>
       </Route>
       <Route path="/mypage">
@@ -109,6 +126,8 @@ function App() {
           detailData={detailData}
           handleMainPage={handleMainPage}
           handleLogout={handleLogout}
+          setIsRemake={setIsRemake}
+          handleMusicData={handleMusicData}
         ></Detail>
       </Route>
       <Route path="/editor">
@@ -119,6 +138,7 @@ function App() {
           loadMypage={loadMypage}
           handleLogout={handleLogout}
           detailData={detailData}
+          isRemake={isRemake}
         ></Editor>
       </Route>
     </Switch>

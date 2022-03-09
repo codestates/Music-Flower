@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
-const PostThumnailSelecter = ({ setPostPoto }) => {
+const PostThumnailSelecter = ({ setPostPoto, image, detailData }) => {
+  console.log("image:", detailData.image);
   // console.log("label : ", label);
   const [photo, setphoto] = useState("sellect");
   // const [photoIdx, setPotoIdx] = useState(0);
@@ -46,7 +47,7 @@ const PostThumnailSelecter = ({ setPostPoto }) => {
     setphoto(e.target.value);
   };
   // dropdownChanged 안에 넣으면 박자 느림 이유를 몰루 아 바뀌기 전에거가 들어가서 그란가?
-  setPostPoto(images[photo]);
+  setPostPoto(images[photo] || detailData.image);
   return (
     <div id="thumnailSelecter">
       <div>
@@ -65,7 +66,7 @@ const PostThumnailSelecter = ({ setPostPoto }) => {
           ))}
         </select>
       </div>
-      <img src={images[photo]} style={{ height: "400px", width: "400px" }} />
+      <img src={images[photo]} style={{ height: "20vh", width: "20vh" }} />
     </div>
   );
 };

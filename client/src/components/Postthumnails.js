@@ -13,12 +13,12 @@ import React, { useEffect, useState } from "react";
 const Card = styled.li`
   /* border: 1px solid red; */
   border: 1px solid grey;
-  padding: 10px;
+  padding: 11px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
   /* border-radius: 20px; */
-  height: 400px;
-  width: 200px;
+  height: 374px;
+  width: 221px;
   display: flex;
   flex-direction: column;
   align-items: center;

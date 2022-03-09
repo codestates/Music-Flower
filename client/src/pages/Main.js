@@ -91,10 +91,12 @@ const Body = styled.div`
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
+
   flex: 8 0 auto;
   > #Posts {
     display: flex;
     flex-wrap: wrap;
+    margin-left: 7px;
   }
   > #BoardName {
     /* border: 1px solid red; */
@@ -158,6 +160,7 @@ export default function Main({
   handleLogout,
   onClickDetailHandle,
   loadMypage,
+  setIsRemake,
 }) {
   const [showPosts, setshowPosts] = useState(items);
   useEffect(() => {
@@ -168,6 +171,7 @@ export default function Main({
     loadMypage();
   };
   const onClickEditorHandle = () => {
+    setIsRemake(false);
     handleMusicData();
   };
 
