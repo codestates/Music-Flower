@@ -113,6 +113,7 @@ function App() {
           users={userinfo}
           musicdata={musicdata}
           handleMainPage={handleMainPage}
+          loadMypage={loadMypage}
           handleLogout={handleLogout}
         ></Editor>
       </Route>
