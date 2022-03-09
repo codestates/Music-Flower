@@ -156,7 +156,9 @@ export default function Detail({
   console.log("디테일 컴포넌트 정보: ", detailData);
   const handleDelete = () => {
     axios
-      .delete(`http://localhost:8080/post/${detailData.id}`)
+      .delete(
+        `ec2-3-35-27-251.ap-northeast-2.compute.amazonaws.com/post/${detailData.id}`
+      )
       .then(() => handleMainPage());
   };
   return (
