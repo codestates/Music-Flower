@@ -150,13 +150,22 @@ export default function Editor({
   loadMypage,
   detailData,
   isRemake,
+  image,
+  setPostPoto,
+  postTitle,
+  setPostTitle,
+  postExplain,
+  setPostintro,
+  musicList,
+  setMusicList,
+
   serverURL,
 }) {
   // console.log("initData:", initData);
-  const [image, setPostPoto] = useState("");
-  const [postTitle, setPostTitle] = useState("");
-  const [postExplain, setPostintro] = useState("");
-  const [musicList, setMusicList] = useState([]);
+  // const [image, setPostPoto] = useState("");
+  // const [postTitle, setPostTitle] = useState("");
+  // const [postExplain, setPostintro] = useState("");
+  // const [musicList, setMusicList] = useState([]);
 
   console.log("수정하기 버튼으로옴?:", isRemake);
   console.log("edit-detailData:", detailData);
@@ -174,14 +183,6 @@ export default function Editor({
     } else if (musicList.length === 0) {
       return alert("음악을 추가해 주세요");
     } else {
-      const remakeData = {
-        userId: users.id,
-        image,
-        postTitle,
-        postExplain,
-        musicList: musiclistid,
-      };
-      console.log("remakeData", remakeData);
       axios
         .post(
           `${serverURL}/post`,
@@ -265,7 +266,7 @@ export default function Editor({
               <input
                 type="text"
                 id="textInput"
-                value={postTitle || detailData.postTitle}
+                value={postTitle}
                 onChange={postTitleChageHandle}
               ></input>
             ) : (
@@ -284,7 +285,7 @@ export default function Editor({
               <input
                 type="textarea"
                 id="textInput"
-                value={postExplain || detailData.postExplain}
+                value={postExplain}
                 onChange={postInroChageHandle}
               ></input>
             ) : (
