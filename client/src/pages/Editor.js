@@ -170,7 +170,7 @@ export default function Editor({
     } else {
       axios
         .post(
-          "ec2-3-35-27-251.ap-northeast-2.compute.amazonaws.com/post",
+          "https://ec2-3-35-27-251.ap-northeast-2.compute.amazonaws.com/post",
           {
             userId: users.id,
             image,

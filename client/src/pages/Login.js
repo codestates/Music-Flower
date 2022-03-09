@@ -20,7 +20,8 @@ export default function Login({ handleResponseSuccess, isLogin, setMeetCode }) {
   };
 
   const handleGuest = () => {
-    const url = "ec2-3-35-27-251.ap-northeast-2.compute.amazonaws.com/login";
+    const url =
+      "http://ec2-3-35-27-251.ap-northeast-2.compute.amazonaws.com/login";
     axios
       .post(
         url,
@@ -32,7 +33,7 @@ export default function Login({ handleResponseSuccess, isLogin, setMeetCode }) {
           withCredentials: true,
         }
       )
-      .then((res) => handleResponseSuccess())
+      .then((res) => handleResponseSuccess(res))
       .catch((err) => alert("아이디 또는 비밀번호가 일치 하지않습니다."));
   };
 
@@ -41,7 +42,8 @@ export default function Login({ handleResponseSuccess, isLogin, setMeetCode }) {
       return alert("아이디와 비밀번호 모두 입력 하세요.");
     }
 
-    const url = "ec2-3-35-27-251.ap-northeast-2.compute.amazonaws.com/login";
+    const url =
+      "http://ec2-3-35-27-251.ap-northeast-2.compute.amazonaws.com/login";
     axios
       .post(
         url,
@@ -53,7 +55,7 @@ export default function Login({ handleResponseSuccess, isLogin, setMeetCode }) {
           withCredentials: true,
         }
       )
-      .then((res) => handleResponseSuccess())
+      .then((res) => handleResponseSuccess(res))
       .catch((err) => alert("아이디 또는 비밀번호가 일치 하지않습니다."));
   };
 

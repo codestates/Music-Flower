@@ -18,7 +18,7 @@ module.exports = {
       delete loginInfo.dataValues.password;
       const token = generateAccessToken(loginInfo.dataValues);
       sendAccessToken(res, token);
-      return res.status(200).json({ message: "successfully loged in!" });
+      // return res.status(200).json({ message: "successfully loged in!" });
     }
   },
   //[post]/logout
