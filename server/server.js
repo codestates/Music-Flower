@@ -3,6 +3,7 @@ const cors = require("cors");
 const app = express();
 const { sequelize } = require("./models");
 
+// const { create, destroy } = require("./test");
 const {
   logIn,
   logOut,
@@ -10,13 +11,14 @@ const {
   findUser,
 } = require("./controller/userController");
 
+const {findMusic} = require("./controller/musicController");
 const postRouter = require("./router/postRouter");
 const spotifyRouter = require("./router/spotifyRouter");
 //const musicListRouter = require("./test/musicListRouter");
 
 sequelize
   .sync({ force: false })
-  .then(() => {
+  .then((e) => {
     console.log("데이터베이스 연결");
   })
   .catch((err) => {
@@ -27,20 +29,22 @@ app.use(
   cors({
     origin: ["http://localhost:3000"],
     credentials: true,
-    methods: ["GET", "POST", "OPTIONS"],
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   })
 );
 app.use(express.json());
-app.use(express.urlencoded({extended: false}));
+app.use(express.urlencoded({ extended: false }));
 
 app.post("/login", logIn);
 app.post("/logout", logOut);
 app.post("/signup", signUp);
 app.get("/userinfo", findUser);
 
+// app.get("/test1", create);
+// app.get("/test2", destroy);
+app.get("/musiclist", findMusic);
 app.use("/post", postRouter);
 app.use("/spotify", spotifyRouter);
-//app.use("/musiclist", musicListRouter);
 
 app.get("/", (req, res) => {
   res.status(200).send("Beautiful Music Flower");

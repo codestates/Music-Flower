@@ -1,5 +1,9 @@
-import React, { useEffect, useState } from "react";
+// import SpotifyAPP from "./components/SpotifyApp";
+// import { allPosts } from "./pages/dummy/dummyitems";
+// import { dummyuser } from "./pages/dummy/dummyUser";
+import React, { useState } from "react";
 import { Switch, Route, useHistory } from "react-router-dom";
+import axios from "axios";
 import Landing from "./pages/Landing";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
@@ -8,71 +12,95 @@ import Mypage from "./pages/Mypage";
 import Detail from "./pages/Detail";
 import Editor from "./pages/Editor";
 
-// import SpotifyAPP from "./components/SpotifyApp";
-
-import { allPosts } from "./pages/dummy/dummyitems";
-import { dummyuser } from "./pages/dummy/dummyUser";
 function App() {
-  const [meetCode, setMeetCode] = useState(null);
-  const [isLogin, setIsLogin] = useState(false);
   const [userinfo, setUserinfo] = useState(null);
   const history = useHistory();
+  const [items, setItems] = useState([]);
+  const [detailData, setDetailData] = useState({});
+  const [myItem, setMypageItem] = useState([]);
+  const [musicdata, setMusicData] = useState([]);
 
-  // axios.get("https://localhost:4000/auth").then((res) => {
-  //   console.log(res.data.data.userInfo);
-  //   setUserinfo(res.data.data.userInfo);
-  //   setIsLogin(!isLogin);
-  //   history.push("/mypage");
-  // });
+  const isAuthenticated = (token) => {
+    axios
+      .get("http://localhost:8080/userinfo", { headers: { jwt: token } })
+      .then((res) => {
+        setUserinfo(res.data.data.loginInfo);
+        // setIsLogin(!isLogin);
+        handleMainPage();
+      });
+  };
   const handleMainPage = () => {
+    axios
+      .get("http://localhost:8080/post")
+      .then((res) => setItems(res.data.data));
     history.push("/main");
   };
   const handleResponseSuccess = () => {
-    setIsLogin(!isLogin);
-    setUserinfo(dummyuser);
-    history.push("/main");
+    console.log("cookie", document.cookie);
+    const jwt = document.cookie.split("jwt=")[1];
+    console.log(jwt);
+    isAuthenticated(jwt);
   };
-  const [items, setItems] = useState(allPosts);
-  const [detailData, setDetailData] = useState({});
 
   const handleLogout = () => {
+    userLogout();
+  };
+  const userLogout = () => {
     setUserinfo(null);
-    setIsLogin(false);
+    // setIsLogin(false);
+    document.cookie = "jwt" + "=; expires=Thu, 01 Jan 1999 00:00:10 GMT;";
     history.push("/");
   };
   const onClickDetailHandle = (postData) => {
     // 클릭하면 디테일데이터가 들어가야지 ㅇㅇ
-    console.log("postData:", postData);
+    // console.log("postData:", postData);
     setDetailData(postData);
     history.push("/detail");
   };
 
+  const loadMypage = () => {
+    setTimeout(() => load(), 300);
+  };
+  const load = () => {
+    axios
+      .get(`http://localhost:8080/post/${userinfo.id}`)
+      .then((res) => setMypageItem(res.data.data));
+    history.push("/mypage");
+  };
+
+  const handleMusicData = () => {
+    axios
+      .get("http://localhost:8080/musiclist")
+      .then((res) => setMusicData(res.data.data));
+    history.push("/editor");
+  };
+  console.log(musicdata);
   return (
     <Switch>
       <Route exact path="/">
-        <Landing isLogin={isLogin} setMeetCode={setMeetCode} />
+        <Landing isLogin={isLogin} userinfo={userinfo} />
       </Route>
       <Route path="/login">
-        <Login
-          handleResponseSuccess={handleResponseSuccess}
-          setMeetCode={setMeetCode}
-        />
+        <Login handleResponseSuccess={handleResponseSuccess} />
       </Route>
       <Route path="/signup">
-        <Signup loginInfo={userinfo} />
+        <Signup />
       </Route>
       <Route path="/main">
         <Main
           items={items}
           users={userinfo}
+          loadMypage={loadMypage}
           setDetailData={setDetailData}
           handleLogout={handleLogout}
           onClickDetailHandle={onClickDetailHandle}
+          handleMusicData={handleMusicData}
         ></Main>
       </Route>
       <Route path="/mypage">
         <Mypage
           users={userinfo}
+          myItem={myItem}
           onClickDetailHandle={onClickDetailHandle}
           handleLogout={handleLogout}
           handleMainPage={handleMainPage}
@@ -89,7 +117,9 @@ function App() {
       <Route path="/editor">
         <Editor
           users={userinfo}
+          musicdata={musicdata}
           handleMainPage={handleMainPage}
+          loadMypage={loadMypage}
           handleLogout={handleLogout}
         ></Editor>
       </Route>

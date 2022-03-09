@@ -1,7 +1,5 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Post extends Model {
     /**
@@ -12,37 +10,83 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
 
-      models.Post.hasMany(models.Like, { foreignKey: 'postId', sourceKey: 'id'});
-      models.Post.hasMany(models.Comment, { foreignKey: 'postId', sourceKey: 'id'});
+      models.Post.hasMany(models.Like, {
+        foreignKey: "postId",
+        onDelete: 'cascade',
+        sourceKey: "id",
+      });
+      models.Post.hasMany(models.Comment, {
+        foreignKey: "postId",
+        onDelete: 'cascade',
+        sourceKey: "id",
+      });
 
-      models.Post.belongsTo(models.User, { foreignKey: 'userId', targetKey: 'id'});
+      models.Post.belongsTo(models.User, {
+        foreignKey: "userId",
+        targetKey: "id",
+      });
 
-      const Post_MusicData = sequelize.define('Post_MusicData', {}, {timestamps: false});
-      models.Post.belongsToMany(models.MusicData, {through: 'Post_MusicData'})
+      const Post_MusicData = sequelize.define("Post_MusicData", {
+        id: {
+           type: DataTypes.INTEGER,
+           primaryKey: true,
+           autoIncrement: true,
+           allowNull: false
+        },
+        PostId: {
+          type: 'foreign key',
+          references: {
+            model: "Posts",
+            key: "id",
+          },
+          onDelete: 'cascade',
+          onUpdate: 'cascade'
+        },
+        MusicDatumId: {
+          type: 'foreign key',
+          references: {
+            model: "MusicData",
+            key: "id",
+          },
+          onDelete: 'cascade',
+          onUpdate: 'cascade'
+        },
+      },
+        { timestamps: false })
 
-      const Post_Hashtag = sequelize.define('Post_Hashtag', {}, {timestamps: false});
-      models.Post.belongsToMany(models.Hashtag, {through:Post_Hashtag});
+      models.Post.belongsToMany(models.MusicData, {
+        through: Post_MusicData });
+
+      const Post_Hashtag = sequelize.define(
+        "Post_Hashtag",
+        {},
+        { timestamps: false }
+      );
+      models.Post.belongsToMany(models.Hashtag, { through: Post_Hashtag });
     }
   }
-  Post.init({
-    userId: DataTypes.INTEGER,
-    postTitle: DataTypes.STRING,
-    image: DataTypes.TEXT,
-    postExplain: DataTypes.TEXT,
-    totalLike: {
-      type: DataTypes.INTEGER,
-      defaultValue: 0
+  Post.init(
+    {
+      userId: DataTypes.INTEGER,
+      postTitle: DataTypes.STRING,
+      image: DataTypes.TEXT,
+      postExplain: DataTypes.TEXT,
+      totalLike: {
+        type: DataTypes.INTEGER,
+        defaultValue: 0,
+      },
+      totalComment: {
+        type: DataTypes.INTEGER,
+        defaultValue: 0,
+      },
     },
-    totalComment: {
-      type: DataTypes.INTEGER,
-      defaultValue: 0
+    {
+      sequelize,
+      timestamps: true,
+      createdAt: true,
+      updatedAt: false,
+      modelName: "Post",
     }
-  }, {
-    sequelize,
-    timestamps: true,
-    createdAt: true,
-    updatedAt: false,
-    modelName: 'Post',
-  });
+  );
   return Post;
 };

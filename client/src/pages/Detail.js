@@ -1,33 +1,48 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import axios from "axios";
 const Detailbody = styled.div`
-  border: 1px solid red;
+  border: 1px solid grey;
   /* padding: 200px; */
   margin: 0 auto;
   padding: 0 20px;
   max-width: 1080px;
   max-height: 1980px;
+  border-radius: 10px;
 
   > div {
-    border: 1px solid red;
     padding: 10px;
     display: flex;
-
-    > div {
-      border: 1px solid red;
-      padding: 10px;
-    }
   }
   > #up {
     flex: 1 0 auto;
+    border: 1px solid grey;
+    margin-top: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     > #postImg {
       flex: 1 0 auto;
     }
     > #postInfo {
       flex: 2 0 auto;
+
       > div {
         margin: 10px;
+
+        > button {
+          margin-left: 1rem;
+          width: 70px;
+          height: 25px;
+          border: 1px solid grey;
+          cursor: pointer;
+          color: rgba(30, 22, 54, 0.6);
+          font-size: 14px;
+          border-radius: 30px;
+        }
+        > button:hover {
+          color: rgba(255, 255, 255, 0.85);
+          box-shadow: rgba(30, 22, 54, 0.7) 0 80px 0px 2px inset;
+        }
         > h4 {
           color: #a14efc;
         }
@@ -38,24 +53,39 @@ const Detailbody = styled.div`
     display: flex;
     flex: 3 0 auto;
     flex-direction: column;
-    > text {
+    > h3 {
       margin-left: 9px;
+      border-bottom: 1px solid #c7cad0;
+      padding-bottom: 7px;
     }
     > #postIntro {
       display: flex;
       flex: 1 0 auto;
-      > textarea {
-        width: 100vw;
-      }
-      > div {
+      margin-left: 9px;
+
+      > text {
+        font-size: 17px;
+        font-style: inherit;
+        color: #767676;
       }
     }
     > #musicList {
       flex: 4 0 auto;
+      margin-left: 9px;
+      margin-top: 25px;
+      > h3 {
+        border-bottom: 1px solid #c7cad0;
+      }
+
       > #music {
-        border: 1px solid red;
+        border-bottom: 1px solid #c7cad0;
         padding: 10px;
         display: flex;
+        > div {
+          padding: 10px;
+          font-size: 17px;
+          font-style: inherit;
+        }
       }
     }
   }
@@ -87,6 +117,7 @@ const Menu = styled.div`
 const Nick = styled.div`
   /* //border: 1px solid red; */
   /* padding: 10px; */
+  font-size: 20px;
   text-align: center;
   margin-top: 20px;
   flex: 3 0 auto;
@@ -122,7 +153,12 @@ export default function Detail({
   users,
   handleLogout,
 }) {
-  // console.log("디테일 컴포넌트 정보: ", detailData);
+  console.log("디테일 컴포넌트 정보: ", detailData);
+  const handleDelete = () => {
+    axios
+      .delete(`http://localhost:8080/post/${detailData.id}`)
+      .then(() => handleMainPage());
+  };
   return (
     <div id="detailPage">
       <Header>
@@ -146,8 +182,17 @@ export default function Detail({
               <h1>{detailData.postTitle}</h1>
             </div>
             <div>
-              <h4>{detailData.nickname}</h4>
+              <h4>{detailData.User.nickname}</h4>
             </div>
+            {detailData.User.nickname === users.nickname ? (
+              <div>
+                <button>수정하기</button>
+                <button onClick={handleDelete}>삭제하기</button>
+              </div>
+            ) : (
+              <div></div>
+            )}
+
             <div>
               {/* <text>
                 테그 :
@@ -158,28 +203,28 @@ export default function Detail({
             </div>
           </div>
           <div id="postImg">
-            <img src={detailData.imageUrl} width="200vw" />
+            <img src={detailData.image} width="200vw" />
           </div>
         </div>
         <div id="down">
-          <text>소개글</text>
+          <h3>소개글</h3>
           <div id="postIntro">
             <text>{detailData.postExplain}</text>
           </div>
           <div id="musicList">
-            음악 리스트
-            {detailData.musicList.map((e) => {
+            <h3>음악 리스트</h3>
+            {detailData.MusicData.map((e) => {
               return (
                 <div id="music">
                   <div>
-                    <img src={e.albumImageUrl} alt="1" width="100vw"></img>
+                    <img src={e.musicImage} alt="1" width="100vw"></img>
                   </div>
                   <div>
                     <div>
-                      <text>노래이름 : {e.songName}</text>
+                      <text> {e.musicTitle}</text>
                     </div>
                     <div>
-                      <text>아티스트 : {e.artist}</text>
+                      <text> {e.artist}</text>
                     </div>
                   </div>
                 </div>

@@ -13,12 +13,12 @@ import React, { useEffect, useState } from "react";
 const Card = styled.li`
   /* border: 1px solid red; */
   border: 1px solid grey;
-  padding: 10px;
+  padding: 11px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
   /* border-radius: 20px; */
-  height: 400px;
-  width: 200px;
+  height: 374px;
+  width: 221px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -83,35 +83,23 @@ const Bar = styled.i`
   width: 14px;
   height: 12px;
 `;
-const Tagitem = styled.button`
-  border: none;
-  display: inline-block;
-  padding: auto;
-  border-radius: 15px;
-  font-family: "paybooc-Light", sans-serif;
-  box-shadow: 0 5px 35px rgba(0, 0, 0, 0.2);
-  font-weight: 800;
-  transition: 0.25s;
-  background-color: aliceblue;
-  color: #1e6b7b;
-`;
 
 export default function Postthumnails({ item, onClickDetailHandle }) {
-  console.log(item.totalLike);
+  console.log(item);
 
   const [like, setLike] = useState(item.totalLike);
 
   const handleLike = (item) => {
     setLike(Number(like) + 1);
   };
-
+  console.log("items", item);
   return (
     // <Post>
 
     <Card key={item.id}>
       <img
         onClick={() => onClickDetailHandle(item)}
-        src={item.imageUrl}
+        src={item.image}
         width="200px"
         alt="logo"
       />
@@ -120,16 +108,13 @@ export default function Postthumnails({ item, onClickDetailHandle }) {
           <b onClick={() => onClickDetailHandle(item)}>{item.postTitle}</b>
         </h4>
         <Nickname>
-          <span>{item.nickname}</span>
+          <span>{item.User.nickname}</span>
         </Nickname>
         <Meta>
           <Likes onClick={() => handleLike(item)} />
           {like}
           <Bar>\</Bar>
-          {item.musicList.length}곡
-        </Meta>
-        <Meta>
-          <Tagitem>{item.tags}</Tagitem>
+          {item.MusicData.length}곡
         </Meta>
       </Container>
     </Card>

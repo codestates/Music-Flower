@@ -1,27 +1,27 @@
-import React, { useState, useEffect } from "react";
+// import SpotifyAPP from "../components/SpotifyApp";
+import axios from "axios";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { MusicSelector } from "./UI_components/MusicSelector";
-// import SpotifyAPP from "../components/SpotifyApp";
-import { Switch, Route, useHistory, Redirect } from "react-router-dom";
 import PostThumnailSelecter from "./UI_components/PostThumnailSelector";
-import { Link } from "react-router-dom";
+import SelectMusicList from "./UI_components/SelectMusicList";
 
 const EditorBody = styled.div`
-  border: 1px solid red;
+  border: 3px solid grey;
   padding: 10px;
   display: flex;
   flex-direction: column;
   margin: 0 auto;
-  padding: 0 20px;
   max-width: 1080px;
   max-height: 1980px;
   > div {
-    border: 1px solid red;
+    border: 1px solid grey;
     padding: 10px;
     display: flex;
 
     > div {
-      border: 1px solid red;
+      /* border: 1px solid grey; */
       padding: 10px;
     }
   }
@@ -51,10 +51,40 @@ const EditorBody = styled.div`
     > #musicList {
       flex: 4 0 auto;
       > #music {
-        border: 1px solid red;
+        /* border: 1px solid grey; */
         padding: 10px;
+        display: flex;
+        justify-content: space-between;
+
+        > div {
+        }
+        > #musicserch {
+          width: 40vh;
+        }
+        > #musicselectList {
+          /* border: 1px solid red; */
+          margin-left: 60px;
+          width: 40vh;
+
+          /* flex: 2 0 auto; */
+        }
       }
     }
+  }
+  > button {
+    /* width: 150px; */
+    margin-top: 10px;
+    height: 50px;
+    border: 1px solid grey;
+    cursor: pointer;
+    color: rgba(30, 22, 54, 0.6);
+    box-shadow: rgba(119, 108, 153, 0.4) 0 0px 0px 2px inset;
+    font-size: 16px;
+    border-radius: 30px;
+  }
+  > button:hover {
+    color: rgba(255, 255, 255, 0.85);
+    box-shadow: rgba(30, 22, 54, 0.7) 0 80px 0px 2px inset;
   }
 `;
 const Header = styled.div`
@@ -112,8 +142,56 @@ const MenuButton = styled.div`
     color: #a14efc;
   }
 `;
-export default function Editor({ handleLogout, handleMainPage }) {
+export default function Editor({
+  handleLogout,
+  handleMainPage,
+  musicdata,
+  users,
+  loadMypage,
+}) {
   const [musicList, setMusicList] = useState([]);
+  const [image, setPostPoto] = useState("");
+  const [postTitle, setPostTitle] = useState("");
+  const [postExplain, setPostintro] = useState("");
+  const [userId, setUserId] = useState("");
+  const submitHandle = () => {
+    let musiclistid = musicList.map((el) => el.id);
+    let postData = {
+      userId: users.id,
+      image,
+      postTitle,
+      postExplain,
+      musicList: musiclistid,
+    };
+    if (!userId && !image && !postTitle && !postExplain) {
+      return alert("내용을 모두 작성해주세요");
+    } else if (musicList.length === 0) {
+      return alert("음악을 추가해 주세요");
+    } else {
+      axios
+        .post(
+          "http://localhost:8080/post",
+          {
+            userId: users.id,
+            image,
+            postTitle,
+            postExplain,
+            musicList: musiclistid,
+          },
+          { headers: { "Content-Type": "application/json" } }
+        )
+        .then((res) => loadMypage());
+      //console.log("전송정보", postData);
+    }
+  };
+  const postTitleChageHandle = (e) => {
+    //console.log("title", e.target.value);
+    setPostTitle(e.target.value);
+  };
+  const postInroChageHandle = (e) => {
+    // console.log("Inro", e.target.value);
+    setPostintro(e.target.value);
+  };
 
   return (
     <div id="editorPage">
@@ -134,46 +212,62 @@ export default function Editor({ handleLogout, handleMainPage }) {
       <EditorBody>
         <div id="up">
           <div id="postImg">
-            이미지
+            post 이미지 선택
             <br />
-            <PostThumnailSelecter></PostThumnailSelecter>
+            <PostThumnailSelecter
+              setPostPoto={setPostPoto}
+            ></PostThumnailSelecter>
           </div>
           <div id="postInfo">
             post 제목
-            <input type="text" id="textInput"></input>
+            <input
+              type="text"
+              id="textInput"
+              onChange={postTitleChageHandle}
+            ></input>
           </div>
         </div>
         <div id="down">
           <div>post 소개</div>
           <div id="postIntro">
-            <input type="text" id="textInput"></input>
+            <input
+              type="textarea"
+              id="textInput"
+              onChange={postInroChageHandle}
+            ></input>
           </div>
 
           <div id="musicList">
             음악 리스트
             {/* <SpotifyAPP meetCode={meetCode} /> */}
-            <MusicSelector
-              musicList={musicList}
-              setMusicList={setMusicList}
-            ></MusicSelector>
-            {musicList.map((e) => {
-              return (
-                <div id="musicList" key={e.albumImageUrl}>
-                  <img
-                    src={e.albumImageUrl}
-                    style={{ height: "64px", width: "64px" }}
-                  />
-                  <span> // </span>
-                  <div>{e.songName}</div>
-                  <div className="serchArtist">{e.artist}</div>
-                </div>
-              );
-            })}
-            {/* <div id="music">music</div>
-            <div id="music">music</div>
-            <div id="music">music</div> */}
+            <div id="music">
+              <div id="musicserch">
+                <MusicSelector
+                  musicData={musicdata}
+                  musicList={musicList}
+                  setMusicList={setMusicList}
+                ></MusicSelector>
+              </div>
+              <div id="musicselectList">
+                {musicList.map((music, idx) => {
+                  // console.log("music", music);
+                  return (
+                    <div key={music.albumImageUrl}>
+                      {/* SavePlayList */}
+                      <SelectMusicList
+                        music={music}
+                        idx={idx}
+                        musicList={musicList}
+                        setMusicList={setMusicList}
+                      ></SelectMusicList>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
           </div>
         </div>
+        <button onClick={submitHandle}>작성완료</button>
       </EditorBody>
     </div>
   );

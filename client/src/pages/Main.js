@@ -1,12 +1,9 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Postthumnails from "../components/Postthumnails";
 import { Autocomplete } from "../pages/UI_components/Autocomplete";
-import { Switch, Route, useHistory, Link, Redirect } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import axios from "axios";
-// import { AUTH_URL } from "../components/SpotifyC";
-// const cId = spotifyC;
-// const AUTH_URL = `https://accounts.spotify.com/authorize?client_id=${cId}&response_type=code&redirect_uri=http://localhost:3000/editor&scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20user-read-playback-state%20user-modify-playback-state`;
 
 const MainPage = styled.div`
   /* border: 1px solid red; */
@@ -48,23 +45,25 @@ const SerchArea = styled.div`
   /* padding: 10px; */
 
   margin-bottom: 1rem;
-  margin-left: 10rem;
-  margin-right: 10rem;
+  margin-left: 5rem;
+  margin-right: 7rem;
   display: flex;
   align-items: center;
   flex: 0 0 auto;
   flex-direction: row;
   justify-content: center;
+
   > #select_bar {
     /* border: 1px solid red; */
     /* padding: 10px; */
 
-    flex: 2 0 auto;
-    margin-left: 40px;
+    width: 40vh;
+    margin-left: 20px;
   }
   > #create_post {
     /* border: 1px solid red; */
     /* padding: 10px; */
+    flex: 1 0 auto;
 
     > button {
       margin-left: 8rem;
@@ -92,10 +91,12 @@ const Body = styled.div`
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
+
   flex: 8 0 auto;
   > #Posts {
     display: flex;
     flex-wrap: wrap;
+    margin-left: 7px;
   }
   > #BoardName {
     /* border: 1px solid red; */
@@ -125,6 +126,7 @@ const Menu = styled.div`
 const Nick = styled.div`
   /* //border: 1px solid red; */
   /* padding: 10px; */
+  font-size: 20px;
   margin-top: 20px;
   flex: 3 0 auto;
   > span {
@@ -155,20 +157,24 @@ export default function Main({
   items,
   setItems,
   users,
-  setDetailData,
+  handleMusicData,
   handleLogout,
   onClickDetailHandle,
+  loadMypage,
 }) {
+  const [showPosts, setshowPosts] = useState(items);
+  useEffect(() => {
+    setshowPosts(items);
+  }, [items]);
+
   const onClickMyPageHandle = () => {
-    history.push("/mypage");
+    loadMypage();
   };
   const onClickEditorHandle = () => {
-    history.push("/editor");
+    handleMusicData();
   };
 
   const history = useHistory();
-
-  axios.get("http://localhost:8080/post").then((res) => console.log(res));
 
   return (
     <div id="mainPage">
@@ -190,7 +196,10 @@ export default function Main({
         <div id="bottom">
           <SerchArea>
             <div id="select_bar">
-              <Autocomplete items={items} setItems={setItems}></Autocomplete>
+              <Autocomplete
+                items={items}
+                setshowPosts={setshowPosts}
+              ></Autocomplete>
             </div>
             <div id="create_post">
               <button className="12134" onClick={onClickEditorHandle}>
@@ -201,7 +210,7 @@ export default function Main({
           <Body>
             <div id="BoardName">이것은 예시입니다</div>
             <div id="Posts">
-              {items.map((item, idx) => (
+              {showPosts.map((item, idx) => (
                 <Postthumnails
                   onClickDetailHandle={onClickDetailHandle}
                   item={item}

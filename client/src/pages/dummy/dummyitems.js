@@ -1,6 +1,5 @@
 // 서버에있는 모든 포스트들을 넣음
-
-export const allPosts = [
+const allPosts = [
   {
     id: 1,
     postTitle: "봄에 듣기 좋은 노래",
