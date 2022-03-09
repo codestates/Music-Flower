@@ -18,7 +18,7 @@ const spotifyRouter = require("./router/spotifyRouter");
 
 sequelize
   .sync({ force: false })
-  .then(() => {
+  .then((e) => {
     console.log("데이터베이스 연결");
   })
   .catch((err) => {
@@ -33,7 +33,7 @@ app.use(
   })
 );
 app.use(express.json());
-app.use(express.urlencoded({extended: false}));
+app.use(express.urlencoded({ extended: false }));
 
 app.post("/login", logIn);
 app.post("/logout", logOut);
