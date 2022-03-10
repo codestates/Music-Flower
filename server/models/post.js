@@ -10,17 +10,6 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
 
-      models.Post.hasMany(models.Like, {
-        foreignKey: "postId",
-        onDelete: 'cascade',
-        sourceKey: "id",
-      });
-      models.Post.hasMany(models.Comment, {
-        foreignKey: "postId",
-        onDelete: 'cascade',
-        sourceKey: "id",
-      });
-
       models.Post.belongsTo(models.User, {
         foreignKey: "userId",
         targetKey: "id",
@@ -56,13 +45,6 @@ module.exports = (sequelize, DataTypes) => {
 
       models.Post.belongsToMany(models.MusicData, {
         through: Post_MusicData });
-
-      const Post_Hashtag = sequelize.define(
-        "Post_Hashtag",
-        {},
-        { timestamps: false }
-      );
-      models.Post.belongsToMany(models.Hashtag, { through: Post_Hashtag });
     }
   }
   Post.init(

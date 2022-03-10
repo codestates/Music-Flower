@@ -25,7 +25,6 @@ const Mypage = styled.div`
     flex: 3 0 auto;
     flex-direction: column;
     > #boardName {
-      font-size: 30px;
       display: flex;
       justify-content: space-around;
     }
@@ -100,8 +99,8 @@ const MenuButton = styled.div`
 `;
 
 export default function MyPage({
-  users,
-  onClickDetailHandle,
+  userInfo,
+  handleDetailPage,
   handleLogout,
   handleMainPage,
   myItem,
@@ -117,7 +116,7 @@ export default function MyPage({
         </Link>
         <Menu>
           <Nick>
-            <span>{users.nickname}</span>님의 마이페이지 입니다.
+            <span>{userInfo.nickname}</span>님의 마이페이지 입니다.
           </Nick>
           <MenuButton>
             <button onClick={handleMainPage}>메인페이지</button>
@@ -126,14 +125,14 @@ export default function MyPage({
         </Menu>
       </Header>
       <div id="down">
-        <div id="boardName">{users.nickname}님의 뮤직</div>
+        <div id="boardName">{userInfo.nickname}님의 뮤직</div>
         {userPosts.length !== 0 ? (
           <div className="myPost">
             {userPosts.map((item, idx) => (
               <Postthumnails
                 item={item}
                 key={idx}
-                onClickDetailHandle={onClickDetailHandle}
+                handleDetailPage={handleDetailPage}
               />
             ))}
           </div>

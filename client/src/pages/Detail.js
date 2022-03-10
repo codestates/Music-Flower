@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
+
 const Detailbody = styled.div`
   border: 1px solid grey;
   /* padding: 200px; */
@@ -150,15 +151,35 @@ const MenuButton = styled.div`
 export default function Detail({
   detailData,
   handleMainPage,
-  users,
+  userInfo,
   handleLogout,
+  setIsRemake,
+  handleMusicData,
+  setPostPoto,
+  setPostTitle,
+  setPostintro,
+  setMusicList,
+  serverURL,
 }) {
+  const history = useHistory();
+
   console.log("디테일 컴포넌트 정보: ", detailData);
   const handleDelete = () => {
     axios
-      .delete(`http://localhost:8080/post/${detailData.id}`)
+      .delete(`${serverURL}/post/${detailData.id}`)
       .then(() => handleMainPage());
   };
+  const handleEdit = () => {
+    setIsRemake(true);
+    setPostPoto(detailData.image);
+    setPostTitle(detailData.postTitle);
+    setPostintro(detailData.postExplain);
+    setMusicList(detailData.MusicData);
+
+    handleMusicData();
+    history.push("/editor");
+  };
+
   return (
     <div id="detailPage">
       <Header>
@@ -167,7 +188,7 @@ export default function Detail({
         </Link>
         <Menu>
           <Nick>
-            <span>{users.nickname}</span>님 안녕하세요.
+            <span>{userInfo.nickname}</span>님 안녕하세요.
           </Nick>
           <MenuButton>
             <button onClick={handleMainPage}>메인페이지</button>
@@ -184,26 +205,17 @@ export default function Detail({
             <div>
               <h4>{detailData.User.nickname}</h4>
             </div>
-            {detailData.User.nickname === users.nickname ? (
+            {detailData.User.nickname === userInfo.nickname ? (
               <div>
-                <button>수정하기</button>
+                <button onClick={handleEdit}>수정하기</button>
                 <button onClick={handleDelete}>삭제하기</button>
               </div>
             ) : (
               <div></div>
             )}
-
-            <div>
-              {/* <text>
-                테그 :
-                {detailData.tags.map((e) => {
-                  return <span>{e}, </span>;
-                })}
-              </text> */}
-            </div>
           </div>
           <div id="postImg">
-            <img src={detailData.image} width="200vw" />
+            <img src={detailData.image} width="200vw" alt="postImg" />
           </div>
         </div>
         <div id="down">

@@ -56,9 +56,9 @@ export const DropDownContainer = styled.ul`
   > li {
     padding: 0 1rem;
 
-    &:hover {
+    /* &:hover {
       background-color: #eee;
-    }
+    } */
 
     &.selected {
       background-color: #ebe5f9;
@@ -111,8 +111,6 @@ export const MusicSelector = ({ musicList, setMusicList, musicData }) => {
   };
 
   const handleKeyUp = (event) => {
-    // https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/getModifierState#example
-    // eslint-disable-next-line
     if (
       event.getModifierState("Fn") ||
       event.getModifierState("Hyper") ||
@@ -149,6 +147,7 @@ export const MusicSelector = ({ musicList, setMusicList, musicData }) => {
           type="text"
           className="autocomplete-input"
           onChange={handleInputChange}
+          placeholder="음악을 검색해주세요!"
           value={inputValue}
         />
         <div className="delete-button" onClick={handleDeleteButtonClick}>
@@ -167,6 +166,18 @@ export const MusicSelector = ({ musicList, setMusicList, musicData }) => {
 };
 
 export const DropDown = ({ options, handleDropDownClick, selected }) => {
+  const SerchMusicText = styled.div`
+    border-bottom: 1px solid grey;
+    padding: 20px;
+    display: flex;
+    &:hover {
+      background-color: #eee;
+    }
+    > div {
+      /* border: 1px solid grey; */
+      padding: 5px 0px 0px 10px;
+    }
+  `;
   return (
     <DropDownContainer>
       {options.map((option, idx) => (
@@ -176,15 +187,17 @@ export const DropDown = ({ options, handleDropDownClick, selected }) => {
           className={selected === idx ? "selected" : ""}
         >
           <div className="serchMusicText">
-            <img
-              src={option.musicImage}
-              style={{ height: "64px", width: "64px" }}
-            />
-            <div>{option.musicTitle}</div>
-            <div className="serchArtist">{option.artist}</div>
-            <div>
-              <br></br>
-            </div>
+            <SerchMusicText>
+              <img
+                src={option.musicImage}
+                style={{ height: "64px", width: "64px" }}
+              />
+              <div>
+                <div>{option.musicTitle}</div>
+                <div className="serchArtist">{option.artist}</div>
+              </div>
+            </SerchMusicText>
+            <div></div>
           </div>
         </li>
       ))}

@@ -23,9 +23,7 @@ module.exports = {
       const token = generateAccessToken(loginInfo.dataValues);
       // console.log("토큰잘받아옴?");
       sendAccessToken(res, token);
-      // console.log("토큰잘보냄?");
-
-      return res.status(200).json({ message: "successfully loged in!" });
+      // return res.status(200).json({ message: "successfully loged in!" });
     }
   },
   //[post]/logout
@@ -40,10 +38,11 @@ module.exports = {
   //[post]/signup
   //User DB에서 사용자 정보 찾고 없으면 생성해서 accessToken을 쿠키(jwt)에 담아서 보내줌
   signUp: async (req, res) => {
+    console.log(req);
     const { nickname, email, password } = req.body;
 
     if (!nickname || !email || !password) {
-      res.status(422).send("모든 항목을 입력해 주세요");
+      return res.status(422).send("모든 항목을 입력해 주세요");
     }
 
     const [result, created] = await User.findOrCreate({
@@ -55,7 +54,7 @@ module.exports = {
     });
 
     if (!created) {
-      res.status(400).send("user is already exists");
+      return res.status(400).send("user is already exists");
     } else {
       const payload = {
         email,
@@ -64,7 +63,6 @@ module.exports = {
       };
       const token = generateAccessToken(payload);
       sendAccessToken(res, token);
-      res.status(201).json({ message: "successfully signed up" });
     }
   },
   //[get]/userinfo

@@ -2,23 +2,20 @@ import axios from "axios";
 import React from "react";
 import "../css/Login.css";
 import { useState } from "react";
-// import spotifyAuth from "../auth/useSpotifyAuth";
-//const code = new URLSearchParams(window.location.search).get("code");
 import { Link } from "react-router-dom";
 
-export default function Login({ handleResponseSuccess }) {
+export default function Login({ handleResponseSuccess, serverURL }) {
   const [loginInfo, setLoginInfo] = useState({
     email: "",
     password: "",
   });
 
-  // 이메일과 비밀번호 입력 핸들
   const handleInputValue = (key) => (e) => {
     setLoginInfo({ ...loginInfo, [key]: e.target.value });
   };
 
   const handleGuestLogin = () => {
-    const url = "http://localhost:8080/login";
+    const url = `${serverURL}/login`;
     axios
       .post(
         url,
@@ -32,7 +29,7 @@ export default function Login({ handleResponseSuccess }) {
       )
       .then((res) => {
         console.log("server login result: " + res);
-        handleResponseSuccess();
+        handleResponseSuccess(res);
       })
       .catch((err) => {
         console.log("게스트 로그인 에러:", err);
@@ -45,7 +42,7 @@ export default function Login({ handleResponseSuccess }) {
       return alert("아이디와 비밀번호 모두 입력 하세요.");
     }
 
-    const url = "http://localhost:8080/login";
+    const url = `${serverURL}/login`;
     axios
       .post(
         url,
@@ -59,7 +56,7 @@ export default function Login({ handleResponseSuccess }) {
       )
       .then((res) => {
         // console.log("해당 유저 있음:", res.statusText);
-        handleResponseSuccess();
+        handleResponseSuccess(res);
       })
       .catch((err) => alert("아이디 또는 비밀번호가 일치 하지않습니다."));
   };

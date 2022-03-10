@@ -67,7 +67,6 @@ export const DropDownContainer = styled.ul`
 `;
 
 export const Autocomplete = ({ items, setshowPosts }) => {
-  console.log("items", items);
   const [hasText, setHasText] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const [options, setOptions] = useState(items);
@@ -110,8 +109,6 @@ export const Autocomplete = ({ items, setshowPosts }) => {
   };
 
   const handleKeyUp = (event) => {
-    // https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/getModifierState#example
-    // eslint-disable-next-line
     if (
       event.getModifierState("Fn") ||
       event.getModifierState("Hyper") ||
@@ -148,6 +145,7 @@ export const Autocomplete = ({ items, setshowPosts }) => {
           type="text"
           className="autocomplete-input"
           onChange={handleInputChange}
+          placeholder="포스트 제목을 검색해주세요!"
           value={inputValue}
         />
         <div className="delete-button" onClick={handleDeleteButtonClick}>

@@ -1,6 +1,6 @@
 // import SpotifyAPP from "../components/SpotifyApp";
 import axios from "axios";
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { MusicSelector } from "./UI_components/MusicSelector";
@@ -146,41 +146,70 @@ export default function Editor({
   handleLogout,
   handleMainPage,
   musicdata,
-  users,
-  loadMypage,
+  userInfo,
+  handleMypage,
+  detailData,
+  isRemake,
+  postImage,
+  setPostPoto,
+  postTitle,
+  setPostTitle,
+  postExplain,
+  setPostintro,
+  musicList,
+  setMusicList,
+
+  serverURL,
 }) {
-  const [musicList, setMusicList] = useState([]);
-  const [image, setPostPoto] = useState("");
-  const [postTitle, setPostTitle] = useState("");
-  const [postExplain, setPostintro] = useState("");
-  const [userId, setUserId] = useState("");
+  console.log("수정하기 버튼으로옴?:", isRemake);
+  console.log("edit-detailData:", detailData);
+
   const submitHandle = () => {
     let musiclistid = musicList.map((el) => el.id);
-    let postData = {
-      userId: users.id,
-      image,
-      postTitle,
-      postExplain,
-      musicList: musiclistid,
-    };
-    if (!userId && !image && !postTitle && !postExplain) {
+
+    if (!postImage && !postTitle && !postExplain) {
       return alert("내용을 모두 작성해주세요");
     } else if (musicList.length === 0) {
       return alert("음악을 추가해 주세요");
     } else {
       axios
         .post(
-          "http://localhost:8080/post",
+          `${serverURL}/post`,
           {
-            userId: users.id,
-            image,
+            userId: userInfo.id,
+            image: postImage,
             postTitle,
             postExplain,
             musicList: musiclistid,
           },
           { headers: { "Content-Type": "application/json" } }
         )
-        .then((res) => loadMypage());
+        .then((res) => handleMypage());
+      //console.log("전송정보", postData);
+    }
+  };
+  const remakeHandle = () => {
+    let musiclistid = musicList.map((el) => el.id);
+    if (!postTitle && !postExplain) {
+      setPostTitle(detailData.postTitle);
+      setPostintro(detailData.postExplain);
+      return alert("내용을 수정해주세요");
+    } else if (musicList.length === 0) {
+      return alert("음악을 추가해 주세요");
+    } else {
+      axios
+        .put(
+          `${serverURL}/post/${detailData.id}`,
+          {
+            userId: userInfo.id,
+            image: postImage,
+            postTitle,
+            postExplain,
+            musicList: musiclistid,
+          },
+          { headers: { "Content-Type": "application/json" } }
+        )
+        .then((res) => handleMypage());
       //console.log("전송정보", postData);
     }
   };
@@ -201,7 +230,7 @@ export default function Editor({
         </Link>
         <Menu>
           <Nick>
-            <span>글 작성 페이지</span>
+            {isRemake ? <span>수정 페이지</span> : <span>글 작성 페이지</span>}
           </Nick>
           <MenuButton>
             <button onClick={handleMainPage}>메인페이지</button>
@@ -212,34 +241,51 @@ export default function Editor({
       <EditorBody>
         <div id="up">
           <div id="postImg">
-            post 이미지 선택
-            <br />
             <PostThumnailSelecter
               setPostPoto={setPostPoto}
+              detailData={detailData}
+              isRemake={isRemake}
             ></PostThumnailSelecter>
           </div>
           <div id="postInfo">
-            post 제목
-            <input
-              type="text"
-              id="textInput"
-              onChange={postTitleChageHandle}
-            ></input>
+            제목
+            {isRemake ? (
+              <input
+                type="text"
+                id="textInput"
+                value={postTitle}
+                onChange={postTitleChageHandle}
+              ></input>
+            ) : (
+              <input
+                type="text"
+                id="textInput"
+                onChange={postTitleChageHandle}
+              ></input>
+            )}
           </div>
         </div>
         <div id="down">
-          <div>post 소개</div>
+          <div>소개글</div>
           <div id="postIntro">
-            <input
-              type="textarea"
-              id="textInput"
-              onChange={postInroChageHandle}
-            ></input>
+            {isRemake ? (
+              <input
+                type="textarea"
+                id="textInput"
+                value={postExplain}
+                onChange={postInroChageHandle}
+              ></input>
+            ) : (
+              <input
+                type="textarea"
+                id="textInput"
+                onChange={postInroChageHandle}
+              ></input>
+            )}
           </div>
 
           <div id="musicList">
             음악 리스트
-            {/* <SpotifyAPP meetCode={meetCode} /> */}
             <div id="music">
               <div id="musicserch">
                 <MusicSelector
@@ -250,10 +296,8 @@ export default function Editor({
               </div>
               <div id="musicselectList">
                 {musicList.map((music, idx) => {
-                  // console.log("music", music);
                   return (
                     <div key={music.albumImageUrl}>
-                      {/* SavePlayList */}
                       <SelectMusicList
                         music={music}
                         idx={idx}
@@ -267,7 +311,11 @@ export default function Editor({
             </div>
           </div>
         </div>
-        <button onClick={submitHandle}>작성완료</button>
+        {isRemake ? (
+          <button onClick={remakeHandle}>수정완료</button>
+        ) : (
+          <button onClick={submitHandle}>작성완료</button>
+        )}
       </EditorBody>
     </div>
   );
