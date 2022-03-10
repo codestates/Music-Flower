@@ -38,26 +38,26 @@ Music-Flower 입니다 :D
 <b>김경연
 
  
-### `kimkyoungyeon` 
+### [`kimkyoungyeon`](https://github.com/kim-kyoungyeon) 
 * position : Backend 
 * Stack : NODE.js, EXPRESS, MYSql, Sequelize
 * contributions
-  * controller,API , DB 
+  * User controller작성, API작성, DB스키마 작성, DB 시드 삽입 
 <br>  
 
  <b>양지윤
  
-### `jiyuunyang`
+### [`jiyuunyang`](https://github.com/jiyuunyang)
 * position : Backend 
 * Stack : NODE js, EXPRESS, MYSql, Sequelize, AWS
 * contributions
-  *  controller, API, DB, AWS
+  * Post controller작성, API작성, DB스키마 작성, DB모델 구축, AWS
 
  <br>
  
 <b>추홍욱
 
- ### `ChooHongWook`
+ ### [`ChooHongWook`](https://github.com/ChooHongWook)
 * position : Frontend 
 * Stack: React, React(Hook), Styled-Component
 * contributions
@@ -66,7 +66,7 @@ Music-Flower 입니다 :D
   
 <b>손태권
 
- ### `KAPUIST`
+ ### [`KAPUIST`](https://github.com/KAPUIST)
 * position : Frontend 
 * Stack: React, React(Hook) Typescript, AWS
 * contributions
