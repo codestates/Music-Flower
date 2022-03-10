@@ -1,6 +1,6 @@
 // import SpotifyAPP from "../components/SpotifyApp";
 import axios from "axios";
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { MusicSelector } from "./UI_components/MusicSelector";
@@ -146,11 +146,11 @@ export default function Editor({
   handleLogout,
   handleMainPage,
   musicdata,
-  users,
-  loadMypage,
+  userInfo,
+  handleMypage,
   detailData,
   isRemake,
-  image,
+  postImage,
   setPostPoto,
   postTitle,
   setPostTitle,
@@ -161,24 +161,13 @@ export default function Editor({
 
   serverURL,
 }) {
-  // console.log("initData:", initData);
-  // const [image, setPostPoto] = useState("");
-  // const [postTitle, setPostTitle] = useState("");
-  // const [postExplain, setPostintro] = useState("");
-  // const [musicList, setMusicList] = useState([]);
-
   console.log("수정하기 버튼으로옴?:", isRemake);
   console.log("edit-detailData:", detailData);
-
-  // if (isRemake) {
-  //   //이렇게는 작동 안됨 ㅜㅜ
-  //   console.log("수정하기 버틍으로오면 작동");
-  // }
 
   const submitHandle = () => {
     let musiclistid = musicList.map((el) => el.id);
 
-    if (!image && !postTitle && !postExplain) {
+    if (!postImage && !postTitle && !postExplain) {
       return alert("내용을 모두 작성해주세요");
     } else if (musicList.length === 0) {
       return alert("음악을 추가해 주세요");
@@ -187,15 +176,15 @@ export default function Editor({
         .post(
           `${serverURL}/post`,
           {
-            userId: users.id,
-            image,
+            userId: userInfo.id,
+            image: postImage,
             postTitle,
             postExplain,
             musicList: musiclistid,
           },
           { headers: { "Content-Type": "application/json" } }
         )
-        .then((res) => loadMypage());
+        .then((res) => handleMypage());
       //console.log("전송정보", postData);
     }
   };
@@ -212,15 +201,15 @@ export default function Editor({
         .put(
           `${serverURL}/post/${detailData.id}`,
           {
-            userId: users.id,
-            image,
+            userId: userInfo.id,
+            image: postImage,
             postTitle,
             postExplain,
             musicList: musiclistid,
           },
           { headers: { "Content-Type": "application/json" } }
         )
-        .then((res) => loadMypage());
+        .then((res) => handleMypage());
       //console.log("전송정보", postData);
     }
   };
@@ -256,7 +245,6 @@ export default function Editor({
             <br />
             <PostThumnailSelecter
               setPostPoto={setPostPoto}
-              image={image}
               detailData={detailData}
               isRemake={isRemake}
             ></PostThumnailSelecter>
@@ -313,7 +301,6 @@ export default function Editor({
                   // console.log("music", music);
                   return (
                     <div key={music.albumImageUrl}>
-                      {/* SavePlayList */}
                       <SelectMusicList
                         music={music}
                         idx={idx}

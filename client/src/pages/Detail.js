@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Link, Switch, Route, useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
 
 const Detailbody = styled.div`
@@ -151,7 +151,7 @@ const MenuButton = styled.div`
 export default function Detail({
   detailData,
   handleMainPage,
-  users,
+  userInfo,
   handleLogout,
   setIsRemake,
   handleMusicData,
@@ -188,7 +188,7 @@ export default function Detail({
         </Link>
         <Menu>
           <Nick>
-            <span>{users.nickname}</span>님 안녕하세요.
+            <span>{userInfo.nickname}</span>님 안녕하세요.
           </Nick>
           <MenuButton>
             <button onClick={handleMainPage}>메인페이지</button>
@@ -205,7 +205,7 @@ export default function Detail({
             <div>
               <h4>{detailData.User.nickname}</h4>
             </div>
-            {detailData.User.nickname === users.nickname ? (
+            {detailData.User.nickname === userInfo.nickname ? (
               <div>
                 <button onClick={handleEdit}>수정하기</button>
                 <button onClick={handleDelete}>삭제하기</button>
@@ -213,18 +213,9 @@ export default function Detail({
             ) : (
               <div></div>
             )}
-
-            <div>
-              {/* <text>
-                테그 :
-                {detailData.tags.map((e) => {
-                  return <span>{e}, </span>;
-                })}
-              </text> */}
-            </div>
           </div>
           <div id="postImg">
-            <img src={detailData.image} width="200vw" />
+            <img src={detailData.image} width="200vw" alt="postImg" />
           </div>
         </div>
         <div id="down">

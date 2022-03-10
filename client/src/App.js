@@ -1,6 +1,3 @@
-// import SpotifyAPP from "./components/SpotifyApp";
-// import { allPosts } from "./pages/dummy/dummyitems";
-// import { dummyuser } from "./pages/dummy/dummyUser";
 import React, { useState } from "react";
 import { Switch, Route, useHistory } from "react-router-dom";
 import axios from "axios";
@@ -14,7 +11,7 @@ import Editor from "./pages/Editor";
 
 function App() {
   const history = useHistory();
-  const [userinfo, setUserinfo] = useState(null);
+  const [userInfo, setUserinfo] = useState(null);
   const [items, setItems] = useState([]);
   const [detailData, setDetailData] = useState({});
   const [myItem, setMypageItem] = useState([]);
@@ -22,17 +19,17 @@ function App() {
   const [isRemake, setIsRemake] = useState(false);
 
   // editor state
-  const [image, setPostPoto] = useState("");
+  const [postImage, setPostPoto] = useState("");
   const [postTitle, setPostTitle] = useState("");
   const [postExplain, setPostintro] = useState("");
   const [musicList, setMusicList] = useState([]);
 
-  // let serverURL = "http://ec2-3-35-27-251.ap-northeast-2.compute.amazonaws.com";
-  let serverURL = "http://localhost:8080";
+  let serverURL = "http://ec2-3-35-27-251.ap-northeast-2.compute.amazonaws.com";
+  //let serverURL = "http://localhost:8080";
 
   const isAuthenticated = (token) => {
     axios
-      .get(`${serverURL}/userinfo`, {
+      .get(`${serverURL}/userInfo`, {
         headers: { jwt: token },
       })
       .then((res) => {
@@ -43,7 +40,6 @@ function App() {
   };
   const handleMainPage = () => {
     axios.get(`${serverURL}/post`).then((res) => setItems(res.data.data));
-    // history.push("/main");
     setTimeout(
       () =>
         (() => {
@@ -63,29 +59,24 @@ function App() {
   };
   const userLogout = () => {
     setUserinfo(null);
-    // setIsLogin(false);
-    document.cookie = "jwt" + "=; expires=Thu, 01 Jan 1999 00:00:10 GMT;";
     history.push("/");
   };
-  const onClickDetailHandle = (postData) => {
+  const handleDetailPage = (postData) => {
     // 클릭하면 디테일데이터가 들어가야지 ㅇㅇ
-    // console.log("postData:", postData);
     setDetailData(postData);
     history.push("/detail");
   };
 
-  // setTimeout(() => {}, 300);
-
-  const loadMypage = () => {
+  const handleMypage = () => {
+    axios
+      .get(`${serverURL}/post/${userInfo.id}`)
+      .then((res) => setMypageItem(res.data.data));
     setTimeout(
       () =>
         (() => {
-          axios
-            .get(`${serverURL}/post/${userinfo.id}`)
-            .then((res) => setMypageItem(res.data.data));
           history.push("/mypage");
         })(),
-      300
+      400
     );
   };
 
@@ -95,16 +86,15 @@ function App() {
       .then((res) => setMusicData(res.data.data));
     history.push("/editor");
   };
-  // console.log(musicdata);
+
   return (
     <Switch>
       <Route exact path="/">
-        <Landing userinfo={userinfo} />
+        <Landing userInfo={userInfo} />
       </Route>
       <Route path="/login">
         <Login
           handleResponseSuccess={handleResponseSuccess}
-          loadMypage={loadMypage}
           serverURL={serverURL}
         />
       </Route>
@@ -114,12 +104,12 @@ function App() {
       <Route path="/main">
         <Main
           items={items}
-          users={userinfo}
-          loadMypage={loadMypage}
-          setDetailData={setDetailData}
+          userInfo={userInfo}
+          handleMypage={handleMypage}
           handleLogout={handleLogout}
-          onClickDetailHandle={onClickDetailHandle}
+          handleDetailPage={handleDetailPage}
           handleMusicData={handleMusicData}
+          setDetailData={setDetailData}
           setIsRemake={setIsRemake}
           setPostPoto={setPostPoto}
           setPostTitle={setPostTitle}
@@ -129,46 +119,46 @@ function App() {
       </Route>
       <Route path="/mypage">
         <Mypage
-          users={userinfo}
+          userInfo={userInfo}
           myItem={myItem}
-          onClickDetailHandle={onClickDetailHandle}
+          handleDetailPage={handleDetailPage}
           handleLogout={handleLogout}
           handleMainPage={handleMainPage}
         ></Mypage>
       </Route>
       <Route path="/detail">
         <Detail
-          users={userinfo}
+          userInfo={userInfo}
           detailData={detailData}
+          serverURL={serverURL}
           handleMainPage={handleMainPage}
           handleLogout={handleLogout}
-          setIsRemake={setIsRemake}
           handleMusicData={handleMusicData}
+          setIsRemake={setIsRemake}
           setPostPoto={setPostPoto}
           setPostTitle={setPostTitle}
           setPostintro={setPostintro}
           setMusicList={setMusicList}
-          serverURL={serverURL}
         ></Detail>
       </Route>
       <Route path="/editor">
         <Editor
-          users={userinfo}
+          userInfo={userInfo}
           musicdata={musicdata}
-          handleMainPage={handleMainPage}
-          loadMypage={loadMypage}
-          handleLogout={handleLogout}
           detailData={detailData}
           isRemake={isRemake}
-          image={image}
-          setPostPoto={setPostPoto}
+          postImage={postImage}
           postTitle={postTitle}
-          setPostTitle={setPostTitle}
           postExplain={postExplain}
-          setPostintro={setPostintro}
           musicList={musicList}
-          setMusicList={setMusicList}
           serverURL={serverURL}
+          handleMainPage={handleMainPage}
+          handleMypage={handleMypage}
+          handleLogout={handleLogout}
+          setMusicList={setMusicList}
+          setPostintro={setPostintro}
+          setPostTitle={setPostTitle}
+          setPostPoto={setPostPoto}
         ></Editor>
       </Route>
     </Switch>

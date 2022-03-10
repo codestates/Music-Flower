@@ -1,15 +1,6 @@
 import styled from "styled-components";
-import React, { useEffect, useState } from "react";
-// const Post = styled.div`
-//   border: 1px solid red;
-//   padding: 10px;
+import React from "react";
 
-//   display: flex;
-//   text-align: center;
-//   height: 30vw;
-//   width: auto;
-//   flex-direction: row;
-// `;
 const Card = styled.li`
   /* border: 1px solid red; */
   border: 1px solid grey;
@@ -84,35 +75,28 @@ const Bar = styled.i`
   height: 12px;
 `;
 
-export default function Postthumnails({ item, onClickDetailHandle }) {
-  const [like, setLike] = useState(item.totalLike);
-
-  const handleLike = (item) => {
-    setLike(Number(like) + 1);
-  };
+export default function Postthumnails({ item, handleDetailPage }) {
   return (
-    // <Post>
     <Card key={item.id}>
       <img
-        onClick={() => onClickDetailHandle(item)}
+        onClick={() => handleDetailPage(item)}
         src={item.image}
         width="200px"
         alt="logo"
       />
       <Container>
         <h4>
-          <b onClick={() => onClickDetailHandle(item)}>{item.postTitle}</b>
+          <b onClick={() => handleDetailPage(item)}>{item.postTitle}</b>
         </h4>
         <Nickname>
           <span>{item.User.nickname}</span>
         </Nickname>
         <Meta>
-          <Likes onClick={() => handleLike(item)} />
+          <Likes />
           <Bar>\</Bar>
           {item.MusicData.length}곡
         </Meta>
       </Container>
     </Card>
-    /* </Post> */
   );
 }

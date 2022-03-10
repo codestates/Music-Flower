@@ -2,9 +2,9 @@ import React, { useState } from "react";
 
 const PostThumnailSelecter = ({ setPostPoto, detailData, isRemake }) => {
   console.log("image:", detailData.image);
-  // console.log("label : ", label);
+
   const [photo, setphoto] = useState("sellect");
-  // const [photoIdx, setPotoIdx] = useState(0);
+
   let label = "";
   console.log("photo", photo);
   let options = [
@@ -37,16 +37,12 @@ const PostThumnailSelecter = ({ setPostPoto, detailData, isRemake }) => {
     trip: "https://cdnimg.melon.co.kr/svc/user_images/plylst/2022/02/148/54/506288133_org.jpg?tm=20220307064445/melon/resize/x236/quality/80/optimize",
     exersice:
       "https://cdnimg.melon.co.kr/svc/user_images/plylst/2021/11/547/20/472310607_org.jpg?tm=20211210062211/melon/resize/x236/quality/80/optimize",
-    sky: "https://cdnimg.melon.co.kr/svc/user_images/plylst/2017/09/313/90/434559796_org.png?tm=20170929094509/melon/resize/x236/quality/80/optimize",
+    sky: "https://cdnimg.melon.co.kr/svc/user_images/plylst/2018/03/13/25/441357421_org.jpg?tm=20211223094109/melon/resize/x262/quality/80/optimize",
   };
-  // console.log("options : ", options);
-  // console.log("selectedValue : ", selectedValue);
-  // console.log("changed : ", changed);
 
   const dropdownChanged = (e) => {
     setphoto(e.target.value);
   };
-  // dropdownChanged 안에 넣으면 박자 느림 이유를 몰루 아 바뀌기 전에거가 들어가서 그란가?
   setPostPoto(images[photo] || detailData.image);
   return (
     <div id="thumnailSelecter">
@@ -54,7 +50,6 @@ const PostThumnailSelecter = ({ setPostPoto, detailData, isRemake }) => {
         <label className="form-label col-sm-2">{label}</label>
         <select
           value={photo}
-          // idx={photoIdx}
           onChange={dropdownChanged}
           className="form-control form-control-sm col-sm-10"
         >
