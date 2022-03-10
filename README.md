@@ -90,7 +90,7 @@ Music-Flower 입니다 :D
 <summary><b>추홍욱</summary>
 <div markdown="1">
  
-###`ChooHongWook`
+### `ChooHongWook`
 * position : Frontend 
 * Stack: React, React(Hook), Styled-Component
 * contributions
