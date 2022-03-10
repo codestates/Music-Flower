@@ -35,6 +35,7 @@ Music-Flower 입니다 :D
 
 # Music-Flower's Developer
 
+
 ##김경연
 
  
@@ -46,7 +47,7 @@ Music-Flower 입니다 :D
 <br>  
 
 ##양지윤
- 
+
 ### [`jiyuunyang`](https://github.com/jiyuunyang)
 * position : Backend 
 * Stack : NODE js, EXPRESS, MYSql, Sequelize, AWS
@@ -63,7 +64,7 @@ Music-Flower 입니다 :D
 * contributions
   * 메인페이지 검색기능, CSS, 노래검색기능, 수정페이지 정보유지기능
    <br>
-  
+   
 ##손태권
 
  ### [`KAPUIST`](https://github.com/KAPUIST)
