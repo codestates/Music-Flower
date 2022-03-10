@@ -13,8 +13,6 @@ const {
 
 const {findMusic} = require("./controller/musicController");
 const postRouter = require("./router/postRouter");
-const spotifyRouter = require("./router/spotifyRouter");
-//const musicListRouter = require("./test/musicListRouter");
 
 sequelize
   .sync({ force: false })
@@ -27,7 +25,7 @@ sequelize
 
 app.use(
   cors({
-    origin: ["http://localhost:3000"],
+    origin: ["http://musicflowerclient.s3-website.ap-northeast-2.amazonaws.com"],
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   })
@@ -40,11 +38,8 @@ app.post("/logout", logOut);
 app.post("/signup", signUp);
 app.get("/userinfo", findUser);
 
-// app.get("/test1", create);
-// app.get("/test2", destroy);
 app.get("/musiclist", findMusic);
 app.use("/post", postRouter);
-app.use("/spotify", spotifyRouter);
 
 app.get("/", (req, res) => {
   res.status(200).send("Beautiful Music Flower");
