@@ -93,6 +93,10 @@ input {
   color: rgba(30, 22, 54, 0.6);
   box-shadow: rgba(119, 108, 153, 0.4) 0 0px 0px 2px inset;
 }
+.Guest-btn:hover {
+  color: rgba(255, 255, 255, 0.85);
+  box-shadow: rgba(30, 22, 54, 0.7) 0 80px 0px 2px inset;
+}
 .Login-btn {
   margin-top: 3rem;
   margin-left: 1.2rem;
