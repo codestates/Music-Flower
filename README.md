@@ -67,3 +67,24 @@ Music-Flower 입니다 :D
 * contributions
   *  서버-클라이언트 연결, 전체 CSS조정 
 
+# Front 
+<img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white"> 
+<img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=blue">
+<img src="https://img.shields.io/badge/NodeJS-339933?style=for-the-badge&logo=NodeJS&logoColor=green">
+<img src="https://img.shields.io/badge/ReactApp-09D3AC?style=for-the-badge&logo=ReactApp&logoColor=blue">
+<img src="https://img.shields.io/badge/VSCode-007ACC?style=for-the-badge&logo=VSCode&logoColor=navy">
+<img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=VSCode&logoColor=black">
+<img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=yellow">
+<img src="https://img.shields.io/badge/StyledComponent-DB7093?style=for-the-badge&logo=styledComponent&logoColor=pink">
+
+
+# Back
+<img src="https://img.shields.io/badge/VSCode-007ACC?style=for-the-badge&logo=VSCode&logoColor=navy">
+<img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=VSCode&logoColor=black">
+<img src="https://img.shields.io/badge/NodeJS-339933?style=for-the-badge&logo=NodeJS&logoColor=green">
+<img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=yellow">
+<img src="https://img.shields.io/badge/GitBook-3884FF?style=for-the-badge&logo=GitBook&logoColor=black">
+<img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=MySQL&logoColor=skyblue">
+<img src="https://img.shields.io/badge/Express-000000?style=for-the-badge&logo=Express&logoColor=black">
+<img src="https://img.shields.io/badge/AWS-000000?style=for-the-badge&logo=AWS&logoColor=black">
+
