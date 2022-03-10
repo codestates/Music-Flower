@@ -25,7 +25,7 @@ function App() {
   const [musicList, setMusicList] = useState([]);
 
   let serverURL = "http://ec2-3-35-27-251.ap-northeast-2.compute.amazonaws.com";
-  //let serverURL = "http://localhost:8080";
+  // let serverURL = "http://localhost:8080";
 
   const isAuthenticated = (token) => {
     axios

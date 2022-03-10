@@ -56,9 +56,9 @@ export const DropDownContainer = styled.ul`
   > li {
     padding: 0 1rem;
 
-    &:hover {
+    /* &:hover {
       background-color: #eee;
-    }
+    } */
 
     &.selected {
       background-color: #ebe5f9;
@@ -168,8 +168,11 @@ export const MusicSelector = ({ musicList, setMusicList, musicData }) => {
 export const DropDown = ({ options, handleDropDownClick, selected }) => {
   const SerchMusicText = styled.div`
     border-bottom: 1px solid grey;
-    padding-bottom: 20px;
+    padding: 20px;
     display: flex;
+    &:hover {
+      background-color: #eee;
+    }
     > div {
       /* border: 1px solid grey; */
       padding: 5px 0px 0px 10px;
@@ -194,9 +197,7 @@ export const DropDown = ({ options, handleDropDownClick, selected }) => {
                 <div className="serchArtist">{option.artist}</div>
               </div>
             </SerchMusicText>
-            <div>
-              <br></br>
-            </div>
+            <div></div>
           </div>
         </li>
       ))}
