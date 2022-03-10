@@ -2,21 +2,14 @@ import axios from "axios";
 import React from "react";
 import "../css/Login.css";
 import { useState } from "react";
-// import spotifyAuth from "../auth/useSpotifyAuth";
-//const code = new URLSearchParams(window.location.search).get("code");
 import { Link } from "react-router-dom";
 
-export default function Login({
-  handleResponseSuccess,
-  loadMypage,
-  serverURL,
-}) {
+export default function Login({ handleResponseSuccess, serverURL }) {
   const [loginInfo, setLoginInfo] = useState({
     email: "",
     password: "",
   });
 
-  // 이메일과 비밀번호 입력 핸들
   const handleInputValue = (key) => (e) => {
     setLoginInfo({ ...loginInfo, [key]: e.target.value });
   };

@@ -2,8 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Postthumnails from "../components/Postthumnails";
 import { Autocomplete } from "../pages/UI_components/Autocomplete";
-import { useHistory, Link } from "react-router-dom";
-import axios from "axios";
+import { Link } from "react-router-dom";
 
 const MainPage = styled.div`
   /* border: 1px solid red; */
@@ -100,7 +99,8 @@ const Body = styled.div`
   }
   > #BoardName {
     /* border: 1px solid red; */
-    font-size: 30px;
+    font-size: 25px;
+    font-style: inherit;
   }
   > #thumnail {
     cursor: pointer;
@@ -155,12 +155,11 @@ const MenuButton = styled.div`
 
 export default function Main({
   items,
-  setItems,
-  users,
+  userInfo,
   handleMusicData,
   handleLogout,
-  onClickDetailHandle,
-  loadMypage,
+  handleDetailPage,
+  handleMypage,
   setIsRemake,
   setPostPoto,
   setPostTitle,
@@ -173,7 +172,7 @@ export default function Main({
   }, [items]);
 
   const onClickMyPageHandle = () => {
-    loadMypage();
+    handleMypage();
   };
   const onClickEditorHandle = () => {
     setIsRemake(false);
@@ -181,11 +180,8 @@ export default function Main({
     setPostTitle("");
     setPostintro("");
     setMusicList([]);
-
     handleMusicData();
   };
-
-  const history = useHistory();
 
   return (
     <div id="mainPage">
@@ -196,7 +192,7 @@ export default function Main({
           </Link>
           <Menu>
             <Nick>
-              <span>{users.nickname}</span>님 안녕하세요.
+              <span>{userInfo.nickname}</span>님 안녕하세요.
             </Nick>
             <MenuButton>
               <button onClick={onClickMyPageHandle}>마이페이지</button>
@@ -219,11 +215,11 @@ export default function Main({
             </div>
           </SerchArea>
           <Body>
-            <div id="BoardName">이것은 예시입니다</div>
+            <div id="BoardName">오늘은 뭘 듣지?</div>
             <div id="Posts">
               {showPosts.map((item, idx) => (
                 <Postthumnails
-                  onClickDetailHandle={onClickDetailHandle}
+                  handleDetailPage={handleDetailPage}
                   item={item}
                   key={idx}
                 />

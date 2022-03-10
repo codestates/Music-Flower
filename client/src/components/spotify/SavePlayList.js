@@ -2,11 +2,7 @@ import React from "react";
 
 export default function SavePlayList({ track }) {
   return (
-    <div
-      className="trackserchresult"
-      // style={{ cursor: "pointer" }}
-      // onClick={삭제 있어야함}
-    >
+    <div className="trackserchresult">
       <div className="serchMusicText">
         <img src={track.albumUrl} style={{ height: "64px", width: "64px" }} />
         <span> // </span>

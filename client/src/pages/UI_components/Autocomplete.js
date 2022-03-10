@@ -67,7 +67,6 @@ export const DropDownContainer = styled.ul`
 `;
 
 export const Autocomplete = ({ items, setshowPosts }) => {
-  console.log("items", items);
   const [hasText, setHasText] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const [options, setOptions] = useState(items);
@@ -110,8 +109,6 @@ export const Autocomplete = ({ items, setshowPosts }) => {
   };
 
   const handleKeyUp = (event) => {
-    // https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/getModifierState#example
-    // eslint-disable-next-line
     if (
       event.getModifierState("Fn") ||
       event.getModifierState("Hyper") ||

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "../css/Signup.css";
 import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
