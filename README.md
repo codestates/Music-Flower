@@ -72,30 +72,5 @@ Music-Flower 입니다 :D
 * contributions
   *  서버-클라이언트 연결, 전체 CSS조정 
 
-# Front 
-  <div align=center> 
-<img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white"> 
-<img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=blue">
-<img src="https://img.shields.io/badge/NodeJS-339933?style=for-the-badge&logo=NodeJS&logoColor=green">
-<img src="https://img.shields.io/badge/ReactApp-09D3AC?style=for-the-badge&logo=ReactApp&logoColor=blue">
-<img src="https://img.shields.io/badge/VSCode-007ACC?style=for-the-badge&logo=VSCode&logoColor=navy">
-<img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=VSCode&logoColor=black">
-<img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=yellow">
-<img src="https://img.shields.io/badge/StyledComponent-DB7093?style=for-the-badge&logo=styledComponent&logoColor=pink">
-<img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white">
-   </div>
-
-  
-# Back
-  <div align=center> 
-<img src="https://img.shields.io/badge/VSCode-007ACC?style=for-the-badge&logo=VSCode&logoColor=navy">
-<img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=VSCode&logoColor=black">
-<img src="https://img.shields.io/badge/NodeJS-339933?style=for-the-badge&logo=NodeJS&logoColor=green">
-<img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=yellow">
-<img src="https://img.shields.io/badge/GitBook-3884FF?style=for-the-badge&logo=GitBook&logoColor=black">
-<img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=MySQL&logoColor=skyblue">
-<img src="https://img.shields.io/badge/Express-000000?style=for-the-badge&logo=Express&logoColor=black">
-<img src="https://img.shields.io/badge/AWS-000000?style=for-the-badge&logo=AWS&logoColor=black">
-<img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white">
-   </div>
-
+# Stack
+![2022-03-10_9 52 40](https://user-images.githubusercontent.com/91522788/157578616-4de9ce7b-bbec-4a79-adae-82325f614773.png)
