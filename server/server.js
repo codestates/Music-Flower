@@ -24,11 +24,11 @@ sequelize
   });
 
 let server = "http://musicflowerclient.s3-website.ap-northeast-2.amazonaws.com";
-// let server = "http://localhost:3000";
+let localhost = "http://localhost:3000";
 
 app.use(
   cors({
-    origin: [`${server}`],
+    origin: [`${server}`, `${localhost}`],
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   })
