@@ -147,6 +147,7 @@ export const MusicSelector = ({ musicList, setMusicList, musicData }) => {
           type="text"
           className="autocomplete-input"
           onChange={handleInputChange}
+          placeholder="음악을 검색해주세요!"
           value={inputValue}
         />
         <div className="delete-button" onClick={handleDeleteButtonClick}>
