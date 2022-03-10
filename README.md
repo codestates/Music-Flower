@@ -1,6 +1,6 @@
 # Music-Flower
 
-![image](https://user-images.githubusercontent.com/90957389/157562341-34aa8a54-a6a5-48ee-b2ef-bc29eb5cb7af.png)
+![image](https://user-images.githubusercontent.com/91464689/157590945-3ba79510-a5da-472a-a8c1-71f3e7172632.png)
 
 ### 음악에 대한 사랑과 로망이 가득한 4명의 개발자가 모였습니다.
 
