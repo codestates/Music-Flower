@@ -37,7 +37,7 @@ export default function Signup({ serverURL }) {
         <div>
           <nav className="navbar">
             <div className="nav-container">
-              <Link to="/land" className="nav-logo">
+              <Link to="/" className="nav-logo">
                 <img
                   src={require("../images/logo.png")}
                   width="220px"
