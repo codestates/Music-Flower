@@ -179,6 +179,7 @@ export default function Detail({
     handleMusicData();
     history.push("/editor");
   };
+
   return (
     <div id="detailPage">
       <Header>

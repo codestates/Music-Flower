@@ -27,8 +27,8 @@ function App() {
   const [postExplain, setPostintro] = useState("");
   const [musicList, setMusicList] = useState([]);
 
-  let serverURL = "http://ec2-3-35-27-251.ap-northeast-2.compute.amazonaws.com";
-  // let serverURL = "http://localhost:8080";
+  // let serverURL = "http://ec2-3-35-27-251.ap-northeast-2.compute.amazonaws.com";
+  let serverURL = "http://localhost:8080";
 
   const isAuthenticated = (token) => {
     axios
@@ -44,7 +44,6 @@ function App() {
   const handleMainPage = () => {
     axios.get(`${serverURL}/post`).then((res) => setItems(res.data.data));
     // history.push("/main");
-
     setTimeout(
       () =>
         (() => {
@@ -75,6 +74,8 @@ function App() {
     history.push("/detail");
   };
 
+  // setTimeout(() => {}, 300);
+
   const loadMypage = () => {
     setTimeout(
       () =>
@@ -87,12 +88,6 @@ function App() {
       300
     );
   };
-  // const load = () => {
-  //   axios
-  //     .get(`http://localhost:8080/post/${userinfo.id}`)
-  //     .then((res) => setMypageItem(res.data.data));
-  //   history.push("/mypage");
-  // };
 
   const handleMusicData = () => {
     axios
@@ -100,7 +95,7 @@ function App() {
       .then((res) => setMusicData(res.data.data));
     history.push("/editor");
   };
-  console.log(musicdata);
+  // console.log(musicdata);
   return (
     <Switch>
       <Route exact path="/">
@@ -126,6 +121,10 @@ function App() {
           onClickDetailHandle={onClickDetailHandle}
           handleMusicData={handleMusicData}
           setIsRemake={setIsRemake}
+          setPostPoto={setPostPoto}
+          setPostTitle={setPostTitle}
+          setPostintro={setPostintro}
+          setMusicList={setMusicList}
         ></Main>
       </Route>
       <Route path="/mypage">
