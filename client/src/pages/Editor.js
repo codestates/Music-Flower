@@ -241,8 +241,6 @@ export default function Editor({
       <EditorBody>
         <div id="up">
           <div id="postImg">
-            post 이미지 선택
-            <br />
             <PostThumnailSelecter
               setPostPoto={setPostPoto}
               detailData={detailData}
@@ -250,7 +248,7 @@ export default function Editor({
             ></PostThumnailSelecter>
           </div>
           <div id="postInfo">
-            post 제목
+            제목
             {isRemake ? (
               <input
                 type="text"
@@ -268,7 +266,7 @@ export default function Editor({
           </div>
         </div>
         <div id="down">
-          <div>post 소개</div>
+          <div>소개글</div>
           <div id="postIntro">
             {isRemake ? (
               <input
