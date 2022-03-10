@@ -97,7 +97,7 @@ export const Autocomplete = ({ items, setshowPosts }) => {
   };
 
   const handleDropDownClick = (clickedOption) => {
-    setInputValue(clickedOption);
+    setInputValue(clickedOption.postTitle);
     const resultOptions = items.filter(
       (option) => option.postTitle === clickedOption.postTitle
     );
@@ -137,7 +137,7 @@ export const Autocomplete = ({ items, setshowPosts }) => {
       }
     }
   };
-
+  console.log("inputValue", inputValue);
   return (
     <div className="autocomplete-wrapper" onKeyUp={handleKeyUp}>
       <InputContainer hasText={hasText}>
