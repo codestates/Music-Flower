@@ -62,7 +62,7 @@ module.exports = {
 
         {
           userId: 1,
-          postTitle: "겨을에 듣기 좋은 노래",
+          postTitle: "겨울에 듣기 좋은 노래",
           image:
             "https://cdnimg.melon.co.kr/svc/user_images/plylst/2021/01/175/69/487951872_org.jpg?tm=20220224061254/melon/resize/x236/quality/80/optimize",
           postExplain:
