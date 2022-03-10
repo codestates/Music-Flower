@@ -145,6 +145,7 @@ export const Autocomplete = ({ items, setshowPosts }) => {
           type="text"
           className="autocomplete-input"
           onChange={handleInputChange}
+          placeholder="포스트 제목을 검색해주세요!"
           value={inputValue}
         />
         <div className="delete-button" onClick={handleDeleteButtonClick}>
