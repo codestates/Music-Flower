@@ -42,7 +42,8 @@ Music-Flower 입니다 :D
 * position : Backend 
 * Stack : NODE.js, EXPRESS, MYSql, Sequelize
 * contributions
-  * controller,API , DB 
+  * controller,API , DB
+</div>
 </details>
 <br>
  
@@ -54,6 +55,7 @@ Music-Flower 입니다 :D
 * Stack : NODE js, EXPRESS, MYSql, Sequelize, AWS
 * contributions
   *  controller, API, DB, AWS
+ </div>
 </details>
  <br>
 <details>
@@ -64,6 +66,7 @@ Music-Flower 입니다 :D
 * Stack: React, React(Hook), Styled-Component
 * contributions
   * 메인페이지 검색기능, CSS, 노래검색기능, 수정페이지 정보유지기능
+ </div>
 </details>
 <br>
 <details>
@@ -74,6 +77,7 @@ Music-Flower 입니다 :D
 * Stack: React, React(Hook) Typescript, AWS
 * contributions
   *  서버-클라이언트 연결, 전체 CSS조정 
+ </div>
 </details>
 
 # Front 
