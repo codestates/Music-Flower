@@ -36,7 +36,7 @@ Music-Flower 입니다 :D
 # Music-Flower's Developer
 
 
-##김경연
+## 김경연
 
  
 ### [`kimkyoungyeon`](https://github.com/kim-kyoungyeon) 
@@ -46,7 +46,7 @@ Music-Flower 입니다 :D
   * User controller작성, API작성, DB스키마 작성, DB 시드 삽입
 <br>  
 
-##양지윤
+## 양지윤
 
 ### [`jiyuunyang`](https://github.com/jiyuunyang)
 * position : Backend 
@@ -56,7 +56,7 @@ Music-Flower 입니다 :D
 
  <br>
  
-##추홍욱
+## 추홍욱
 
  ### [`ChooHongWook`](https://github.com/ChooHongWook)
 * position : Frontend 
@@ -65,7 +65,7 @@ Music-Flower 입니다 :D
   * 메인페이지 검색기능, CSS, 노래검색기능, 수정페이지 정보유지기능
    <br>
    
-##손태권
+## 손태권
 
  ### [`KAPUIST`](https://github.com/KAPUIST)
 * position : Frontend 
