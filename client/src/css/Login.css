@@ -77,12 +77,28 @@ input {
   font-size: 14px;
   background: rgb(228, 224, 224);
 }
+
+.Guest-info {
+  margin-left: 1.5rem;
+  color: grey;
+}
+.Guest-btn {
+  margin-left: 1.2rem;
+  font-size: larger;
+  width: inherit;
+  margin-bottom: 10px;
+  padding: 20px 20px;
+  border-radius: 5px;
+  border: none;
+  color: rgba(30, 22, 54, 0.6);
+  box-shadow: rgba(119, 108, 153, 0.4) 0 0px 0px 2px inset;
+}
 .Login-btn {
   margin-top: 3rem;
   margin-left: 1.2rem;
   font-size: larger;
   width: inherit;
-  margin-bottom: 20px;
+  margin-bottom: 3rem;
   padding: 20px 20px;
   border-radius: 5px;
   border: none;

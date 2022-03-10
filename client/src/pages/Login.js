@@ -104,7 +104,10 @@ export default function Login({ handleResponseSuccess, serverURL }) {
             <button className="Login-btn" onClick={handleLogin}>
               Login !
             </button>
-            <button className="Login-btn" onClick={handleGuestLogin}>
+            <div className="Guest-info">
+              게스트 로그인시 손코딩으로 로그인 됩니다.
+            </div>
+            <button className="Guest-btn" onClick={handleGuestLogin}>
               Guest !
             </button>
           </form>
