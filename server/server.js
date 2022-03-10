@@ -11,7 +11,7 @@ const {
   findUser,
 } = require("./controller/userController");
 
-const {findMusic} = require("./controller/musicController");
+const { findMusic } = require("./controller/musicController");
 const postRouter = require("./router/postRouter");
 
 sequelize
@@ -23,9 +23,12 @@ sequelize
     console.error(err);
   });
 
+let server = "http://musicflowerclient.s3-website.ap-northeast-2.amazonaws.com";
+// let server = "http://localhost:3000";
+
 app.use(
   cors({
-    origin: ["http://musicflowerclient.s3-website.ap-northeast-2.amazonaws.com"],
+    origin: [`${server}`],
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   })
