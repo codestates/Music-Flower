@@ -24,7 +24,7 @@ body {
   margin-top: 10vh;
 }
 .play-btn {
-  background: #93ffd8;
+  background: #a14efc;
   color: rgb(255, 255, 255);
   border: none;
   position: relative;
@@ -47,7 +47,7 @@ body {
   right: 0;
   height: 2px;
   width: 0;
-  background: #93ffd8;
+  background: #a14efc;
   transition: 400ms ease all;
 }
 .play-btn:after {
