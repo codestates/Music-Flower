@@ -76,7 +76,7 @@ function App() {
         (() => {
           history.push("/mypage");
         })(),
-      400
+      600
     );
   };
 
