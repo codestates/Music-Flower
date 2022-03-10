@@ -36,43 +36,33 @@ Music-Flower 입니다 :D
 # Music-Flower's Developer
 
 
-## 김경연
-
-### [`kimkyoungyeon`](https://github.com/kim-kyoungyeon) 
+### 김경연 [`kimkyoungyeon`](https://github.com/kim-kyoungyeon) 
 * position : Backend 
 * Stack : NODE.js, EXPRESS, MYSql, Sequelize
 * contributions
   * User controller작성, API작성, DB스키마 작성, DB 시드 삽입
 <br>  
 
-## 손태권
-
- ### [`KAPUIST`](https://github.com/KAPUIST)
+### 손태권 [`KAPUIST`](https://github.com/KAPUIST)
 * position : Frontend 
 * Stack: React, React(Hook) Typescript, AWS
 * contributions
   *  랜딩 및 로그인 페이지 작성, 서버-클라이언트 연결, 전체 CSS조정, AWS EC2 서버 배포
 <br>
 
-## 양지윤
-
-### [`jiyuunyang`](https://github.com/jiyuunyang)
+### 양지윤 [`jiyuunyang`](https://github.com/jiyuunyang)
 * position : Backend 
 * Stack : NODE js, EXPRESS, MYSql, Sequelize, AWS
 * contributions
   * Post controller작성, API작성, DB스키마 작성, DB모델 구축, AWS S3 클라이언트 배포
+<br>
 
- <br>
- 
-## 추홍욱
-
- ### [`ChooHongWook`](https://github.com/ChooHongWook)
+### 추홍욱 [`ChooHongWook`](https://github.com/ChooHongWook)
 * position : Frontend 
 * Stack: React, React(Hook), Styled-Component
 * contributions
   * 메인페이지 검색기능, CSS, 노래검색기능, 수정페이지 정보유지기능
    <br>
    
-
 # Stack
 ![2022-03-10_9 52 40](https://user-images.githubusercontent.com/91522788/157578616-4de9ce7b-bbec-4a79-adae-82325f614773.png)
