@@ -43,21 +43,10 @@ Music-Flower 입니다 :D
 * Stack : NODE.js, EXPRESS, MYSql, Sequelize
 * contributions
   * controller,API , DB 
-<div align=left> 
-<img src="https://img.shields.io/badge/VSCode-007ACC?style=for-the-badge&logo=VSCode&logoColor=navy">
-<img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=VSCode&logoColor=black">
-<img src="https://img.shields.io/badge/NodeJS-339933?style=for-the-badge&logo=NodeJS&logoColor=green">
-<img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=yellow">
-<img src="https://img.shields.io/badge/GitBook-3884FF?style=for-the-badge&logo=GitBook&logoColor=black">
-<img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=MySQL&logoColor=skyblue">
-<img src="https://img.shields.io/badge/Express-000000?style=for-the-badge&logo=Express&logoColor=black">
-<img src="https://img.shields.io/badge/AWS-000000?style=for-the-badge&logo=AWS&logoColor=black">
-<img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white">
-</div>
 </details>
- <br>
-  <br>
- <details>
+<br>
+ 
+<details>
 <summary><b>양지윤</summary>
 <div markdown="1">
 ### `jiyuunyang`
@@ -65,21 +54,9 @@ Music-Flower 입니다 :D
 * Stack : NODE js, EXPRESS, MYSql, Sequelize, AWS
 * contributions
   *  controller, API, DB, AWS
-<div align=left> 
-<img src="https://img.shields.io/badge/VSCode-007ACC?style=for-the-badge&logo=VSCode&logoColor=navy">
-<img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=VSCode&logoColor=black">
-<img src="https://img.shields.io/badge/NodeJS-339933?style=for-the-badge&logo=NodeJS&logoColor=green">
-<img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=yellow">
-<img src="https://img.shields.io/badge/GitBook-3884FF?style=for-the-badge&logo=GitBook&logoColor=black">
-<img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=MySQL&logoColor=skyblue">
-<img src="https://img.shields.io/badge/Express-000000?style=for-the-badge&logo=Express&logoColor=black">
-<img src="https://img.shields.io/badge/AWS-000000?style=for-the-badge&logo=AWS&logoColor=black">
-<img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white">
- </div>
 </details>
  <br>
-  <br>
-  <details>
+<details>
 <summary><b>추홍욱</summary>
 <div markdown="1">
 ### `ChooHongWook`
@@ -87,21 +64,9 @@ Music-Flower 입니다 :D
 * Stack: React, React(Hook), Styled-Component
 * contributions
   * 메인페이지 검색기능, CSS, 노래검색기능, 수정페이지 정보유지기능
- <div align=left> 
-<img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white"> 
-<img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=blue">
-<img src="https://img.shields.io/badge/NodeJS-339933?style=for-the-badge&logo=NodeJS&logoColor=green">
-<img src="https://img.shields.io/badge/ReactApp-09D3AC?style=for-the-badge&logo=ReactApp&logoColor=blue">
-<img src="https://img.shields.io/badge/VSCode-007ACC?style=for-the-badge&logo=VSCode&logoColor=navy">
-<img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=VSCode&logoColor=black">
-<img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=yellow">
-<img src="https://img.shields.io/badge/StyledComponent-DB7093?style=for-the-badge&logo=styledComponent&logoColor=pink">
-<img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white">
-   </div>
 </details>
-   <br>
-   <br>
-  <details>
+<br>
+<details>
 <summary><b>손태권</summary>
 <div markdown="1">
  ### `KAPUIST`
@@ -109,21 +74,8 @@ Music-Flower 입니다 :D
 * Stack: React, React(Hook) Typescript, AWS
 * contributions
   *  서버-클라이언트 연결, 전체 CSS조정 
- <div align=left> 
-<img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white"> 
-<img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=blue">
-<img src="https://img.shields.io/badge/NodeJS-339933?style=for-the-badge&logo=NodeJS&logoColor=green">
-<img src="https://img.shields.io/badge/ReactApp-09D3AC?style=for-the-badge&logo=ReactApp&logoColor=blue">
-<img src="https://img.shields.io/badge/VSCode-007ACC?style=for-the-badge&logo=VSCode&logoColor=navy">
-<img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=VSCode&logoColor=black">
-<img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=yellow">
-<img src="https://img.shields.io/badge/StyledComponent-DB7093?style=for-the-badge&logo=styledComponent&logoColor=pink">
-<img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white">
-<img src="https://img.shields.io/badge/AWS-000000?style=for-the-badge&logo=AWS&logoColor=black">
-   </div>
 </details>
-    <br>
-   
+
 # Front 
   <div align=left> 
 <img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white"> 
