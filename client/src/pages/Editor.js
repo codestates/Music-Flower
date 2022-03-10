@@ -296,7 +296,6 @@ export default function Editor({
               </div>
               <div id="musicselectList">
                 {musicList.map((music, idx) => {
-                  // console.log("music", music);
                   return (
                     <div key={music.albumImageUrl}>
                       <SelectMusicList
