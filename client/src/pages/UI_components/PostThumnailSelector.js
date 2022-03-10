@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const PostThumnailSelecter = ({ setPostPoto, image, detailData }) => {
+const PostThumnailSelecter = ({ setPostPoto, detailData, isRemake }) => {
   console.log("image:", detailData.image);
   // console.log("label : ", label);
   const [photo, setphoto] = useState("sellect");
@@ -66,10 +66,14 @@ const PostThumnailSelecter = ({ setPostPoto, image, detailData }) => {
           ))}
         </select>
       </div>
-      <img
-        src={images[photo] || detailData.image}
-        style={{ height: "20vh", width: "20vh" }}
-      />
+      {isRemake ? (
+        <img
+          src={images[photo] || detailData.image}
+          style={{ height: "20vh", width: "20vh" }}
+        />
+      ) : (
+        <img src={images[photo]} style={{ height: "20vh", width: "20vh" }} />
+      )}
     </div>
   );
 };

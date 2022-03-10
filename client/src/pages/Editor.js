@@ -170,10 +170,10 @@ export default function Editor({
   console.log("수정하기 버튼으로옴?:", isRemake);
   console.log("edit-detailData:", detailData);
 
-  if (isRemake) {
-    //이렇게는 작동 안됨 ㅜㅜ
-    console.log("수정하기 버틍으로오면 작동");
-  }
+  // if (isRemake) {
+  //   //이렇게는 작동 안됨 ㅜㅜ
+  //   console.log("수정하기 버틍으로오면 작동");
+  // }
 
   const submitHandle = () => {
     let musiclistid = musicList.map((el) => el.id);
@@ -258,6 +258,7 @@ export default function Editor({
               setPostPoto={setPostPoto}
               image={image}
               detailData={detailData}
+              isRemake={isRemake}
             ></PostThumnailSelecter>
           </div>
           <div id="postInfo">

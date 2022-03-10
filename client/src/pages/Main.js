@@ -162,6 +162,10 @@ export default function Main({
   onClickDetailHandle,
   loadMypage,
   setIsRemake,
+  setPostPoto,
+  setPostTitle,
+  setPostintro,
+  setMusicList,
 }) {
   const [showPosts, setshowPosts] = useState(items);
   useEffect(() => {
@@ -173,6 +177,11 @@ export default function Main({
   };
   const onClickEditorHandle = () => {
     setIsRemake(false);
+    setPostPoto("");
+    setPostTitle("");
+    setPostintro("");
+    setMusicList([]);
+
     handleMusicData();
   };
 
