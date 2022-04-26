@@ -36,7 +36,7 @@ Music-Flower 입니다 :D
 # Music-Flower's Developer
 
 
-### 김경연 [`kimkyoungyeon`](https://github.com/kim-kyoungyeon) 
+### 김경연 [`kimkyoungyeon`](https://github.com/kim-kyoungyeon/kyoungyeon.github.io) 
 * position : Backend 
 * Stack : NODE.js, EXPRESS, MYSql, Sequelize
 * contributions
