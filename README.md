@@ -45,7 +45,7 @@ Music-Flower 입니다 :D
 
 ### 손태권 [`KAPUIST`](https://github.com/KAPUIST)
 * position : Frontend 
-* Stack: React, React(Hook) Typescript, AWS
+* Stack: React, React(Hook), AWS
 * contributions
   *  랜딩 및 로그인 페이지 작성, 서버-클라이언트 연결, 전체 CSS조정, AWS EC2 서버 배포
 <br>
