@@ -20,7 +20,7 @@ module.exports = {
     // });
     return res.status(200).json({ data: null, accessToken, message: "ok" });
   },
-  // client token의 유효성 검사합니다. 
+  // authentication
   isAuthorized: (req) => {
     // token 말고
     // TODO: JWT 토큰 정보를 받아서 검증합니다.
